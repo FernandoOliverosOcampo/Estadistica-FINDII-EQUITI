@@ -1,0 +1,277 @@
+@import url(../config/global.css);
+@import url(../menu.css);
+
+.hero {
+    color: #191919;
+    background-color: #ffffff;
+}
+
+.hero .pagina-principal {
+    padding: 5vh 5vw;
+}
+
+.hero .pagina-principal .grilla {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3vh;
+}
+
+.datos-usuario .nombre p {
+    font-size: 7vh;
+    font-weight: 700;
+}
+
+.datos-estadisticos .contenido-datos-estadisticos {
+    display: flex;
+    column-gap: 2vw;
+    justify-content: space-between;
+}
+
+.contenido-datos-estadisticos .estadistica {
+    display: grid;
+    grid-template-areas:
+        "valor icono"
+        "titulo icono";
+    background-color: #ffffff;
+    padding: 0.5vw 1.5vw;
+    column-gap: 2vw;
+    border-radius: 0.5vw;
+    justify-content: space-between;
+    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.08);
+    height: 10vh;
+    width: 15vw;
+}
+
+.estadistica .titulo {
+    grid-area: titulo;
+}
+
+.estadistica .titulo p {
+    color: #00000088;
+    font-weight: 600;
+    font-size: 1.9vh;
+}
+
+.estadistica .valor {
+    grid-area: valor;
+}
+
+.estadistica .valor p {
+    font-size: 4vh;
+    font-weight: 700;
+}
+
+.estadistica .icono {
+    display: flex;
+    align-items: center;
+    grid-area: icono;
+    color: #030303;
+}
+
+.estadistica .icono i{
+    font-size: 5vh;
+}
+
+.graficas {
+    margin-top: 5vh;
+}
+
+.cont-grafica {
+    padding: 1vw 2vw;
+    border-radius: 1vw;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.graficas .contenido-graficas {
+    display: grid;
+    grid-template-areas:
+        "ventas-mes ventas-realizar";
+    justify-content: space-between;
+}
+
+.graficas .ventas-mes {
+    grid-area: ventas-mes;
+}
+
+.titulo-grafica {
+    padding: 0.5vw;
+    border-bottom: 1px solid rgb(233, 231, 231);
+}
+
+.titulo-grafica p {
+    font-size: 3vh;
+    font-weight: 600;
+    color: #00000088;
+}
+
+.grafica-ventas-mes #myChart {
+    width: 50vw;
+}
+
+.graficas .ventas-realizar {
+    grid-area: ventas-realizar;
+}
+
+.ventas-realizar #myDona {
+    height: 40vh;
+}
+
+/* TABLA */
+
+/* INFORMACION DATOS (MODAL)*/
+
+.contenido-tabla .editar-formulario .contenido {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vw;
+    margin: 5% 25%;
+    padding: 0 2vw;
+    background-color: var(--blanco);
+    border-radius: 0.5vw;
+    width: 50vw;
+    height: 80vh;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cabecera{
+    display: flex;
+    border-bottom: 1px solid var(--fondo);
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo{
+    display: grid;
+    grid-template-areas: 
+    "nombre tipo"
+    "ubicacion cantidad"
+    "descripcion descripcion";
+    row-gap: 3vh;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .nombre{
+    grid-area: nombre;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .tipo{
+    grid-area: tipo;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .cantidad{
+    grid-area: cantidad;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion{
+    grid-area: descripcion;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .ubicacion{
+    grid-area: ubicacion;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion .entrada textarea{
+    width: 48vw;
+    height: 15vh;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-footer{
+    text-align: end;
+}
+
+.contenido-tabla {
+    grid-area: tabla;
+    display: flex;
+    flex-direction: column;
+    /* margin: 1vw; */
+    /* padding: 0 2vw; */
+    row-gap: 1.5vw;
+}
+
+.contenido-tabla .cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contenido-tabla .cabecera .botones {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 1vw;
+}
+
+.contenido-tabla .cabecera .botones button {
+    background-color: var(--primario);
+    padding: 0.5vw;
+    color: var(--blanco);
+    border-radius: 0.5vw;
+    font-size: 1.1vw;
+}
+
+.contenido-tabla .cabecera .botones a {
+    color: var(--blanco);
+
+}
+
+
+.contenido-tabla .cabecera .botones button:hover {
+    background-color: var(--hover-primario)
+}
+
+.contenido-tabla .cabecera .titulo p {
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.no-padding {
+    padding: 1vw;
+    border: none;
+}
+
+.contenido-tabla .tabla {
+    overflow: auto;
+    height: 40vh;
+    background-color: #ffffff;
+}
+
+.contenido-tabla .tabla {
+    text-align: center;
+    border-radius: 0.5vw;
+    font-size: 1vw;
+    padding: 0.2vw;
+}
+
+.contenido-tabla .tabla th,
+td {
+    padding: 0.7vw 2vw;
+}
+
+.contenido-tabla .tabla td {
+    overflow: hidden;
+    /* Otra opción es ocultar el contenido que excede el ancho máximo */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
+    white-space: nowrap;
+    max-width: 6.5vw;
+}
+
+.contenido-tabla .tabla table tbody tr td {
+    width: 10%;
+}
+
+/* FIN TABLA */
+
+
+@media only screen and (max-width: 700px) {
+    .contenido-datos-estadisticos .estadistica {
+      
+        grid-template-areas:
+            "valor icono"
+            "titulo titulo";
+        column-gap: 2vw;
+        height: 13vh;
+        width: 22vw;
+    }
+  
+
+}

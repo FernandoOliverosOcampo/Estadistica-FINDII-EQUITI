@@ -1,0 +1,220 @@
+@import url(./config/global.css);
+@import url(./menu2.css);
+
+.datos-usuario .nombre p {
+    font-size: 7vh;
+    font-weight: 700;
+}
+
+.datos-estadisticos .contenido-datos-estadisticos {
+    display: flex;
+    column-gap: 2vw;
+    justify-content: space-evenly;
+}
+
+.contenido-datos-estadisticos .estadistica {
+    display: grid;
+    grid-template-areas:
+        "valor icono"
+        "titulo icono";
+    background-color: #ffffff;
+    padding: 0.5vw 1.5vw;
+    column-gap: 2vw;
+    border-radius: 0.5vw;
+    justify-content: space-between;
+    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.08);
+    height: 10vh;
+    width: 15vw;
+}
+
+.estadistica .titulo {
+    grid-area: titulo;
+}
+
+.estadistica .titulo p {
+    color: #00000088;
+    font-weight: 600;
+    font-size: 1.9vh;
+}
+
+.estadistica .valor {
+    grid-area: valor;
+}
+
+.estadistica .valor p {
+    font-size: 4vh;
+    font-weight: 700;
+}
+
+.estadistica .icono {
+    display: flex;
+    align-items: center;
+    grid-area: icono;
+    color: #030303;
+}
+
+.estadistica .icono i{
+    font-size: 5vh;
+}
+
+.graficas {
+    margin-top: 5vh;
+}
+
+.cont-grafica {
+    padding: 1vw 2vw;
+    border-radius: 1vw;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.graficas .contenido-graficas {
+    display: grid;
+    grid-template-areas:
+     "promedios ventas-mes ventas-realizar";
+    align-items: baseline;
+    justify-content: space-evenly;
+}
+
+.graficas .promedios{
+    grid-area: promedios;
+}
+
+.graficas .ventas-mes {
+    grid-area: ventas-mes;
+}
+
+.titulo-grafica {
+    padding: 0.5vw;
+    border-bottom: 1px solid rgb(233, 231, 231);
+}
+
+.titulo-grafica p {
+    font-size: 3vh;
+    font-weight: 600;
+    color: #00000088;
+}
+
+.grafica-ventas-mes #myChart {
+    width: 35vw;
+}
+
+.graficas .ventas-realizar {
+    grid-area: ventas-realizar;
+}
+
+.ventas-realizar #myDona {
+    height: 35vh;
+}
+.promedios{
+    grid-area: promedios;
+    display: grid;
+    grid-template-areas: 
+    "titulo titulo titulo"
+    "promedio promedio promedio";
+    height: 10vh;
+}
+.promedios .titulo_estadisticas{
+    grid-area: titulo;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.5vh;
+    
+}
+.contenido-promedios{
+    grid-area: promedio;
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.promedio {
+    display: grid;
+    grid-template-areas: 
+    "icono cantidad"
+    "titulo titulo";
+    margin: 8px;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color:  #ffffff;;
+    width: 8.5vw;
+    padding: 1vw 1vw;
+    column-gap: 3vw;
+    border-radius: 0.5vw;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+.icono{
+    grid-area: icono;
+    text-align: center;
+}
+.promedio .titulo_promedio{
+    grid-area: titulo;
+    color: gray;
+    font-weight: bold;
+    font-size: 2vh;
+    text-align: start;
+}
+.promedio .numero_promedio{
+    grid-area: cantidad;
+    font-size: 2.7vh;
+    font-weight: bold;
+    text-align: center;
+}
+.estados_ventas{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ventas{
+    display: flex;
+    flex-wrap: wrap;
+    width: 37vw;
+    justify-content: center;
+    align-items: center;
+}
+.titulo_ventas{
+    grid-area: titulo;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.5vh;
+    text-align: center;
+
+}
+.ventas_estado{
+    display: grid;
+    grid-template-areas: 
+    "icono cantidad"
+    "titulo titulo";
+    margin: 8px;
+    align-items: center;
+    justify-content: space-around;
+    background-color:  #ffffff;;
+    width: 9vw;
+    padding: 1vw 1vw;
+    column-gap: 3vw;
+    border-radius: 0.5vw;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+
+}
+.ventas_estado{
+    grid-area: icono;
+    text-align: center;
+}
+.ventas_estado .titulo_promedio{
+    grid-area: titulo;
+    color: gray;
+    font-weight: bold;
+    font-size: 2vh;
+    text-align: start;
+    width: 9.5vw;
+}
+.ventas_estado .numero_promedio{
+    grid-area: cantidad;
+    font-size: 2.7vh;
+    font-weight: bold;
+    text-align: center;
+}

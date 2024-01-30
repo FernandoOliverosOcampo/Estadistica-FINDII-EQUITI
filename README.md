@@ -1,1 +1,1 @@
-# Estadistica-FINDII-EQUITI
+# graficas-findii

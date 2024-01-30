@@ -1,0 +1,85 @@
+/* TABLA */
+
+/* INFORMACION DATOS (MODAL)*/
+
+.contenido-tabla {
+    grid-area: tabla;
+    display: flex;
+    flex-direction: column;
+    /* margin: 1vw; */
+    /* padding: 0 2vw; */
+    row-gap: 1.5vw;
+}
+
+.contenido-tabla .cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contenido-tabla .cabecera .botones {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 1vw;
+}
+
+.contenido-tabla .cabecera .botones button {
+    background-color: var(--primario);
+    padding: 0.5vw;
+    color: var(--blanco);
+    border-radius: 0.5vw;
+    font-size: 1.1vw;
+}
+
+.contenido-tabla .cabecera .botones a {
+    color: var(--blanco);
+
+}
+
+
+.contenido-tabla .cabecera .botones button:hover {
+    background-color: var(--hover-primario)
+}
+
+.contenido-tabla .cabecera .titulo p {
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.no-padding {
+    padding: 1vw;
+    border: none;
+}
+
+.contenido-tabla .tabla {
+    overflow: auto;
+    height: 40vh;
+    background-color: #ffffff;
+}
+
+.contenido-tabla .tabla {
+    text-align: center;
+    border-radius: 0.5vw;
+    font-size: 1vw;
+    padding: 0.2vw;
+}
+
+.contenido-tabla .tabla th,
+td {
+    padding: 0.7vw 2vw;
+}
+
+.contenido-tabla .tabla td {
+    overflow: hidden;
+    /* Otra opción es ocultar el contenido que excede el ancho máximo */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
+    white-space: nowrap;
+    max-width: 6.5vw;
+}
+
+.contenido-tabla .tabla table tbody tr td {
+    width: 10%;
+}
+
+/* FIN TABLA */

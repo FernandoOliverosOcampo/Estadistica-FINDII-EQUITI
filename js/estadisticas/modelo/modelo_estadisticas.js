@@ -6,31 +6,39 @@ const Modelo = {
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://192.168.10.18:5600/mostrar-ventas-realizadas/" + cedula,
+            url: "http://equitisoporte.pythonanywhere.com/mostrar-ventas-realizadas/" + cedula,
+            headers: config.headers,
+        });
+        return res
+    },
+
+    async infoEquipo(liderEquipo) {
+        //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
+        const res = axios({
+            method: "GET",
+            url: "http://equitisoporte.pythonanywhere.com/info-equipo/" + liderEquipo,
             headers: config.headers,
         });
         return res
     },
 
     async traerDatosPersonalesAgente(cedula) {
-
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://192.168.10.18:5600/mostrar-datos-personales/" + cedula,
+            url: "http://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
             headers: config.headers,
         });
         return res
     },
-    async mostrarEstadisticas(cedula){
+
+    async mostrarEstadisticas(cedula) {
         const res = axios({
             method: "GET",
-            url:"http://192.168.10.18:5600/estadisticas/" + cedula,
+            url: "http://equitisoporte.pythonanywhere.com/estadisticas/" + cedula,
             headers: config.headers,
         });
         return res
-        
-
     }
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -12,39 +12,34 @@
 <body>
 
     <header>
-        <div class="menu">
-            <div class="contenido-menu">
-                <div class="lado-izquierdo">
-                    <div class="contenido-izquierda">
-                        <div class="banner-findii">
-                            <img src="../../img/FINDII.png" alt="">
-                        </div>
-                        <div class="hora-actual" >
-                            <p id="horaActual"></p>
-                        </div>
-                    </div>
+        <nav class="menu">
+            <div class="izquierda">
+                <div class="logo-empresa">
+                    <img src="../../img/FINDII.png" alt="">
                 </div>
-
-                <div class="lado-derecho">
-                    <div class="contenido-derecha">
-                        <div class="nombre-usuario" id = "menuNombreAgente"> </div>
-                        <div class="rol-usuario" id = "menuRolUsuario"> </div>
-                        <div class="imagen" id="abrirMenuOpciones">
-                            <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
-                        </div>
-
-                        <div class="opciones-perfil" id="opcionesPerfil">
-                            <div class="contenido-perfil" id = "contenidoPerfil">
-                                <a href="" target="_blank"></a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
+                <div class="hora-actual">
+                    <p id="horaActual"></p>
                 </div>
             </div>
-        </div>
+            <div class="derecha">
+
+                <div class="datos-agente">
+                    <div class="nombre-usuario" id="menuNombreAgente"> </div>
+                    <div class="rol-usuario" id="menuRolUsuario"> </div>
+                </div>
+
+                <div class="foto-usuario" id="abrirMenuOpciones">
+                    <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
+                </div>
+
+                <div class="opciones-perfil" id="opcionesPerfil">
+                    <div class="contenido-perfil" id="contenidoPerfil">
+                        <a href="" target="_blank"></a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
     </header>
 
     <div class="hero">
@@ -53,169 +48,87 @@
 
             <section class="cabecera">
                 <div class="nombre-lider">
-                    <p>Team leader: Davina</p>
+                    <p>Team leader:</p>
+                    <select name="team leader" id="teamLeader">
+                        <option value="No selecionado" selected>No selecionado</option>
+                        <option value="davina" >Davina</option>
+                        <option value="ray">Ray</option>
+                        <option value="laureano">Laureano</option>
+                        <option value="miguel">Miguel</option>
+                    </select>
                 </div>
             </section>
 
             <section class="cuerpo">
                 <div class="estadisticas">
-                    <div class="graficas">
-                        <canvas id="myChart"></canvas>
-                    </div>
-
                     <div class="indicadores">
                         <div class="promedio-mes">
-                            <p>Promedio ventas mensual = 23</p>
+                            <p><b>Promedio ventas mensual</b> = 23</p>
                         </div>
 
                         <div class="promedio-semanal">
-                            <p>Promedio ventas semanal = 12</p>
+                            <p><b>Promedio ventas semanal</b> = 12</p>
+                        </div>
+                    </div>
+                    <div class="datos-estadisticos">
+                        <div class="contenido-datos-estadisticos" id="contenedorDatos">
+                       
                         </div>
                     </div>
                 </div>
 
-                <div class="agentes">
-                    <div class="titulo-agentes">
-                        <p>Agentes</p>
-                    </div>
-                    <div class="contenedor-agentes">
+                <div class="opciones">
+                    <div class="tarjetas">
 
-                        <div class="agente">
-                            <div class="foto">
-                                <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
+                        <div class="tarjeta tarjeta-equipo">
+                            <div class="cabecera">
+                                <div class="icono">
+                                    <i class="fa-solid fa-people-group"></i>
+                                </div>
+                                <div class="titulo">
+                                    <p>MI EQUIPO</p>
+                                </div>
                             </div>
 
-                            <div class="nombre">
-                                <p>Pedrito electrocutador</p>
+                            <div class="cuerpo">
+                                <div class="descripcion" id = "agentesPertenecientesContenedor">
+                                    <ul id = "listaAgentesPertenecientes">
+                                        
+                                    </ul>
+                                </div>
                             </div>
 
-                            <div class="boton-info-agente">
-                                <button>Ver mas</button>
+                            <div class="pie">
+                                <a href="../estadisticas.html">Ver estadísticas</a>
                             </div>
-
-                        </div>
-
-
-                        <div class="agente">
-                            <div class="foto">
-                                <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
-                            </div>
-
-                            <div class="nombre">
-                                <p>Pedrito electrocutador</p>
-                            </div>
-
-                            <div class="boton-info-agente">
-                                <button>Ver mas</button>
-                            </div>
-
-                        </div>
-
-                        
-                        <div class="agente">
-                            <div class="foto">
-                                <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
-                            </div>
-
-                            <div class="nombre">
-                                <p>Pedrito electrocutador</p>
-                            </div>
-
-                            <div class="boton-info-agente">
-                                <button>Ver mas</button>
-                            </div>
-
-                        </div>
-
-                        
-                        <div class="agente">
-                            <div class="foto">
-                                <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
-                            </div>
-
-                            <div class="nombre">
-                                <p>Pedrito electrocutador</p>
-                            </div>
-
-                            <div class="boton-info-agente">
-                                <button>Ver mas</button>
-                            </div>
-
-                        </div>
-
-                        
-                        <div class="agente">
-                            <div class="foto">
-                                <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
-                            </div>
-
-                            <div class="nombre">
-                                <p>Pedrito electrocutador</p>
-                            </div>
-
-                            <div class="boton-info-agente">
-                                <button>Ver mas</button>
-                            </div>
-
-                        </div>
-
-                        
-                        <div class="agente">
-                            <div class="foto">
-                                <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
-                            </div>
-
-                            <div class="nombre">
-                                <p>Pedrito electrocutador</p>
-                            </div>
-
-                            <div class="boton-info-agente">
-                                <button>Ver mas</button>
-                            </div>
-
                         </div>
 
                     </div>
                 </div>
 
-                <div class="lista-ventas">
-                    <table>
-                        <tr>
-                            <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th>
-                        </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                            <td>Germany</td>
-                        </tr>
-                        <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
-                            <td>Mexico</td>
-                        </tr>
-                        <tr>
-                            <td>Ernst Handel</td>
-                            <td>Roland Mendel</td>
-                            <td>Austria</td>
-                        </tr>
-                        <tr>
-                            <td>Island Trading</td>
-                            <td>Helen Bennett</td>
-                            <td>UK</td>
-                        </tr>
-                        <tr>
-                            <td>Laughing Bacchus Winecellars</td>
-                            <td>Yoshi Tannamuri</td>
-                            <td>Canada</td>
-                        </tr>
-                        <tr>
-                            <td>Magazzini Alimentari Riuniti</td>
-                            <td>Giovanni Rovelli</td>
-                            <td>Italy</td>
-                        </tr>
-                    </table>
+                <div class="graficas">
+                    <div class="contenido-graficas">
+
+                        <div class="ventas-mes cont-grafica">
+                            <div class="titulo-grafica">
+                                <p>Ventas de equipos por mes</p>
+                            </div>
+
+                            <div class="grafica-ventas-mes">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- <div class="ventas-realizar cont-grafica">
+                            <div class="titulo-grafica" id="tituloGrafica">
+
+                            </div>
+                            <div class="grafica-ventas-realizar">
+                                <canvas id="myDona"></canvas>
+                            </div>
+                        </div> -->
+
+                    </div>
                 </div>
             </section>
 

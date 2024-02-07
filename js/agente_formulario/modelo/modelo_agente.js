@@ -1,28 +1,29 @@
 import config from "../../supabase/keys.js";
 
 const Modelo = {
-    async insertarAgente(apodo, nombre, cedula, correo, celular, estado, grupo, campaña, liderResponsable, liderEquipo, contraseña){
+
+    async insertarAgente(apodo, nombre, usuario, cedulaFinal, correo, celular, grupo, campaña, liderResponsable, liderEquipo) {
+
         const data_agentes = {
             apodo: apodo,
+            usuario: usuario,
             nombre: nombre,
-            cedula: cedula,
-            correo: correo,
-            celular: celular,
-            estado: estado,
+            cedula: cedulaFinal,
+            correo: correo || 'no dado',
+            celular: celular || 'no dado',
+            estado: "activo",
             grupo: grupo,
             campana: campaña,
             lider_responsable: liderResponsable,
             lider_equipo: liderEquipo,
             rol: 'agente',
-            contrasena: contraseña
+            contrasena: "Findii2024"
         }
 
-        console.log(data_agentes)
-
-        const res = await axios (
+        const res = await axios(
             {
-                method:"POST",
-                url:"http://192.168.10.18:5600/registro-agente/",
+                method: "POST",
+                url: "http://equitisoporte.pythonanywhere.com/registro-agente/",
                 headers: config.headers,
                 data: data_agentes
             }
@@ -30,12 +31,13 @@ const Modelo = {
         return res
 
     },
+
     async traerDatosPersonalesAgente(cedula) {
 
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://192.168.10.18:5600/mostrar-datos-personales/" + cedula,
+            url: "http://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
             headers: config.headers,
         });
         return res

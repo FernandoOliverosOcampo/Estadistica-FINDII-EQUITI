@@ -6,7 +6,7 @@ const Controlador = {
         const { correo, password } = Vista.getDatosInicioSesion();
         try {
             const res = await Modelo.iniciar_seion(correo, password);
-            console.log(res)
+
             if (res.data.acceso == "AUTORIZADO") {
                 const access_token = res.data.access_token;
                 const cedula = res.data.cedula;
@@ -20,6 +20,7 @@ const Controlador = {
                 if(res.data.rol == "admin"){
                     Vista.redirigirAdmin();
                 }
+
                 if (res.data.rol == "agente"){
                     Vista.redirigirAIndex();
                 }
@@ -27,6 +28,11 @@ const Controlador = {
                 if (res.data.rol == "team leader"){
                     Vista.redirigirTeamLeader();
                 }
+
+                if (res.data.rol == "calidad"){
+                    Vista.redirigirCalidad();
+                }
+
 
             } else {
                 Vista.mostrarMensajeError("Usuario no encontrado")

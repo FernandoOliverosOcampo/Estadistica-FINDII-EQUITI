@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div class="informacion-editar">
+        <h3>Informacion venta</h3>
+
+       <div class="contenido-venta">
+
+            <div class="campo compania">
+               <div class="texto">
+                   <p>Compañia:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['compania']}</p>
+               </div>
+           </div>
+
+            <div class="campo dni">
+           <div class="texto">
+               <p>DNI:</p>
+           </div>
+           <div class="entrada">
+               <p>${dato['dni']}</p>
+           </div>
+            </div>
+   
+            <div class="campo nombre">
+           <div class="texto">
+               <p>Nombre:</p>
+           </div>
+           <div class="entrada">
+               <p>${dato['nombre']}</p>
+           </div>
+           </div>
+
+            <div class="campo telefono">
+               <div class="texto">
+                   <p>Telefono:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['telefono']}</p>
+               </div>
+           </div>
+
+            <div class="campo correo">
+           <div class="texto">
+               <p>Correo:</p>
+           </div>
+           <div class="entrada">
+               <p>${dato['correo']}</p>
+           </div>
+           </div>
+
+            <div class="campo direccion">
+           <div class="texto">
+               <p>Dirección:</p>
+           </div>
+           <div class="entrada">
+               <p>${dato['direccion']}</p>
+           </div>
+           </div>
+
+            <div class="campo fecha-nacimiento">
+               <div class="texto">
+                   <p>Fecha de nacimiento:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['fecha_nacimiento']}</p>
+               </div>
+           </div>
+
+           <div class="campo cups-luz">
+               <div class="texto">
+                   <p>CUPS LUZ:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['cups_luz']}</p>
+               </div>
+           </div>
+
+           <div class="campo cups-gas">
+               <div class="texto">
+                   <p>CUPS GAS:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['cups_gas']}</p>
+               </div>
+           </div>
+
+           <div class="campo iban">
+               <div class="texto">
+                   <p>IBAN:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['iban']}</p>
+               </div>
+           </div>
+
+           <div class="campo numero-contrato">
+               <div class="texto">
+                   <p>Numero de Contrato:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['numero_contrato']}</p>
+               </div>
+           </div>
+
+           <div class="campo potencia">
+               <div class="texto">
+                   <p>POTENCIA:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['potencia']}</p>
+               </div>
+           </div>
+
+           <div class="campo peajeGas">
+               <div class="texto">
+                   <p>PEAJE GAS:</p>
+               </div>
+               <div class="entrada">
+                   <p>${dato['peaje_gas']}</p>
+               </div>
+           </div>
+
+           <div class="campo descripcion-venta">
+               <div class="texto">
+                   <p>Observaciones venta:</p>
+               </div>
+               <div class="entrada">
+                   <textarea id="observacionesVenta" disabled>${dato['observaciones_venta']}</textarea>
+               </div>
+           </div>
+
+
+       </div>
+
+       <div class="contenido-editable">
+
+        <div class="campo llamada-calidad">
+            <div class="texto">
+                <p>Llamada calidad:</p>
+            </div>
+            <div class="entrada">
+                <select name="" id="llamadaCalidadComboBoxCampoEditar">
+                    <option value="${dato['llamada_calidad']}">${dato['llamada_calidad']}</option>
+                    <option value="corregida">Corregida</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="realizada">Realizada</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo calidad-enviada">
+            <div class="texto">
+                <p>Calidad enviada:</p>
+            </div>
+            <div class="entrada">
+                <select name="" id="calidadEnviadaComboBoxCampoEditar">
+                    <option value="${dato['calidad_enviada']}">${dato['calidad_enviada']}</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo legalizacion">
+            <div class="texto">
+                <p>Legalización:</p>
+            </div>
+            <div class="entrada">
+                <select name="" id="legalizacion">
+                    <option value="${dato['legalizacion']}">${dato['legalizacion']}</option>
+                    <option value="Naturgy">Naturgy</option>
+                    <option value="Iberdrola">Iberdrola</option>    
+                    <option value="No enviado">No enviado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo verificacion-calidad">
+            <div class="texto">
+                <p>Verificación calidad:</p>
+            </div>
+            <div class="entrada">
+                <select name="" id="verificacionComboBoxCampoEditar">
+                    <option value="${dato['verificacion_calidad']}">${dato['verificacion_calidad']}</option>
+                    <option value="realizada">Realizada</option>
+                    <option value="no facturables">No facturables</option>
+                    <option value="pendiente">Pendiente</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo audios-cargados">
+            <div class="texto">
+                <p>Audios cargados:</p>
+            </div>
+            <div class="entrada">
+                <select name="" id="audiosCargadosComboBoxCampoEditar">
+                    <option value="${dato['audios_cargados']}">${dato['audios_cargados']}</option>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo estado">
+            <div class="texto">
+                <p>Estado:</p>
+            </div>
+            <div class="entrada">
+                <select name="" id="estadoComboBoxCampoEditar">
+                    <option value="${dato['estado']}">${dato['estado']}</option>
+                    <option value="no cumple calidad">No cumple calidad</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo descripcion">
+            <div class="texto">
+                <p>Observaciones calidad:</p>
+            </div>
+            <div class="entrada">
+                <textarea id="observacionesCalidadCampoEditar">${dato['observaciones_calidad']}</textarea>
+            </div>
+        </div>
+
+        <div class="campo descripcion">
+            <div class="texto">
+                <p>Observaciones adicionales:</p>
+            </div>
+            <div class="entrada">
+                <textarea id="observacionesAdicionalesCampoEditar">${dato['observaciones_adicionales']}</textarea>
+            </div>
+        </div>
+       </div>
+  
+   </div>
+</body>
+</html>

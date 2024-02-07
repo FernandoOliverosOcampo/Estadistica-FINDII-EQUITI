@@ -1,5 +1,7 @@
 @import url(../config/global.css);
-@import url(../menu.css);
+@import url(../menu2.css);
+@import url(../tabla2.css);
+
 
 .hero {
     color: #191919;
@@ -124,143 +126,114 @@
 
 /* INFORMACION DATOS (MODAL)*/
 
-.contenido-tabla .editar-formulario .contenido {
+.editar-formulario .contenido {
     display: flex;
     flex-direction: column;
     row-gap: 2vw;
-    margin: 5% 25%;
+    margin: 2% auto;
     padding: 0 2vw;
     background-color: var(--blanco);
     border-radius: 0.5vw;
-    width: 50vw;
-    height: 80vh;
+    width: 80vw;
+    height: 90vh;
+    overflow: auto;
 }
 
-.contenido-tabla .editar-formulario .contenido .modal-cabecera{
+.editar-formulario .contenido .modal-cabecera {
     display: flex;
     border-bottom: 1px solid var(--fondo);
 }
+.editar-formulario .contenido .modal-cuerpo {
+    display: grid;
+    grid-template-areas:
+    "agente"
+    "editar"
+}
+.editar-formulario .contenido .modal-cuerpo .informacion-agente-venta{
+    grid-area: agente;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.editar-formulario .contenido .modal-cuerpo .informacion-agente{
+    display: flex;
+    padding: 2vw 0;
+    justify-content: space-around;
+}
 
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo{
+
+.editar-formulario .contenido .modal-cuerpo .informacion-editar{
+    grid-area: editar;
     display: grid;
     grid-template-areas: 
-    "nombre tipo"
-    "ubicacion cantidad"
-    "descripcion descripcion";
-    row-gap: 3vh;
+    "info-venta info-editable";
+    grid-template-columns: 2fr 1fr;
 }
 
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .nombre{
-    grid-area: nombre;
+.informacion-editar .contenido-venta{
+    grid-area: info-venta;
+    display: grid;
+    row-gap: 20px;
 }
 
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .tipo{
-    grid-area: tipo;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .cantidad{
-    grid-area: cantidad;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion{
-    grid-area: descripcion;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .ubicacion{
-    grid-area: ubicacion;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion .entrada textarea{
-    width: 48vw;
-    height: 15vh;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-footer{
-    text-align: end;
-}
-
-.contenido-tabla {
-    grid-area: tabla;
-    display: flex;
-    flex-direction: column;
-    /* margin: 1vw; */
-    /* padding: 0 2vw; */
-    row-gap: 1.5vw;
-}
-
-.contenido-tabla .cabecera {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.contenido-tabla .cabecera .botones {
-    display: flex;
-    justify-content: flex-end;
-    column-gap: 1vw;
-}
-
-.contenido-tabla .cabecera .botones button {
-    background-color: var(--primario);
-    padding: 0.5vw;
-    color: var(--blanco);
-    border-radius: 0.5vw;
-    font-size: 1.1vw;
-}
-
-.contenido-tabla .cabecera .botones a {
-    color: var(--blanco);
-
-}
-
-
-.contenido-tabla .cabecera .botones button:hover {
-    background-color: var(--hover-primario)
-}
-
-.contenido-tabla .cabecera .titulo p {
-    font-size: 2vw;
+.informacion-editar .campo .texto{
     font-weight: bold;
 }
 
-.no-padding {
-    padding: 1vw;
+.informacion-editar .contenido-editable{
+    grid-area: info-editable;
+    height: 20vh;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 50px;
+    justify-content: center;
+    row-gap: 20px
+}
+
+.entrada textarea{
+    height: 80px;
+    width: 30vw;
+    resize: none;
+}
+.modal-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vw 0;
+}
+.modal-footer .boton{
+    background-color: var(--primario);
+    color: var(--blanco);
+    border-radius: 0.5vw;
+    padding: 1vw 2vw;
+    cursor: pointer;
+    font-size: 1vw;
+    padding: 1vw 2vw;
     border: none;
 }
-
-.contenido-tabla .tabla {
-    overflow: auto;
-    height: 40vh;
-    background-color: #ffffff;
-}
-
-.contenido-tabla .tabla {
-    text-align: center;
+.btn-danger{
+    background-color: red;
+    padding: 1vw;
+    color: var(--blanco);
     border-radius: 0.5vw;
-    font-size: 1vw;
-    padding: 0.2vw;
+    font-size: 1.1vw;
+    margin: 20px;
+    width: 10vw;
 }
+.btn-success{
+    background-color: blue;
+    padding: 1vw;
+    color: var(--blanco);
+    border-radius: 0.5vw;
+    margin: 20px;
+    font-size: 1.1vw;
+    width: 10vw;
 
-.contenido-tabla .tabla th,
-td {
-    padding: 0.7vw 2vw;
 }
-
-.contenido-tabla .tabla td {
-    overflow: hidden;
-    /* Otra opción es ocultar el contenido que excede el ancho máximo */
-    text-overflow: ellipsis;
-    /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
-    white-space: nowrap;
-    max-width: 6.5vw;
-}
-
-.contenido-tabla .tabla table tbody tr td {
-    width: 10%;
-}
-
 /* FIN TABLA */
-
+.boton{
+    width: 15dvw;
+}
 
 @media only screen and (max-width: 700px) {
     .contenido-datos-estadisticos .estadistica {

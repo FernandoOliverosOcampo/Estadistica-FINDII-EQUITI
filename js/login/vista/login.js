@@ -43,14 +43,17 @@ const Vista = {
 
     redirigirTeamLeader() {
         location.href = ("./team_leader/inicio_team_leader.html");
+    },
+
+    redirigirCalidad() {
+        location.href = ("./admin/calidad.html");
     }
 }
 export default Vista;
 
-
 const botonEnviar = document.getElementById('btnIngresar');
 const botonEnter = document
-botonEnter.addEventListener('keydown', function(event) {
+botonEnter.addEventListener('keydown', function (event) {
     if (event.keyCode === 13) {
         Controlador.iniciarSesion();
     }

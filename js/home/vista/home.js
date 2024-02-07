@@ -25,14 +25,18 @@ const Vista = {
 
     datosEstadisticos(res) {
 
+        console.log(res)
+
         const cant_ventas_totales_realizadas = res.data.cant_ventas_realizadas
-        const cant_ventas_totales_noviembre = res.data.cant_ventas_noviembre
         const cant_ventas_totales_diciembre = res.data.cant_ventas_diciembre
         const cant_ventas_totales_enero = res.data.cant_ventas_enero
+        const cant_ventas_totales_febrero = res.data.cant_ventas_febrero
 
-        this.llenarCuadroVentasTotales(cant_ventas_totales_noviembre, "Ventas Noviembre")
+
         this.llenarCuadroVentasTotales(cant_ventas_totales_diciembre, "Ventas Diciembre")
         this.llenarCuadroVentasTotales(cant_ventas_totales_enero, "Ventas Enero")
+        this.llenarCuadroVentasTotales(cant_ventas_totales_febrero, "Ventas Febrero")
+
     },
 
     modalIncrustado(targetModal, btnAbrir, claseCerrarModal) {
@@ -49,12 +53,13 @@ const Vista = {
         btnCerrarModal.onclick = function () {
             modal.style.display = "none";
         }
-
+        /*
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
+        */
     },
 
     modalCero(targetModal, claseCerrarModal) {
@@ -62,15 +67,15 @@ const Vista = {
         /* MODAL Agregar datos */
         var modal = document.getElementById(targetModal);
         //var btnAbrirModal = document.getElementById(btnAbrir);
-        var btnCerrarModal = document.getElementsByClassName(claseCerrarModal)[0];
+        //var btnCerrarModal = document.getElementsByClassName(claseCerrarModal)[0];
 
         //btnAbrirModal.onclick = function () {
         modal.style.display = "block";
         //}
 
-        btnCerrarModal.onclick = function () {
-            modal.style.display = "none";
-        }
+        //btnCerrarModal.onclick = function () {
+        //    modal.style.display = "none";
+        //}
 
         window.onclick = function (event) {
             if (event.target == modal) {
@@ -79,70 +84,251 @@ const Vista = {
         }
     },
 
-    modalContenido(modalCuerpo, estadoVenta) {
+    modalContenido(modalCuerpo, modalCabecera, dato) {
+
+        modalCabecera.innerHTML =
+        `
+         <h1>Información</h1>
+        `
         modalCuerpo.innerHTML =
-            `
-            <div class="campo nombre">
+        `
+        <div class="informacion-agente-venta">
+                    <h3>Informacion agente</h3>
+            <div class="informacion-agente">
+                <p>Id venta:</p>
+                <p id = "idVenta" ><i class="fa-solid fa-hashtag"></i> ${dato['id']}</p>
+                <p><i class="fa-solid fa-calendar-days"></i> Fecha: ${dato['fecha_ingreso_venta']}</p>
+                <p><i class="fa-solid fa-people-group"></i> Lider Equipo: ${dato['lider_equipo']}</p>
+                <p id = "cedula" ><i class="fa-solid fa-address-card"> </i> Cedula:  ${dato['cedula']}</p>
+                <p><i class="fa-solid fa-user"></i> Agente: ${dato['nombre_agente']}</p>
+                <p><i class="fa-solid fa-database"></i> Base de datos: ${dato['base_de_datos']}</p>                      
+            </div>
+
+        </div>
+
+        <div class="informacion-editar">
+             <h3>Informacion venta</h3>
+
+            <div class="contenido-venta">
+
+                <div class="campo compania">
+                    <div class="texto">
+                        <p>Compañia:</p>
+                    </div>
+                    <div class="entrada">
+                       <p id="campoCompañiaEditar">${dato['compania']}</p>
+                    </div>
+                </div>
+
+            <div class="campo dni">
+                <div class="texto">
+                    <p>DNI:</p>
+                </div>
+                <div class="entrada">
+                   <p id="campoDniEditar">${dato['dni']}</p>
+                </div>
+            </div>
+        
+                <div class="campo nombre">
                 <div class="texto">
                     <p>Nombre:</p>
                 </div>
                 <div class="entrada">
-                    <input type="text" id="nombreCampoEditar" value = "">
+                   <p id="campoNombreEditar">${dato['nombre']}</p>
                 </div>
-            </div>
+                </div>
 
-            <div class="campo tipo">
+                <div class="campo telefono">
+                    <div class="texto">
+                        <p>Telefono:</p>
+                    </div>
+                    <div class="entrada">
+                       <p id="campoTelefonoEditar">${dato['telefono']}</p>
+                    </div>
+                </div>
+
+                <div class="campo correo">
                 <div class="texto">
-                    <p>Estado venta:</p>
+                    <p>Correo:</p>
                 </div>
                 <div class="entrada">
-                    <select name="" id="tipoComboBoxCampoEditar">
-                        <option value="">${estadoVenta}</option>
-                        <option value="no facturables">No facturables</option>
-                        <option value="pendiente">Pendiente</option>
-                    </select>
+                   <p id="campoCorreoEditar">${dato['correo']}</p>
                 </div>
-            </div>
+                </div>
 
-            <div class="campo cantidad">
+                <div class="campo direccion">
                 <div class="texto">
-                    <p>Cantidad:</p>
+                    <p>Dirección:</p>
                 </div>
                 <div class="entrada">
-                    <input type="number" id="cantidadCampoEditar" min="0" value = "">
+                   <p id="campoDireccionEditar">${dato['direccion']}</p>
                 </div>
-            </div>
+                </div>
 
-            <div class="campo ubicacion">
-                <div class="texto">
-                    <p>Ubicacion:</p>
+                <div class="campo fecha-nacimiento">
+                    <div class="texto">
+                        <p>Fecha de nacimiento:</p>
+                    </div>
+                    <div class="entrada">
+                       <p id="campoFechaNacimientoEditar">${dato['fecha_nacimiento']}</p>
+                    </div>
                 </div>
-                <div class="entrada">
-                    <input type="text" id="ubicacionCampoEditar" min="0" value = "">
-                </div>
-            </div>
 
-            <div class="campo descripcion">
-                <div class="texto">
-                    <p>Descripcion:</p>
+
+                <div class="campo cups-luz">
+                    <div class="texto">
+                        <p>CUPS LUZ:</p>
+                    </div>
+                    <div class="entrada">
+                       <p id="campoCupsLuzEditar">${dato['cups_luz']}</p>
+                    </div>
                 </div>
-                <div class="entrada">
-                    <textarea id="descripcionCampoEditar"></textarea>
+
+                <div class="campo cups-gas">
+                    <div class="texto">
+                        <p>CUPS GAS:</p>
+                    </div>
+                    <div class="entrada">
+                       <p id="campoCupsGasEditar">${dato['cups_gas']}</p>
+                    </div>
                 </div>
+
+                <div class="campo iban">
+                    <div class="texto">
+                        <p>IBAN:</p>
+                    </div>
+                    <div class="entrada">
+                       <p id="campoIbanEditar">${dato['iban']}</p>
+                    </div>
+                </div>
+
+                <div class="campo numero-contrato">
+                    <div class="texto">
+                        <p>Numero de Contrato:</p>
+                    </div>
+                    <div class="entrada">
+                       <p id="campoNumeroContratoEditar">${dato['numero_contrato']}</p>
+                    </div>
+                </div>
+
+                <div class="campo potencia">
+                    <div class="texto">
+                        <p>POTENCIA:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="campoPotenciaEditar">${dato['potencia']}</p>
+                    </div>
+                </div>
+
+                <div class="campo peajeGas">
+                    <div class="texto">
+                        <p>PEAJE GAS:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="campoPeajeGasEditar">${dato['peaje_gas']}</p>
+                    </div>
+                </div>
+
+                <div class="campo descripcion-venta">
+                    <div class="texto">
+                        <p>Observaciones venta:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="observacionesVenta">${dato['observaciones_venta']}</p>
+                    </div>
+                </div>
+
+                <div class="campo llamada-calidad">
+                    <div class="texto">
+                        <p>Llamada calidad:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="llamadaCalidadComboBoxCampoEditar">${dato['llamada_calidad']}</p>
+                    </div>
+                </div>
+
+                <div class="campo calidad-enviada">
+                    <div class="texto">
+                        <p>Calidad enviada:</p>
+                    </div>
+                    <div class="entrada">
+                     <p id="calidadEnviadaComboBoxCampoEditar">${dato['calidad_enviada']}</p>
+                    </div>
+                </div>
+
+                <div class="campo legalizacion">
+                    <div class="texto">
+                        <p>Legalización:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="legalizacion">${dato['legalizacion']}</p>
+                    </div>
+                </div>
+
+                <div class="campo verificacion-calidad">
+                    <div class="texto">
+                        <p>Verificación calidad:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="verificacionComboBoxCampoEditar">${dato['verificacion_calidad']}</p>
+                    </div>
+                </div>
+
+                <div class="campo audios-cargados">
+                    <div class="texto">
+                        <p>Audios cargados:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="audiosCargadosComboBoxCampoEditar">${dato['audios_cargados']}</p>
+                    </div>
+                </div>
+
+                <div class="campo estado">
+                    <div class="texto">
+                        <p>Estado:</p>
+                    </div>
+                    <div class="entrada">
+                        <select name="" id="estadoComboBoxCampoEditar">
+                            <option value="${dato['estado']}">${dato['estado']}</option>
+                            <option value="recuperada">Recuperada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="campo descripcion">
+                    <div class="texto">
+                        <p>Observaciones calidad:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="observacionesCalidadCampoEditar">${dato['observaciones_calidad']}</p>
+                    </div>
+                </div>
+
+                <div class="campo descripcion">
+                    <div class="texto">
+                        <p>Observaciones adicionales:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="observacionesAdicionalesCampoEditar">${dato['observaciones_adicionales']}</p>
+                    </div>
+                </div>
+
             </div>
+       
+        </div>
+        
         `
-        return modalCuerpo
+        return modalCabecera, modalCuerpo
     },
 
     mostrarTablaDatos(response) {
         const datos = response.data['ventas_realizadas'];
         const tablaDatos = document.getElementById('tablaDatos');
-        console.log(datos)
+        console.log(datos);
         tablaDatos.innerHTML = '';
-
+    
         // Definir las columnas que deseas mostrar
-        const columnasAMostrar = ['fecha_ingreso_venta', 'dni', 'nombre', 'observaciones_venta', 'estado'];
-
+        const columnasAMostrar = ['fecha_ingreso_venta', 'compania', 'dni', 'telefono', 'nombre', 'numero_contrato', 'observaciones_venta', 'llamada_calidad', 'calidad_enviada', 'verificacion_calidad', 'audios_cargados', 'observaciones_calidad', 'observaciones_adicionales', 'legalizacion', 'estado'];
 
         // Crear encabezado
         const encabezadoRow = document.createElement('tr');
@@ -158,7 +344,8 @@ const Vista = {
             const fila = document.createElement('tr');
             for (const columna of columnasAMostrar) {
                 const celda = document.createElement('td');
-                if (columna === 'created_at') {
+                if (columna === 'fecha_ingreso_venta') {
+                    // Formatear la fecha en cada celda
                     const fechaCompleta = dato[columna];
                     const soloFecha = fechaCompleta.split('T')[0];
                     celda.textContent = soloFecha;
@@ -172,10 +359,10 @@ const Vista = {
                 const celda = document.createElement('td');
                 const boton = document.createElement('button');
                 const icono = document.createElement('i');
-
+    
                 // Agregar la clase especial 'no-padding' a las celdas de los botones
                 celda.classList.add('no-padding');
-
+    
                 if (i === 0) {
                     // Configuración para el botón de editar
                     icono.classList.add('fa-solid', 'fa-pen-to-square');
@@ -183,44 +370,20 @@ const Vista = {
                     boton.addEventListener('click', () => {
                         Vista.modalCero("targetModalInformacionDatos", "cerrar-modal-informacion-datos")
                         const modalCuerpo = document.getElementById('modalCuerpo');
-                        const estadoVenta = dato['estado'];
-                        const id = dato['id'];
-                        console.log(id)
-                        // const tipoCampo = dato['tipo']
-                        // const cantidadCampo = dato['cantidad']
-                        // const descripcionCampo = dato['descripcion']
-                        // const ubicacionCampo = dato['ubicacion']
-                        Vista.modalContenido(modalCuerpo, estadoVenta)
-                    });
-                } else if (i === 1) {
-                    // Configuración para el botón de eliminar
-                    icono.classList.add('fa-solid', 'fa-trash');
-                    boton.addEventListener('click', function () {
-                        // Lógica para eliminar el elemento
-                        Swal.fire({
-                            title: `¿Estás seguro? `,
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Agregar"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                const ref = dato['ref'];
-                                Controlador.eliminarDatosFormulario(ref);
-                            }
-                        });
+                        const modalCabecera = document.getElementById('modalCabecera');
+                        Vista.modalContenido(modalCuerpo, modalCabecera, dato)
                     });
                 }
-
+    
                 boton.appendChild(icono);
                 celda.appendChild(boton);
                 fila.appendChild(celda);
             }
-
+    
             tablaDatos.appendChild(fila);
         });
     },
+    
      
     opcionesMenu() {
         if (localStorage.getItem("access_token")) {
@@ -474,8 +637,80 @@ const Vista = {
             location.href = "../pages/login.html";
         }
     },
+
+    editarVenta(){
+        const id_venta = document.getElementById('idVenta').textContent;
+        const cedula = document.getElementById('cedula').textContent;
+        const compania = document.getElementById('campoCompañiaEditar').textContent;
+        const nombre = document.getElementById('campoNombreEditar').textContent;
+        const dni = document.getElementById('campoDniEditar').textContent;
+        const telefono = document.getElementById('campoTelefonoEditar').textContent;
+        const correo = document.getElementById('campoCorreoEditar').textContent;
+        const direccion = document.getElementById('campoDireccionEditar').textContent;
+        const fechaNacimiento = document.getElementById('campoFechaNacimientoEditar').textContent;
+        const cupsLuz = document.getElementById('campoCupsLuzEditar').textContent;
+        const cupsGas = document.getElementById('campoCupsGasEditar').textContent;
+        const iban = document.getElementById('campoIbanEditar').textContent;
+        const numeroContrato = document.getElementById('campoNumeroContratoEditar').textContent;
+        const potencia = document.getElementById('campoPotenciaEditar').textContent;
+        const peajeGas = document.getElementById('campoPeajeGasEditar').textContent;
+        const llamada_calidad = document.getElementById('llamadaCalidadComboBoxCampoEditar').textContent;
+        const calidad_enviada = document.getElementById('calidadEnviadaComboBoxCampoEditar').textContent;
+        const verificacion_calidad = document.getElementById('verificacionComboBoxCampoEditar').textContent;
+        const observaciones_calidad = document.getElementById('observacionesCalidadCampoEditar').textContent;
+        const audios_cargados = document.getElementById('audiosCargadosComboBoxCampoEditar').textContent;
+        const estado = document.getElementById('estadoComboBoxCampoEditar').value;
+        const observaciones_adicionales = document.getElementById('observacionesAdicionalesCampoEditar').textContent;
+        const legalizacion = document.getElementById('legalizacion').textContent;
+
+        return {
+            id_venta,
+            cedula,
+            compania,
+            nombre,
+            dni,
+            telefono,
+            correo,
+            direccion,
+            fechaNacimiento,
+            cupsLuz,
+            cupsGas,
+            iban,
+            numeroContrato,
+            potencia,
+            peajeGas,
+            llamada_calidad,
+            calidad_enviada,
+            verificacion_calidad,
+            observaciones_calidad,
+            audios_cargados,
+            estado,
+            observaciones_adicionales,
+            legalizacion
+        };
+        
+    },
+
+    mostrarMensajeError(mensaje) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Algo salió mal',
+          text: mensaje,
+        })
+    },
+    
+    mostrarAlertaSatisfactorio(mensaje) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: mensaje,
+          showConfirmButton: false,
+          timer: 1500
+        })
+    },
 }
 export default Vista;
+
 document.addEventListener('DOMContentLoaded', function () {
     Controlador.ventasRealizadasAgente();
     Vista.opcionesMenu();
@@ -493,3 +728,36 @@ abrirMenuOpciones.onclick = function () {
         opcionesPerfil.style.display = "none";
     }
 };
+
+const botonEditar = document.getElementById('botonEditar');
+
+botonEditar.onclick = function(){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+    
+      swalWithBootstrapButtons.fire({
+        title: '¿Estás seguro?',
+        text: 'Deseas actualizar esta información de la venta en la BD',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+            Controlador.editarventa()
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'No se ha ingresado nada',
+            'error'
+          );
+        }
+      });
+    
+}

@@ -43,10 +43,10 @@ const Controlador = {
     },
 
     async insertarDatos() {
-
-        const { compania, nombre, dni, telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, iban, datos, observacionesVenta, numeroContrato, potencia, peajeGas } = Vista.enviarDatosFormulario()
+        const { compania, nombre, dni, telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, iban, datos, observacionesVenta, numeroContrato, potencia, peajeGas, valorMantenimiento, valorTipoMantenimiento } = Vista.enviarDatosFormulario()
 
         try {
+
             const cedula = localStorage.getItem('cedula')
             const datos_agente = await Modelo.traerDatosPersonalesAgente(cedula)
 
@@ -54,11 +54,12 @@ const Controlador = {
             const liderEquipo = datos_agente.data.lider_equipo;
             const liderResponsable = datos_agente.data.lider_responsable;
             const fechaActual = this.obtenerFechaActual()
-            //const horaActual = this.obtenerHoraActual()
 
-            await Modelo.insertarVenta(fechaActual, compania, this.capitalizarTexto(nombre), this.convertirAMayusculas(dni), telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, iban, datos, numeroContrato, potencia, peajeGas, observacionesVenta, cedula, liderEquipo, liderResponsable, nombreAgente)
+            await Modelo.insertarVenta(fechaActual, compania, this.capitalizarTexto(nombre), this.convertirAMayusculas(dni), telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, iban, datos, numeroContrato, potencia, peajeGas, observacionesVenta, cedula, liderEquipo, liderResponsable, nombreAgente, valorMantenimiento, valorTipoMantenimiento,)
             let mensaje = "Los datos fueron insertados correctamente"
             Vista.mostrarAlertaSatisfactorio(mensaje)
+            Vista.vaciarCampos();
+
 
         } catch (error) {
             console.log(error)
@@ -66,6 +67,6 @@ const Controlador = {
             Vista.mostrarMensajeError(mensaje)
         }
     },
-  
+
 }
 export default Controlador;

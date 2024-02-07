@@ -75,11 +75,14 @@ td {
     text-overflow: ellipsis;
     /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
     white-space: nowrap;
-    max-width: 6.5vw;
+    max-width: 7.5vw;
 }
 
 .contenido-tabla .tabla table tbody tr td {
     width: 10%;
+}
+
+.contenido-tabla .tabla tr th{
 }
 
 /* FIN TABLA */

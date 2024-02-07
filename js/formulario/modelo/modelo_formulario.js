@@ -2,7 +2,7 @@ import config from '../../supabase/keys.js';
 
 const Modelo = {
 
-    async insertarVenta(fechaActual, compania, nombre, dni, telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, iban, datos, numeroContrato, potencia, peajeGas, observacionesVenta, cedula, liderEquipo, liderResponsable, nombreAgente) {
+    async insertarVenta(fechaActual, compania, nombre, dni, telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, iban, datos, numeroContrato, potencia, peajeGas, observacionesVenta, cedula, liderEquipo, liderResponsable, nombreAgente, valorMantenimiento, valorTipoMantenimiento) {
 
         const datos_insertar_bd = {
             marca_temporal: fechaActual,
@@ -12,7 +12,7 @@ const Modelo = {
             dni: dni,
             telefono: telefono || 'no dado',
             correo: correo || 'no dado',
-            direccion: direccion || 'no dado',
+            direccion: direccion.trim() || 'no dado',
             fecha_nacimiento: fechaNacimiento || 'no dado',
             cups_luz: cupsLuz || 'no tiene',
             cups_gas: cupsGas || 'no tiene',
@@ -21,7 +21,7 @@ const Modelo = {
             numero_contrato: numeroContrato || 'no dado',
             potencia: potencia || 'no dado',
             peaje_gas: peajeGas || 'no dado',
-            observaciones_venta: observacionesVenta || 'no dado',
+            observaciones_venta: observacionesVenta.trim() || 'no dado',
             verificacion_calidad: 'no realizada',
             responsable_calidad: 'leidy',
             llamada_calidad: 'pendiente', //
@@ -33,16 +33,22 @@ const Modelo = {
             observaciones_adicionales: 'no dado', //
             cedula: cedula,
             lider_equipo: liderEquipo,
-            nombre_agente: nombreAgente
+            nombre_agente: nombreAgente,
+            mantenimiento: valorMantenimiento || 'no aplica',
+            tipo_mantenimiento: valorTipoMantenimiento || 'no aplica',
+            legalizacion: 'no aplica'
         }
 
         const res = await axios({
             method: 'POST',
-            url: "http://192.168.10.18:5600/registrar-venta/",
+            // url: "http://equitisoporte.pythonanywhere.com/registrar-venta/",
+            url: "http://equitisoporte.pythonanywhere.com/registrar-venta/",
+
             headers: config.headers,
             data: datos_insertar_bd
         });
         return res
+
     },
 
     async traerDatosPersonalesAgente(cedula) {
@@ -50,10 +56,12 @@ const Modelo = {
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://192.168.10.18:5600/mostrar-datos-personales/" + cedula,
+            // url: "http://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
+            url: "http://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
             headers: config.headers,
         });
         return res
     },
+    
 }
 export default Modelo;

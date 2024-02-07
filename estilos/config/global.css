@@ -8,6 +8,7 @@
     list-style: none;
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
+    user-select: none;
 }
 
 a, button{
@@ -37,7 +38,7 @@ input[type=password],
 input[type=phone],
 input[type=number],
 select {
-    width: 15vw;
+    width: 30vw;
     padding: 0.5vw 1vw;
     box-sizing: border-box;
 }
@@ -74,4 +75,23 @@ select {
     column-gap: 0.5vw;
     justify-content: space-between;
     font-size: 1vw;
+}
+.btn-danger{
+    background-color: red;
+    padding: 1vw;
+    color: var(--blanco);
+    border-radius: 0.5vw;
+    font-size: 1.1vw;
+    margin: 20px;
+    width: 10vw;
+}
+
+.btn-success{
+    background-color: blue;
+    padding: 1vw;
+    color: var(--blanco);
+    border-radius: 0.5vw;
+    margin: 20px;
+    font-size: 1.1vw;
+    width: 10vw;
 }

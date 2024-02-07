@@ -61,10 +61,30 @@
                         <div class="informacion-perfil" id="informacionPerfil"></div>
 
                         <div class="botones-perfil">
-                            <button><i class="fa-solid fa-pen-to-square"></i> Editar perfil</button>
+                            <button id="abrirModal"><i class="fa-solid fa-pen-to-square"></i> Editar perfil</button>
                         </div>
                     </div>
 
+                </div>
+                <div class="editar-formulario modal" id="targetModalInformacionDatos">
+                    <div class="contenido">
+                        <div class="titulo modal-cabecera" id = "modalCabecera">
+                            <!-- 
+                            <a><i class="fa-solid fa-remove cerrar-modal-informacion-datos"></i></a>
+                            -->
+                        </div>
+    
+                        <div class="campos modal-cuerpo" id="modalCuerpo">
+                        
+                        
+                        </div>
+    
+                        <div class="botones modal-footer">
+                            <button id="botonEditar" class="boton"><i class="fa-solid fa-pen-to-square"></i> Editar usuario</button>
+                        </div>
+                    </div>
+                
+                    
                 </div>
 
             </section>
@@ -76,6 +96,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/1a5bcd4a97.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

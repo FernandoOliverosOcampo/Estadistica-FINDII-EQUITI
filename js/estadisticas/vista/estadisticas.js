@@ -3,6 +3,7 @@ import General from "../../general/general.js"
 const Vista = {
 
     llenarCuadroVentasTotales(cant_venta_totales, titulo) {
+
         const datos = document.getElementById("contenedorDatos")
         const contenidoDatos = document.createElement('div')
 
@@ -24,16 +25,16 @@ const Vista = {
     },
 
     datosEstadisticos(res) {
-
         const cant_ventas_totales_realizadas = res.data.cant_ventas_realizadas
-        const cant_ventas_totales_noviembre = res.data.cant_ventas_noviembre
         const cant_ventas_totales_diciembre = res.data.cant_ventas_diciembre
         const cant_ventas_totales_enero = res.data.cant_ventas_enero
+        const cant_ventas_totales_febrero = res.data.cant_ventas_febrero
 
         this.llenarCuadroVentasTotales(cant_ventas_totales_realizadas, "Ventas Totales")
-        this.llenarCuadroVentasTotales(cant_ventas_totales_noviembre, "Ventas Noviembre")
         this.llenarCuadroVentasTotales(cant_ventas_totales_diciembre, "Ventas Diciembre")
         this.llenarCuadroVentasTotales(cant_ventas_totales_enero, "Ventas Enero")
+        this.llenarCuadroVentasTotales(cant_ventas_totales_febrero, "Ventas Febrero")
+
     },
 
     opcionesMenu() {
@@ -288,6 +289,7 @@ const Vista = {
             location.href = "../pages/login.html";
         }
     },
+
     crearGrafico(myChart, labels_barra, datos_barra, tipo) {
 
         new Chart(myChart, {
@@ -317,10 +319,10 @@ const Vista = {
         const myChart = document.getElementById('myChart')
         const dona = document.getElementById('myDona')
 
-        const mesActual = parseInt(res.data.cant_ventas_enero)
+        const mesActual = parseInt(res.data.cant_ventas_febrero)
 
-        const datos_barra = [res.data.cant_ventas_noviembre, res.data.cant_ventas_diciembre, mesActual]
-        const labels_barra = ['Noviembre', 'Diciembre', 'Enero']
+        const datos_barra = [res.data.cant_ventas_noviembre, res.data.cant_ventas_diciembre, res.data.cant_ventas_enero, mesActual]
+        const labels_barra = ['Noviembre', 'Diciembre', 'Enero', 'Febrero']
         this.crearGrafico(myChart, labels_barra, datos_barra, 'bar')
 
         const datos_dona = [mesActual, 23 - mesActual]
@@ -333,7 +335,9 @@ const Vista = {
         <p>Ventas mes actual =  ${mesActual}/23</p>
         `;
     }, 
+    
     llenarPromedios(res){
+
         //promedios
         const promedioMesActual = res.data.prom_venta_mes_actual
         const promedioSemanaActual = res.data.prom_venta_semana_actual
@@ -352,6 +356,7 @@ const Vista = {
             <p>${promedioSemanaActual} </i></p>
         </div>
     `;
+
     vistaPromedioMensual.innerHTML = `
         <div class="icono">
             <p> <i class="fa-solid fa-percent"></i></p>
@@ -363,6 +368,7 @@ const Vista = {
             <p>${promedioMesActual}</i></p>
         </div>
     `;
+
     vistaVentaSemanal.innerHTML = `
         <div class="icono">
             <p> <i class="fa-solid fa-calendar-days"></i></p>

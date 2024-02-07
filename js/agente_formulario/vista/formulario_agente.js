@@ -1,6 +1,8 @@
 import General from "../../general/general.js";
 import Controlador from "../controlador/controlador_agente.js";
+
 const Vista = {
+
     opcionesMenu() {
         if (localStorage.getItem("access_token")) {
             const contenidoPerfil = document.getElementById("contenidoPerfil");
@@ -255,26 +257,22 @@ const Vista = {
     },
 
     enviarDatosAgente(){
-        const apodo = document.getElementById('apodoAgente').value;
-        const nombre = document.getElementById('nombreAgente').value;
+        const primerNombre = document.getElementById('primerNombre').value;
+        const primerApellido = document.getElementById('primerApellido').value;
         const cedula = document.getElementById('cedulaAgente').value;
         const correo = document.getElementById('correoAgente').value;
-        const contraseña = document.getElementById('contraseñaAgente').value;
         const celular = document.getElementById('celularAgente').value;
-        const estado = document.getElementById('estadoAgente').value;
         const grupo = document.getElementById('grupo').value;
         const campaña = document.getElementById('campaña').value;
         const liderResponsable = document.getElementById('liderResponsable').value;
         const liderEquipo = document.getElementById('liderEquipo').value;   
 
         return{
-            apodo,
-            nombre,
+            primerNombre,
+            primerApellido,
             cedula,
             correo,
-            contraseña,
             celular,
-            estado,
             grupo,
             campaña,
             liderResponsable,
@@ -302,16 +300,20 @@ const Vista = {
     },
 
 }
+
 export default Vista;
+
 document.addEventListener('DOMContentLoaded', function () {
     Vista.opcionesMenu();
     General.horaActual()
     setInterval(General.horaActual, 1000);
 });
+
 const registrarAgente = document.getElementById('enviarAgente');
 registrarAgente.onclick = function () {
     Controlador.insertarDatosAgente();
 }
+
 const abrirMenuOpciones = document.getElementById('abrirMenuOpciones');
 const opcionesPerfil = document.getElementById('opcionesPerfil');
 

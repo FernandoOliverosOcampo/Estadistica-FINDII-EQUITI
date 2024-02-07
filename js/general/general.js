@@ -1,5 +1,6 @@
 import Controlador from "./controlador/controlador_general.js";
-const General ={
+const General = {
+
     horaActual() {
         // Función para obtener la hora actual y actualizar el elemento correspondiente
         const currentTimeElement = document.getElementById('horaActual');
@@ -22,6 +23,7 @@ const General ={
         // Actualizar el contenido del elemento
         currentTimeElement.textContent = currentTimeString;
     },
+
     datosAgente(res) {
 
         const menuNombreAgente = document.getElementById('menuNombreAgente')
@@ -43,165 +45,11 @@ const General ={
         menuRolUsuario.appendChild(parrafoRolAgente)
 
     },
-    // opcionesMenu() {
-    //     if (localStorage.getItem('access_token')) {
-    //         const contenidoPerfil = document.getElementById('contenidoPerfil')
-    //         if (localStorage.getItem('rol') == "team leader") {
-    //             contenidoPerfil.innerHTML =
-    //                 `
-    //                 <div class="enlaces">
-    //                     <div class="enlace">
-    //                         <div class="icono">
-    //                             <i class="fa-solid fa-house"></i>
-    //                         </div>
 
-    //                         <div class="texto">
-    //                             <button><a href= "../home.html">Inicio</a></button>
-    //                         </div>
-    //                     </div>
-
-    //                     <div class="enlace">
-    //                         <div class="icono">
-    //                             <i class="fa-solid fa-user"></i>
-    //                         </div>
-                    
-    //                         <div class="texto">
-    //                             <button><a href= "./pages/perfil.html">Mi perfil</a></button>
-    //                         </div>
-    //                     </div>
-
-    //                     <div class="enlace">
-    //                         <div class="icono">
-    //                             <i class="fa-solid fa-user"></i>
-    //                         </div>
-                    
-    //                         <div class="texto">
-    //                             <button><a href= "./pages/team_leader/inicio_team_leader.html">Mi equipo</a></button>
-    //                         </div>
-    //                     </div>
-
-                        
-    //                     <div class="enlace">
-    //                     <div class="icono">
-    //                         <i class="fa-solid fa-user"></i>
-    //                     </div>
-            
-    //                     <div class="texto">
-    //                         <button><a href= "./pages/formulario_ventas.html">Añadir Venta</a></button>
-    //                     </div>
-    //                 </div>
-    //                     </div>
-    //                 </div>
-                
-    //                 <div class="pie-menu">
-                
-    //                     <div class="enlace">
-    //                         <div class="icono">
-    //                             <i class="fa-solid fa-gear"></i>
-    //                         </div>
-                
-    //                         <div class="texto">
-    //                             <button>Configurar</button>
-    //                         </div>
-    //                     </div>
-                
-    //                     <div class="enlace">
-    //                         <div class="icono">
-    //                             <i class="fa-solid fa-right-from-bracket"></i>
-    //                         </div>
-                
-    //                         <div class="texto">
-    //                             <button id = "cerrarSesion">Cerrar sesión</button>
-    //                         </div>
-    //                     </div>
-    //                 </div>      
-    //             `;
-    //         } 
-    //         if (localStorage.getItem('rol') == "agente"){
-    //             contenidoPerfil.innerHTML =
-    //             `
-    //       <div class="enlaces">
-    //         <div class="enlace">
-    //             <div class="icono">
-    //                 <i class="fa-solid fa-house"></i>
-    //             </div>
-
-    //             <div class="texto">
-    //                 <button><a href= "../home.html">Inicio</a></button>
-    //             </div>
-    //         </div>
-
-    //         <div class="enlace">
-    //           <div class="icono">
-    //               <i class="fa-solid fa-user"></i>
-    //           </div>
-    
-    //           <div class="texto">
-    //             <button><a href= "./pages/perfil.html">Mi perfil</a></button>
-    //           </div>
-    //         </div>
-
-    //         <div class="enlace">
-    //         <div class="icono">
-    //             <i class="fa-solid fa-user"></i>
-    //         </div>
-  
-    //         <div class="texto">
-    //             <button><a href= "./pages/formulario_ventas.html">Añadir Venta</a></button>
-    //         </div>
-    //       </div>
-    //         </div>
-    //     </div>
-    //     <div class="enlace">
-    //         <div class="icono">
-    //         <i class="fa-solid fa-location-crosshairs"></i>
-    //         </div>
-  
-    //         <div class="texto">
-    //             <button><a href= "./pages/codigos_postales.html">Codigos postales</a></button>
-    //         </div>
-    //       </div>
-    //         </div>
-    //     </div>
-    
-    //     <div class="pie-menu">
-    
-    //         <div class="enlace">
-    //             <div class="icono">
-    //                 <i class="fa-solid fa-gear"></i>
-    //             </div>
-    
-    //             <div class="texto">
-    //                 <button>Configurar</button>
-    //             </div>
-    //         </div>
-    
-    //         <div class="enlace">
-    //             <div class="icono">
-    //                 <i class="fa-solid fa-right-from-bracket"></i>
-    //             </div>
-    
-    //             <div class="texto">
-    //                 <button id = "cerrarSesion">Cerrar sesión</button>
-    //             </div>
-    //         </div>
-    //     </div>      
-    //             `;
-    //         }
-
-
-    //         const botonCerrarSesion = document.getElementById('cerrarSesion')
-    //         botonCerrarSesion.onclick = function () {
-    //             localStorage.clear()
-    //             location.href = ("./pages/login.html");
-    //         }
-
-    //     } else {
-    //         location.href = ("./pages/login.html");
-    //     }
-    // },
 }
+
 export default General;
+
 document.addEventListener('DOMContentLoaded', function () {
     Controlador.datosAgente()
     // General.opcionesMenu()

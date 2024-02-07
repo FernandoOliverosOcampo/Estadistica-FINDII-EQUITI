@@ -11,6 +11,21 @@ const Controlador = {
       Vista.mostrarGraficas(ventas_miguel, ventas_ray, ventas_davina, ventas_laureano)
   
     },
+
+    async traerAgentesPertenecientes(nombre) {
+      // const res = await Modelo.traerDatosPersonalesAgente(localStorage.getItem('cedula'))
+      // const nombre_formatear = res.data['apodo']
+      // const liderEquipo = nombre_formatear.split(' ')[0];
+      const res2 = await Modelo.agentesPertenecientes(nombre)
+      Vista.agentesPertenecientes(res2)
+  },
+
+  async ventasRealizadasAgente(nombre) {
+    // const res2 = await Modelo.traerDatosPersonalesAgente(localStorage.getItem('cedula'))
+    const res = await Modelo.infoEquipo(nombre)
+    console.log(res)
+    Vista.datosEstadisticos(res)
+},
   
   }
 export default Controlador;

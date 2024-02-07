@@ -23,7 +23,7 @@ body{
 }
 
 .cont-grafica {
-    padding: 1vw 2vw;
+    padding: 1vw 1vw;
     border-radius: 0.5vw;
     background-color: #ffffff;
     display: flex;
@@ -261,7 +261,7 @@ body{
     display: flex;
     flex-direction: column;
     row-gap: 2vh;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .tarjeta-equipo .cuerpo .descripcion ul li{

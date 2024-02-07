@@ -52,16 +52,18 @@
                 </div>
                 <div class="contenido-formulario">
                     <div class="formulario-contenido" id="formulario">
-                        <label>Compañia:
-                            <select name="select" id="compania">
-                                <option value="Iberdrola (fuera de península)" selected>Iberdrola (fuera de península) </option>
-                                <option value="Naturgy">Naturgy</option>
-                                <option value="Iberdrola (Cataluña, Aragón, Baleares, Canarias)">Iberdrola (Cataluña, Aragón, Baleares, Canarias)</option>
-                                <option value="Gana energía">Gana energía</option>
-                                <option value="Otro">Otro</option>
-
-                            </select>
-                        </label>
+                        <div class="seccion-compania" id="companiaSeccion">
+                            <label>Compañia:
+                                <select name="select" id="compania">
+                                    <option value="no seleccionado" selected>Seleccionar...</option>
+                                    <option value="Iberdrola (fuera de península)" >Iberdrola (fuera de península) </option>
+                                    <option value="Naturgy">Naturgy</option>
+                                    <option value="Iberdrola (Cataluña, Aragón, Baleares, Canarias)">Iberdrola (Cataluña, Aragón, Baleares, Canarias)</option>
+                                    <option value="Gana energía">Gana energía</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </label>
+                        </div>
 
                         <label>Nombre:
                             <input type="text" placeholder="Nombre" id="nombre" />
@@ -75,7 +77,7 @@
                             <input type="text" placeholder="Telefono" id="telefono">
                         </label>
 
-                        <label>Correo:
+                        <label>Correo (si no tiene, dejarlo vacío):
                             <input type="email" name="email" id="correo" placeholder="Correo electronico" />
                         </label>
 
@@ -107,7 +109,7 @@
                         </label>
 
                         <label>Numero del contrato:
-                            <input type="text" placeholder="Potencia" id="numeroContrato">
+                            <input type="text" placeholder="Numero del contrato" id="numeroContrato" required>
                         </label>
 
                         <label>Potencia:
@@ -118,7 +120,7 @@
                             <input type="text" placeholder="Peaje gas" id="peajeGas">
                         </label>
 
-                        <label>Observaciones venta:
+                        <label>Observaciones venta: (si no hay observaciones, dejarlo vacío)
                             <input type="text" placeholder="Observaciones venta" id="observacionesVenta">
                         </label>
 

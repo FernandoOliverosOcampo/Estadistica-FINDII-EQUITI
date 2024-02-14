@@ -1,72 +1,50 @@
-@import url(./config/global.css);
 
-.contenido-menu {
+.menu{
     display: flex;
-    align-items: center;
+    width: 95vw;
+    margin: 1% auto;
+    border-radius: 0.5vw;
+    padding: 0.5vw 1vw;
+    background-color: rgb(30, 30, 30);
     justify-content: space-between;
-    padding: 1vw 2vw;
-    color: #191919;
+    color: #ffffff;
+    align-items: center;
 }
 
-.contenido-menu .lado-izquierdo .contenido-izquierda .banner-findii img {
+.menu .izquierda .logo-empresa img{
     height: 5vh;
 }
 
-.contenido-menu .lado-izquierdo .contenido-izquierda{
+.menu .derecha{
     display: flex;
-    column-gap: 2vw;
     align-items: center;
+    column-gap: 20px;
 }
 
-.contenido-menu .lado-derecho .contenido-derecha {
-    display: grid;
-    grid-template-areas:
-        "nombre imagen"
-        "rol imagen";
-    column-gap: 1vw;
-    justify-items: end;
-    align-items: center;
+.menu .derecha .datos-agente{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
-.contenido-derecha .nombre-usuario {
-    grid-area: nombre;
+.menu .derecha .datos-agente p{
+    font-size: 1vw;
 }
 
-.contenido-derecha .nombre-usuario p {
-    font-weight: 500;
-}
-
-.contenido-derecha .rol-usuario {
-    grid-area: rol;
-}
-
-.contenido-derecha .rol-usuario p {
-    font-size: 2.2vh;
-}
-
-.contenido-derecha .imagen {
-    grid-area: imagen;
-}
-
-.contenido-derecha .imagen img {
-    height: 7vh;
+.menu .derecha .foto-usuario img{
+    height: 10vh;
     cursor: pointer;
 }
 
-.contenido-derecha .enlace-menu {
-    color: #191919;
-    font-weight: 400;
-    font-size: 3vh;
-}
-
-.contenido-derecha .opciones-perfil{
+.derecha .opciones-perfil{
     display: none;
     position: absolute;
-    top: 10vh;
+    top: 11vh;
     border-radius: 0.5vw;
-    background-color:white;
+    background-color: white;
     box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
     padding: 2vw;
+    right: 4vw;
 }
 
 .opciones-perfil .contenido-perfil{
@@ -74,9 +52,9 @@
     text-align: start;
     flex-direction: column;
     justify-content: space-between;
-    align-items:start;
-    height: 30vh;
+    align-items: start;
     width: 12vw;
+    row-gap: 8px;
 }
 
 .contenido-perfil .enlaces{
@@ -103,10 +81,11 @@
     flex-wrap: wrap;
     row-gap: 2vh;
 }
-@media only screen and (max-width: 700px) {
-    .opciones-perfil .contenido-perfil{
-        width: 22vw;
-    }
 
+.contenido-perfil .enlace .icono i{
+    color: #191919;
+}
 
+.hora-actual{
+    text-align: center;
 }

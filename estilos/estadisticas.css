@@ -1,5 +1,5 @@
 @import url(./config/global.css);
-@import url(./menu2.css);
+@import url(./menu.css);
 
 .datos-usuario .nombre p {
     font-size: 7vh;
@@ -73,9 +73,8 @@
 
 .graficas .contenido-graficas {
     display: grid;
-    grid-template-areas:
-     "promedios ventas-mes ventas-realizar";
-    align-items: baseline;
+    grid-template-areas: "promedios ventas-mes ventas-realizar";
+    align-items: center;
     justify-content: space-evenly;
 }
 
@@ -115,8 +114,8 @@
     grid-template-areas: 
     "titulo titulo titulo"
     "promedio promedio promedio";
-    height: 10vh;
 }
+
 .promedios .titulo_estadisticas{
     grid-area: titulo;
     text-align: center;
@@ -173,7 +172,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 37vw;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 .titulo_ventas{

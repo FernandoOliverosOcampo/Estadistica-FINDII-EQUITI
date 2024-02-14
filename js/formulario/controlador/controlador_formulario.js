@@ -27,11 +27,6 @@ const Controlador = {
         return `${horas}:${minutos}:${segundos}`;
     },
 
-    // Función para agregar un cero al inicio si el número es menor que 10
-    agregarCeroAlInicio(numero) {
-        return numero < 10 ? `0${numero}` : numero;
-    },
-
     capitalizarTexto(texto) {
         return texto.replace(/\b\w/g, function (l) {
             return l.toUpperCase();
@@ -55,7 +50,7 @@ const Controlador = {
             const liderResponsable = datos_agente.data.lider_responsable;
             const fechaActual = this.obtenerFechaActual()
 
-            await Modelo.insertarVenta(fechaActual, compania, this.capitalizarTexto(nombre), this.convertirAMayusculas(dni), telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, iban, datos, numeroContrato, potencia, peajeGas, observacionesVenta, cedula, liderEquipo, liderResponsable, nombreAgente, valorMantenimiento, valorTipoMantenimiento,)
+            await Modelo.insertarVenta(fechaActual, compania, this.capitalizarTexto(nombre), this.convertirAMayusculas(dni), telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, this.capitalizarTexto(iban), datos, numeroContrato, potencia, peajeGas, observacionesVenta, cedula, liderEquipo, liderResponsable, nombreAgente, valorMantenimiento, valorTipoMantenimiento,)
             let mensaje = "Los datos fueron insertados correctamente"
             Vista.mostrarAlertaSatisfactorio(mensaje)
             Vista.vaciarCampos();

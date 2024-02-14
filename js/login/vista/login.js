@@ -47,6 +47,10 @@ const Vista = {
 
     redirigirCalidad() {
         location.href = ("./admin/calidad.html");
+    },
+
+    redirigirReportes() {
+        location.href = ("./admin/reportes.html");
     }
 }
 export default Vista;

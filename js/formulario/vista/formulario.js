@@ -56,16 +56,6 @@ const Vista = {
                 
                         <div class="enlace">
                             <div class="icono">
-                                <i class="fa-solid fa-gear"></i>
-                            </div>
-                
-                            <div class="texto">
-                                <button>Configurar</button>
-                            </div>
-                        </div>
-                
-                        <div class="enlace">
-                            <div class="icono">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </div>
                 
@@ -127,16 +117,6 @@ const Vista = {
     
             <div class="enlace">
                 <div class="icono">
-                    <i class="fa-solid fa-gear"></i>
-                </div>
-    
-                <div class="texto">
-                    <button>Configurar</button>
-                </div>
-            </div>
-    
-            <div class="enlace">
-                <div class="icono">
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </div>
     
@@ -150,99 +130,82 @@ const Vista = {
 
             if (localStorage.getItem("rol") == "admin") {
                 contenidoPerfil.innerHTML = `
-      <div class="enlaces">
-      <div class="enlace">
-      <div class="icono">
-          <i class="fa-solid fa-house"></i>
-      </div>
+        <div class="enlaces">
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-house"></i>
+                </div>
 
-      <div class="texto">
-          <button><a href= "../pages/admin.html">Inicio</a></button>
-      </div>
-  </div>
-        <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-user"></i>
-          </div>
-
-          <div class="texto">
-            <button><a href= "../pages/perfil.html">Mi perfil</a></button>
-          </div>
-        </div>
-
-        <div class="enlace">
-          <div class="icono">
-            <i class="fa-solid fa-people-group"></i>
-          </div>
-
-          <div class="texto">
-              <button><a href= "../pages/admin/equipo.html">Equipos</a></button>
-          </div>
-        </div>
-        <div class="enlace">
-        <div class="icono">
-        <i class="fa-solid fa-certificate"></i>
-        </div>
-
-        <div class="texto">
-            <button><a href= "../pages/admin/calidad.html">Calidad</a></button>
-        </div>
-      </div>
-
-        <div class="enlace">
-          <div class="icono">
-            <i class="fa-solid fa-headset"></i>
-          </div>
-
-          <div class="texto">
-              <button><a href= "../pages/formulario_ventas.html">Ventas</a></button>
-          </div>
-        </div>
-        <div class="enlace">
-        <div class="icono">
-            <i class="fa-solid fa-user"></i>
-        </div>
-
-        <div class="texto">
-          <button><a href= "../pages/registro_agentes.html">Registrar agente</a></button>
-        </div>
-      </div>
-
-        <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-file-pen"></i>
-          </div>
-
-          <div class="texto">
-              <button><a href="https://docs.google.com/forms/d/1zmWZxi-XVMlfp2KE7dv9EEhqIPYGcDDSZY75K1s4lDU/viewform?pli=1&pli=1&edit_requested=true" target="_blank" >Reporte diario</a></button>
-          </div>
-        </div>
-
-        </div>
-    </div>
-
-    <div class="pie-menu">
-
-        <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-gear"></i>
+                <div class="texto">
+                    <button><a href= "./admin.html">Inicio</a></button>
+                </div>
             </div>
 
-            <div class="texto">
-                <button>Configurar</button>
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="texto">
+                    <button><a href= "./perfil.html">Mi perfil</a></button>
+                </div>
+            </div>
+
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
+
+                <div class="texto">
+                    <button><a href= "./admin/equipo.html">Equipos</a></button>
+                </div>
+            </div>
+
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+
+                <div class="texto">
+                    <button><a href= "./formulario_ventas.html">Ventas</a></button>
+                </div>
+            </div>
+
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="texto">
+                <button><a href= "./registro_agentes.html">Registrar agente</a></button>
+                </div>
+            </div>
+
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-file-pen"></i>
+                </div>
+
+                <div class="texto">
+                    <button><a href="https://docs.google.com/forms/d/1zmWZxi-XVMlfp2KE7dv9EEhqIPYGcDDSZY75K1s4lDU/viewform?pli=1&pli=1&edit_requested=true" target="_blank" >Reporte diario</a></button>
+                </div>
+            </div>
+
             </div>
         </div>
 
-        <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </div>
+        <div class="pie-menu">
 
-            <div class="texto">
-                <button id = "cerrarSesion">Cerrar sesión</button>
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+
+                <div class="texto">
+                    <button id = "cerrarSesion">Cerrar sesión</button>
+                </div>
             </div>
-        </div>
-    </div>      
+        </div>      
       `;
             }
 

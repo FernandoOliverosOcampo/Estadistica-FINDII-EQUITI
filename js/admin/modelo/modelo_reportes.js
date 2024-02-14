@@ -11,39 +11,7 @@ const Modelo = {
         headers: config.headers,
         responseType: 'arraybuffer',  // Indica a Axios que esperamos una respuesta binaria
       });
-
       return res
-  },
-
-  async ventasPorLiderEquipo(nombre_lider_equipo){
-    const res = axios({
-      method: "GET",
-      url:'http://127.0.0.1:5700/info-equipo/'+nombre_lider_equipo,
-      headers: config.headers,
-    });
-    return res
-  },
-
-  async traerVentasRealizadasAgente(cedula) {
-    //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
-    const res = axios({
-      method: "GET",
-      //url: "http://127.0.0.1:5700/mostrar-ventas-realizadas/"+cedula,
-      url: "http://127.0.0.1:5700/mostrar-ventas-realizadas/"+cedula,
-      headers: config.headers,
-    });
-    return res
-  },
-
-  async traerDatosPersonalesAgente(cedula) {
-    //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
-    const res = axios({
-      method: "GET",
-      //url: "http://127.0.0.1:5700/mostrar-datos-personales/"+cedula,
-      url: "http://127.0.0.1:5700/mostrar-datos-personales/"+cedula,
-      headers: config.headers,
-    });
-    return res
   },
 
   limpiarSaltosDeLinea(texto){
@@ -90,17 +58,16 @@ const Modelo = {
     const res = await axios({
       method: "PUT",
       url: "http://127.0.0.1:5700/editar-venta/",
+      data: data_clientes,
       headers: config.headers,
-      data: data_clientes
-    
     });
     return res
  },
 
-  async editarEstadoDesdeTabla(idVenta, estadoo){
+  async editarEstadoDesdeTabla(idVenta, estadoo ){
    
     const infoEstado ={
-      estado: estadoo,
+      estado:estadoo,
       id_venta: idVenta
     }
 
@@ -123,36 +90,6 @@ const Modelo = {
     });
     return res
   },
-
-  async eliminarVenta(id){
-    console.log(id)
-    
-    const res = axios({
-      method: "DELETE",
-      url: "http://127.0.0.1:5700/eliminar-venta/"+id,
-      headers: config.headers,
-    });
-
-    return res
-  },
-
-  async mostrarVentasPorFecha(fechaFormateada){
-
-    console.log(fechaFormateada)
-
-    const datos_enviar = {
-      fecha_venta: fechaFormateada
-    }
-
-    const res = await axios({
-      method: "POST",
-      url: "http://127.0.0.1:5700/mostrar-por-fecha/",
-      headers: config.headers,
-      data: datos_enviar
-      
-    });
-    return res
-  }
 
 }
 export default Modelo;

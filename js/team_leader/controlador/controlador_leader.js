@@ -6,9 +6,10 @@ const Controlador = {
         const res2 = await Modelo.traerDatosPersonalesAgente(localStorage.getItem('cedula'))
         const nombre_formatear = res2.data['apodo']
         const liderEquipo = nombre_formatear.split(' ')[0];
-        console.log(liderEquipo)
+
         const res = await Modelo.infoEquipo(liderEquipo)
         Vista.datosEstadisticos(res)
+        Vista.mostrarTablaDatos(res)
     },
 
     async datosAgenteGraficas() {
@@ -19,7 +20,7 @@ const Controlador = {
     async buscarDatosPersonalesAgente() {
         const { cedulaAgente } = Vista.traerCedulaAgente();
         const res = await Modelo.traerDatosPersonalesAgente(cedulaAgente)
-        const res2 = await Modelo.traerVentasRealizadasAgente(cedulaAgente)
+        //const res2 = await Modelo.traerVentasRealizadasAgente(cedulaAgente)
 
         const res3 = await Modelo.mostrarEstadisticas(cedulaAgente);
 

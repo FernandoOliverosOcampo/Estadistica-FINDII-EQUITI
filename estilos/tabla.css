@@ -2,6 +2,15 @@
 
 /* INFORMACION DATOS (MODAL)*/
 
+th{
+    background-color: #f2f2f2;
+
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+  }
+
 .contenido-tabla {
     grid-area: tabla;
     display: flex;
@@ -36,7 +45,6 @@
 
 }
 
-
 .contenido-tabla .cabecera .botones button:hover {
     background-color: var(--hover-primario)
 }
@@ -47,13 +55,13 @@
 }
 
 .no-padding {
-    padding: 1vw;
+    padding: 20px;
     border: none;
 }
 
 .contenido-tabla .tabla {
     overflow: auto;
-    height: 40vh;
+    height: 70vh;
     background-color: #ffffff;
 }
 
@@ -72,14 +80,87 @@ td {
 .contenido-tabla .tabla td {
     overflow: hidden;
     /* Otra opción es ocultar el contenido que excede el ancho máximo */
-    text-overflow: ellipsis;
     /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
     white-space: nowrap;
-    max-width: 6.5vw;
+    max-width: 10vw;
 }
 
 .contenido-tabla .tabla table tbody tr td {
     width: 10%;
 }
 
+
+.tabla tr td select{
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    font-weight: 500;
+    width: 160px;
+    font-size: 13px;
+    text-align: center;
+    text-transform: capitalize;
+    box-shadow: rgba(149, 157, 165, 0.3) 0px 2px 20px;
+}
+
+.estado-amarillo{    
+    background-color: #fee6aa;
+    color: #a47d29;
+}
+
+.letras-estado-amarillo{    
+    color: #a47d29;
+}
+
+.estado-verde{    
+    background-color: #e3f5da;
+    color: #29b929;
+}
+
+.letras-estado-verde{    
+    color: #29b929;
+}
+
+.estado-rojo{    
+    color: #f2083e;
+    background-color: #ffe6e6;
+}
+
+.letras-estado-rojo{    
+    color: #f2083e;
+}
+
+.letras-estado-azul{    
+    color: #577ebf;
+}
+
+.estado-azul{    
+    color: #577ebf;
+    background-color: #dbecfd;
+}
 /* FIN TABLA */
+
+/* Fija las primeras columnas de la tabla */
+.contenido-tabla .tabla tbody td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: #f2f2f2; /* Color de fondo de las celdas fijas */
+}
+
+/* Restaura la posición estática de las demás celdas */
+.contenido-tabla .tabla tbody td {
+    position: static;
+}
+
+/* Ajusta el borde izquierdo de las celdas fijas */
+.contenido-tabla .tabla tbody td:first-child {
+    border-left: 1px solid #dddddd; /* Borde izquierdo de las celdas fijas */
+}
+
+/* Fija las primeras filas de la tabla */
+.contenido-tabla .tabla thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2; /* Color de fondo de las filas fijas */
+    z-index: 2; /* Asegura que las filas fijas estén sobre las celdas fijas */
+}

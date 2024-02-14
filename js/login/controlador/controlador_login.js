@@ -32,6 +32,10 @@ const Controlador = {
                 if (res.data.rol == "calidad"){
                     Vista.redirigirCalidad();
                 }
+                
+                if (res.data.rol == "reportes"){
+                    Vista.redirigirReportes();
+                }
 
 
             } else {

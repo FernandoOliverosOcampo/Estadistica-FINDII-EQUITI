@@ -9,6 +9,7 @@ const Controlador = {
 
     Vista.mostrarTablaDatos(res)
     Vista.datosEstadisticos(res)
+    console.log(res)
   },
 
   async datosAgenteGraficas() {

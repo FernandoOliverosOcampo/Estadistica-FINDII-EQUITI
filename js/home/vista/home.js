@@ -87,22 +87,23 @@ const Vista = {
     modalContenido(modalCuerpo, modalCabecera, dato) {
 
         modalCabecera.innerHTML =
-        `
+            `
          <h1>Información</h1>
         `
         modalCuerpo.innerHTML =
-        `
+            `
         <div class="informacion-agente-venta">
                     <h3>Informacion agente</h3>
-            <div class="informacion-agente">
-                <p>Id venta:</p>
-                <p id = "idVenta" ><i class="fa-solid fa-hashtag"></i> ${dato['id']}</p>
-                <p><i class="fa-solid fa-calendar-days"></i> Fecha: ${dato['fecha_ingreso_venta']}</p>
-                <p><i class="fa-solid fa-people-group"></i> Lider Equipo: ${dato['lider_equipo']}</p>
-                <p id = "cedula" ><i class="fa-solid fa-address-card"> </i> Cedula:  ${dato['cedula']}</p>
-                <p><i class="fa-solid fa-user"></i> Agente: ${dato['nombre_agente']}</p>
-                <p><i class="fa-solid fa-database"></i> Base de datos: ${dato['base_de_datos']}</p>                      
-            </div>
+                <div class="informacion-agente">
+                    <p>Id venta:</p>
+                    <p id = "idVenta" ><i class="fa-solid fa-hashtag"></i> ${dato['id']}</p>
+                    <p><i class="fa-solid fa-calendar-days"></i> Fecha: ${dato['fecha_ingreso_venta']}</p>
+                    <p><i class="fa-solid fa-people-group"></i> Lider Equipo: ${dato['lider_equipo']}</p>
+                    <p><i class="fa-solid fa-address-card"></i>Cedula:</p>
+                    <p id = "cedula" >${dato['cedula']}</p>
+                    <p><i class="fa-solid fa-user"></i> Agente: ${dato['nombre_agente']}</p>
+                    <p><i class="fa-solid fa-database"></i> Base de datos: ${dato['base_de_datos']}</p>                      
+                </div>
 
         </div>
 
@@ -322,13 +323,14 @@ const Vista = {
     },
 
     mostrarTablaDatos(response) {
+
         const datos = response.data['ventas_realizadas'];
         const tablaDatos = document.getElementById('tablaDatos');
-        console.log(datos);
+
         tablaDatos.innerHTML = '';
-    
+
         // Definir las columnas que deseas mostrar
-        const columnasAMostrar = ['fecha_ingreso_venta', 'compania', 'dni', 'telefono', 'nombre', 'numero_contrato', 'observaciones_venta', 'llamada_calidad', 'calidad_enviada', 'verificacion_calidad', 'audios_cargados', 'observaciones_calidad', 'observaciones_adicionales', 'legalizacion', 'estado'];
+        const columnasAMostrar = ['fecha_ingreso_venta', 'estado', 'dni', 'nombre', 'observaciones_venta', 'verificacion_calidad', 'observaciones_calidad', 'observaciones_adicionales'];
 
         // Crear encabezado
         const encabezadoRow = document.createElement('tr');
@@ -344,14 +346,43 @@ const Vista = {
             const fila = document.createElement('tr');
             for (const columna of columnasAMostrar) {
                 const celda = document.createElement('td');
-                if (columna === 'fecha_ingreso_venta') {
-                    // Formatear la fecha en cada celda
-                    const fechaCompleta = dato[columna];
-                    const soloFecha = fechaCompleta.split('T')[0];
-                    celda.textContent = soloFecha;
-                } else {
-                    celda.textContent = dato[columna];
+                celda.textContent = dato[columna];
+
+                // Agregar la clase "estado-verde" a la celda específica
+                if (columna === 'verificacion_calidad' && dato[columna] === 'cumple calidad') {
+                    celda.classList.add('letras-estado-verde');
                 }
+
+                // Agregar la clase "estado-verde" a la celda específica
+                if (columna === 'verificacion_calidad' && dato[columna] === 'no cumple calidad') {
+                    celda.classList.add('letras-estado-rojo');
+                }
+
+                if (columna === 'verificacion_calidad' && dato[columna] === 'pendiente') {
+                    celda.classList.add('letras-estado-amarillo');
+                }
+
+                // Agregar la clase "estado-verde" al select si el estado es "activo"
+
+                if (columna === 'estado' && dato[columna] === 'recuperada') {
+                    celda.classList.add('letras-estado-azul');
+                }
+
+
+                if (columna === 'estado' && dato[columna] === 'activa' || columna === 'estado' && dato[columna] === 'firmado') {
+                    celda.classList.add('letras-estado-verde');
+                }
+
+                if (columna === 'estado' && dato[columna] === 'pendiente') {
+                    celda.classList.add('letras-estado-amarillo');
+                }
+
+                if (columna === 'estado' && dato[columna] === 'baja' || columna === 'estado' && dato[columna] === 'devuelta' || columna === 'estado' && dato[columna] === 'cancelada') {
+                    celda.classList.add('letras-estado-rojo');
+                }
+
+
+
                 fila.appendChild(celda);
             }
             // Agregar botones de editar, eliminar y ver a cada fila
@@ -359,10 +390,10 @@ const Vista = {
                 const celda = document.createElement('td');
                 const boton = document.createElement('button');
                 const icono = document.createElement('i');
-    
+
                 // Agregar la clase especial 'no-padding' a las celdas de los botones
                 celda.classList.add('no-padding');
-    
+
                 if (i === 0) {
                     // Configuración para el botón de editar
                     icono.classList.add('fa-solid', 'fa-pen-to-square');
@@ -374,17 +405,16 @@ const Vista = {
                         Vista.modalContenido(modalCuerpo, modalCabecera, dato)
                     });
                 }
-    
+
                 boton.appendChild(icono);
                 celda.appendChild(boton);
                 fila.appendChild(celda);
             }
-    
+
             tablaDatos.appendChild(fila);
         });
     },
-    
-     
+
     opcionesMenu() {
         if (localStorage.getItem("access_token")) {
             const contenidoPerfil = document.getElementById("contenidoPerfil");
@@ -468,7 +498,7 @@ const Vista = {
                 </div>
 
                 <div class="texto">
-                    <button><a href= "../home.html">Inicio</a></button>
+                    <button><a href= "./home.html">Inicio</a></button>
                 </div>
             </div>
 
@@ -478,7 +508,7 @@ const Vista = {
               </div>
     
               <div class="texto">
-                <button><a href= "../pages/perfil.html">Mi perfil</a></button>
+                <button><a href= "./pages/perfil.html">Mi perfil</a></button>
               </div>
             </div>
 
@@ -488,7 +518,7 @@ const Vista = {
             </div>
   
             <div class="texto">
-                <button><a href= "../pages/formulario_ventas.html">Añadir Venta</a></button>
+                <button><a href= "./pages/formulario_ventas.html">Añadir Venta</a></button>
             </div>
           </div>
             </div>
@@ -499,23 +529,13 @@ const Vista = {
             </div>
   
             <div class="texto">
-                <button><a href= "../pages/codigos_postales.html">Codigos postales</a></button>
+                <button><a href= "./pages/codigos_postales.html">Codigos postales</a></button>
             </div>
           </div>
             </div>
         </div>
     
         <div class="pie-menu">
-    
-            <div class="enlace">
-                <div class="icono">
-                    <i class="fa-solid fa-gear"></i>
-                </div>
-    
-                <div class="texto">
-                    <button>Configurar</button>
-                </div>
-            </div>
     
             <div class="enlace">
                 <div class="icono">
@@ -548,7 +568,7 @@ const Vista = {
           </div>
 
           <div class="texto">
-            <button><a href= "../pages/perfil.html">Mi perfil</a></button>
+            <button><a href= "./pages/perfil.html">Mi perfil</a></button>
           </div>
         </div>
 
@@ -558,18 +578,9 @@ const Vista = {
           </div>
 
           <div class="texto">
-              <button><a href= "../pages/admin/equipo.html">Equipos</a></button>
+              <button><a href= "./pages/admin/equipo.html">Equipos</a></button>
           </div>
         </div>
-        <div class="enlace">
-        <div class="icono">
-        <i class="fa-solid fa-certificate"></i>
-        </div>
-
-        <div class="texto">
-            <button><a href= "../pages/admin/calidad.html">Calidad</a></button>
-        </div>
-      </div>
 
         <div class="enlace">
           <div class="icono">
@@ -577,7 +588,7 @@ const Vista = {
           </div>
 
           <div class="texto">
-              <button><a href= "../pages/formulario_ventas.html">Ventas</a></button>
+              <button><a href= "./pages/formulario_ventas.html">Ventas</a></button>
           </div>
         </div>
         <div class="enlace">
@@ -586,7 +597,7 @@ const Vista = {
         </div>
 
         <div class="texto">
-          <button><a href= "../pages/registro_agentes.html">Registrar agente</a></button>
+          <button><a href= "./pages/registro_agentes.html">Registrar agente</a></button>
         </div>
       </div>
 
@@ -607,16 +618,6 @@ const Vista = {
 
         <div class="enlace">
             <div class="icono">
-                <i class="fa-solid fa-gear"></i>
-            </div>
-
-            <div class="texto">
-                <button>Configurar</button>
-            </div>
-        </div>
-
-        <div class="enlace">
-            <div class="icono">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </div>
 
@@ -631,14 +632,14 @@ const Vista = {
             const botonCerrarSesion = document.getElementById("cerrarSesion");
             botonCerrarSesion.onclick = function () {
                 localStorage.clear();
-                location.href = "../pages/login.html";
+                location.href = "./pages/login.html";
             };
         } else {
-            location.href = "../pages/login.html";
+            location.href = "./pages/login.html";
         }
     },
 
-    editarVenta(){
+    editarVenta() {
         const id_venta = document.getElementById('idVenta').textContent;
         const cedula = document.getElementById('cedula').textContent;
         const compania = document.getElementById('campoCompañiaEditar').textContent;
@@ -688,24 +689,24 @@ const Vista = {
             observaciones_adicionales,
             legalizacion
         };
-        
+
     },
 
     mostrarMensajeError(mensaje) {
         Swal.fire({
-          icon: 'error',
-          title: 'Algo salió mal',
-          text: mensaje,
+            icon: 'error',
+            title: 'Algo salió mal',
+            text: mensaje,
         })
     },
-    
+
     mostrarAlertaSatisfactorio(mensaje) {
         Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: mensaje,
-          showConfirmButton: false,
-          timer: 1500
+            position: 'center',
+            icon: 'success',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1500
         })
     },
 }
@@ -731,16 +732,16 @@ abrirMenuOpciones.onclick = function () {
 
 const botonEditar = document.getElementById('botonEditar');
 
-botonEditar.onclick = function(){
+botonEditar.onclick = function () {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
         },
         buttonsStyling: false
-      })
-    
-      swalWithBootstrapButtons.fire({
+    })
+
+    swalWithBootstrapButtons.fire({
         title: '¿Estás seguro?',
         text: 'Deseas actualizar esta información de la venta en la BD',
         icon: 'warning',
@@ -748,16 +749,16 @@ botonEditar.onclick = function(){
         confirmButtonText: 'Aceptar',
         cancelButtonText: 'Cancelar',
         reverseButtons: true
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
             Controlador.editarventa()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire(
-            'Cancelado',
-            'No se ha ingresado nada',
-            'error'
-          );
+            swalWithBootstrapButtons.fire(
+                'Cancelado',
+                'No se ha ingresado nada',
+                'error'
+            );
         }
-      });
-    
+    });
+
 }

@@ -23,104 +23,6 @@
     font-weight: 700;
 }
 
-.datos-estadisticos .contenido-datos-estadisticos {
-    display: flex;
-    column-gap: 2vw;
-    justify-content: space-between;
-}
-
-.contenido-datos-estadisticos .estadistica {
-    display: grid;
-    grid-template-areas:
-        "valor icono"
-        "titulo icono";
-    background-color: #ffffff;
-    padding: 0.5vw 1.5vw;
-    column-gap: 2vw;
-    border-radius: 0.5vw;
-    justify-content: space-between;
-    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.08);
-    height: 10vh;
-    width: 15vw;
-}
-
-.estadistica .titulo {
-    grid-area: titulo;
-}
-
-.estadistica .titulo p {
-    color: #00000088;
-    font-weight: 600;
-    font-size: 1.9vh;
-}
-
-.estadistica .valor {
-    grid-area: valor;
-}
-
-.estadistica .valor p {
-    font-size: 4vh;
-    font-weight: 700;
-}
-
-.estadistica .icono {
-    display: flex;
-    align-items: center;
-    grid-area: icono;
-    color: #030303;
-}
-
-.estadistica .icono i{
-    font-size: 5vh;
-}
-
-.graficas {
-    margin-top: 5vh;
-}
-
-.cont-grafica {
-    padding: 1vw 2vw;
-    border-radius: 1vw;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1vh;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
-}
-
-.graficas .contenido-graficas {
-    display: grid;
-    grid-template-areas:
-        "ventas-mes ventas-realizar";
-    justify-content: space-between;
-}
-
-.graficas .ventas-mes {
-    grid-area: ventas-mes;
-}
-
-.titulo-grafica {
-    padding: 0.5vw;
-    border-bottom: 1px solid rgb(233, 231, 231);
-}
-
-.titulo-grafica p {
-    font-size: 3vh;
-    font-weight: 600;
-    color: #00000088;
-}
-
-.grafica-ventas-mes #myChart {
-    width: 50vw;
-}
-
-.graficas .ventas-realizar {
-    grid-area: ventas-realizar;
-}
-
-.ventas-realizar #myDona {
-    height: 40vh;
-}
 
 /* TABLA */
 
@@ -161,6 +63,7 @@
     justify-content: space-around;
 }
 
+
 .editar-formulario .contenido .modal-cuerpo .informacion-editar{
     grid-area: editar;
     display: grid;
@@ -194,14 +97,12 @@
     width: 30vw;
     resize: none;
 }
-
 .modal-footer{
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2vw 0;
 }
-
 .modal-footer .boton{
     background-color: var(--primario);
     color: var(--blanco);
@@ -212,7 +113,6 @@
     padding: 1vw 2vw;
     border: none;
 }
-
 .btn-danger{
     background-color: red;
     padding: 1vw;
@@ -222,7 +122,6 @@
     margin: 20px;
     width: 10vw;
 }
-
 .btn-success{
     background-color: blue;
     padding: 1vw;
@@ -231,11 +130,23 @@
     margin: 20px;
     font-size: 1.1vw;
     width: 10vw;
-}
 
+}
 /* FIN TABLA */
 .boton{
+
+    background-color: var(--primario);
+    color: #ffffff;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    font-size: 1vw;
+    padding: 1vw 2vw;
+    border: none;
     width: 15dvw;
+}
+
+.boton-descargar{
+    width: 12vw;
 }
 
 @media only screen and (max-width: 700px) {

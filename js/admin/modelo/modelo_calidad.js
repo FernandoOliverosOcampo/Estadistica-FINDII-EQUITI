@@ -15,7 +15,6 @@ const Modelo = {
   async actualizarDatosVenta(valores) {
 
     const observaciones_calidad = this.limpiarSaltosDeLinea(valores.observaciones_calidad)
-    const observaciones_adicionales = this.limpiarSaltosDeLinea(valores.observaciones_adicionales)
     
     const data_clientes = {
       llamada_calidad: valores.llamada_calidad,
@@ -23,8 +22,6 @@ const Modelo = {
       verificacion_calidad: valores.verificacion_calidad,
       observaciones_calidad: observaciones_calidad,
       audios_cargados: valores.audios_cargados,
-      estado: valores.estado,
-      observaciones_adicionales: observaciones_adicionales,
       cedula: valores.cedula,
       legalizacion: valores.legalizacion,
       id_venta: valores.id_venta.trim(),
@@ -32,7 +29,7 @@ const Modelo = {
 
     const res = axios({
       method: "PUT",
-      url: "http://equitisoporte.pythonanywhere.com/editar-venta-calidad/",
+      url: "http://127.0.0.1:5700/editar-venta-calidad/",
       data: data_clientes,
       headers: config.headers,
     });
@@ -43,12 +40,11 @@ const Modelo = {
     //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
     const res = axios({
       method: "GET",
-      url: "http://equitisoporte.pythonanywhere.com/mostrar-ventas/",
+      url: "http://127.0.0.1:5700/mostrar-ventas/",
       headers: config.headers,
     });
     return res
   },
-
 
 }
 

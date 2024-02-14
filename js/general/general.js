@@ -52,5 +52,4 @@ export default General;
 
 document.addEventListener('DOMContentLoaded', function () {
     Controlador.datosAgente()
-    // General.opcionesMenu()
 })

@@ -16,22 +16,31 @@ const Controlador = {
       ventas_laureano
     );
 
-    Vista.datosEstadisticos(
-      ventas_miguel,
-      ventas_ray,
-      ventas_davina,
-      ventas_laureano
-    );
+  },
+
+  async eliminarVenta() {
+    try {
+      const id = Vista.eliminarVenta();
+      const res = await Modelo.eliminarVenta(id.trim())
+
+      if (res.status == 200) {
+        Vista.mostrarAlertaSatisfactorio("Se eliminó el registro de la venta correctamente");
+        Vista.recargarPagina(500)
+      } else {
+        Vista.mostrarMensajeError("Error al eliminar la venta")
+      }
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   async editarventa() {
     try {
       const valores = Vista.editarVenta();
       const res = await Modelo.actualizarDatosVenta(valores);
-      if (res.status == 200){
+      if (res.status == 200) {
         Vista.mostrarAlertaSatisfactorio("Se actualizo el registro de la venta correctamente");
-        Vista.recargarPagina();
-      }else{
+      } else {
         Vista.mostrarMensajeError("Error al actualizar la venta")
       }
 
@@ -47,7 +56,7 @@ const Controlador = {
     Vista.mostrarTodasLasVentas(res);
   },
 
-  async descargarVentas(){
+  async descargarVentas() {
     try {
       const res = await Modelo.descargarCSV();
       console.log(res)
@@ -61,11 +70,36 @@ const Controlador = {
       link.click();
       document.body.removeChild(link);
 
-        console.log('Archivo CSV descargado correctamente');
+      console.log('Archivo CSV descargado correctamente');
     } catch (error) {
-        console.error('Error al descargar el archivo CSV:', error);
+      console.error('Error al descargar el archivo CSV:', error);
     }
-  }
+  },
+
+  formatearFechaParaEnvio(fecha) {
+    // Formatea la fecha en el formato deseado (dd/mm/yyyy)
+    if (fecha.length == 0) {
+        return fecha
+
+    } else {
+        var partes = fecha.split('-');
+        var fechaFormateada = partes[2].replace('0', '') + '/' + partes[1] + '/' + partes[0];
+
+        return fechaFormateada
+    }
+  },
+
+  async datosPorFecha() {
+
+    const {fecha} = Vista.tomarFecha();
+    const fechaFormateada = this.formatearFechaParaEnvio(fecha)
+
+    // console.log(fechaFormateada)
+
+    const res = await Modelo.mostrarVentasPorFecha(fechaFormateada)
+    console.log(res)
+    Vista.mostrarTodasLasVentas(res)
+},
 
 };
 

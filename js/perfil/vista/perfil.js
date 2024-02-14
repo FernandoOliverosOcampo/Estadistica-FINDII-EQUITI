@@ -2,80 +2,80 @@ import Controlador from "../controlador/controlador_perfil.js";
 import General from "../../general/general.js";
 const Vista = {
 
-  modalIncrustado(targetModal, btnAbrir, claseCerrarModal) {
-    /* MODAL Agregar datos */
-    var modal = document.getElementById(targetModal);
-    var btnAbrirModal = document.getElementById(btnAbrir);
-    var btnCerrarModal = document.getElementsByClassName(claseCerrarModal)[0];
+    modalIncrustado(targetModal, btnAbrir, claseCerrarModal) {
+        /* MODAL Agregar datos */
+        var modal = document.getElementById(targetModal);
+        var btnAbrirModal = document.getElementById(btnAbrir);
+        var btnCerrarModal = document.getElementsByClassName(claseCerrarModal)[0];
 
-    btnAbrirModal.onclick = function () {
-      modal.style.display = "block";
-    };
+        btnAbrirModal.onclick = function () {
+            modal.style.display = "block";
+        };
 
-    btnCerrarModal.onclick = function () {
-      modal.style.display = "none";
-    };
-    /*
+        btnCerrarModal.onclick = function () {
+            modal.style.display = "none";
+        };
+        /*
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            */
+    },
+
+    modalCero(targetModal, claseCerrarModal) {
+        /* MODAL Agregar datos */
+        var modal = document.getElementById(targetModal);
+        //var btnAbrirModal = document.getElementById(btnAbrir);
+        //var btnCerrarModal = document.getElementsByClassName(claseCerrarModal)[0];
+
+        //btnAbrirModal.onclick = function () {
+        modal.style.display = "block";
+        //}
+
+        //btnCerrarModal.onclick = function () {
+        //    modal.style.display = "none";
+        //}
+
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
-        */
-  },
+        };
+    },
 
-  modalCero(targetModal, claseCerrarModal) {
-    /* MODAL Agregar datos */
-    var modal = document.getElementById(targetModal);
-    //var btnAbrirModal = document.getElementById(btnAbrir);
-    //var btnCerrarModal = document.getElementsByClassName(claseCerrarModal)[0];
+    abrirModal() {
+        Controlador.datosModal();
+    },
 
-    //btnAbrirModal.onclick = function () {
-    modal.style.display = "block";
-    //}
+    modalAbierto(res) {
+        Vista.modalCero("targetModalInformacionDatos", "cerrar-modal-informacion-datos");
+        const modalCuerpo = document.getElementById("modalCuerpo");
+        const modalCabecera = document.getElementById("modalCabecera");
+        Vista.modalContenido(modalCuerpo, modalCabecera, res);
+    },
 
-    //btnCerrarModal.onclick = function () {
-    //    modal.style.display = "none";
-    //}
+    modalContenido(modalCuerpo, modalCabecera, res) {
+        const datos = res.data;
 
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
-  },
+        const apodo = datos["apodo"];
+        const campana = datos["campana"];
+        const cedula = datos["cedula"];
+        const celular = datos["celular"];
+        const correo = datos["correo"];
+        const estado = datos["estado"];
+        const grupo = datos["grupo"];
+        const lider_equipo = datos["lider_equipo"];
+        const lider_responsable = datos["lider_responsable"];
+        const nombre = datos["nombre"];
+        const rol = datos["rol"];
 
-  abrirModal() {
-    Controlador.datosModal();
-  },  
-
-  modalAbierto(res){
-    Vista.modalCero("targetModalInformacionDatos", "cerrar-modal-informacion-datos");
-    const modalCuerpo = document.getElementById("modalCuerpo");
-    const modalCabecera = document.getElementById("modalCabecera");
-    Vista.modalContenido(modalCuerpo, modalCabecera, res);
-  },
-
-  modalContenido(modalCuerpo, modalCabecera, res) {
-    const datos = res.data;
-
-    const apodo = datos["apodo"];
-    const campana = datos["campana"];
-    const cedula = datos["cedula"];
-    const celular = datos["celular"];
-    const correo = datos["correo"];
-    const estado = datos["estado"];
-    const grupo = datos["grupo"];
-    const lider_equipo = datos["lider_equipo"];
-    const lider_responsable = datos["lider_responsable"];
-    const nombre = datos["nombre"];
-    const rol = datos["rol"];
-
-    modalCabecera.innerHTML = `
+        modalCabecera.innerHTML = `
          <h1>Información</h1>
         `;
-    
-    modalCuerpo.innerHTML = `
+
+        modalCuerpo.innerHTML = `
         <div class="lado-izquierdo">
 
             <div class="titulo-central-modal">
@@ -211,15 +211,15 @@ const Vista = {
         </div>
            
         `;
-    
-        return modalCabecera, modalCuerpo;
-  },
 
-  opcionesMenu() {
-    if (localStorage.getItem("access_token")) {
-      const contenidoPerfil = document.getElementById("contenidoPerfil");
-      if (localStorage.getItem("rol") == "team leader") {
-        contenidoPerfil.innerHTML = `
+        return modalCabecera, modalCuerpo;
+    },
+
+    opcionesMenu() {
+        if (localStorage.getItem("access_token")) {
+            const contenidoPerfil = document.getElementById("contenidoPerfil");
+            if (localStorage.getItem("rol") == "team leader") {
+                contenidoPerfil.innerHTML = `
                     <div class="enlaces">
                         <div class="enlace">
                             <div class="icono">
@@ -268,16 +268,6 @@ const Vista = {
                 
                         <div class="enlace">
                             <div class="icono">
-                                <i class="fa-solid fa-gear"></i>
-                            </div>
-                
-                            <div class="texto">
-                                <button>Configurar</button>
-                            </div>
-                        </div>
-                
-                        <div class="enlace">
-                            <div class="icono">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </div>
                 
@@ -287,10 +277,10 @@ const Vista = {
                         </div>
                     </div>      
                 `;
-      }
+            }
 
-      if (localStorage.getItem("rol") == "agente") {
-        contenidoPerfil.innerHTML = `
+            if (localStorage.getItem("rol") == "agente") {
+                contenidoPerfil.innerHTML = `
           <div class="enlaces">
             <div class="enlace">
                 <div class="icono">
@@ -339,16 +329,6 @@ const Vista = {
     
             <div class="enlace">
                 <div class="icono">
-                    <i class="fa-solid fa-gear"></i>
-                </div>
-    
-                <div class="texto">
-                    <button>Configurar</button>
-                </div>
-            </div>
-    
-            <div class="enlace">
-                <div class="icono">
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </div>
     
@@ -358,10 +338,10 @@ const Vista = {
             </div>
         </div>      
                 `;
-      }
+            }
 
-      if (localStorage.getItem("rol") == "admin") {
-        contenidoPerfil.innerHTML = `
+            if (localStorage.getItem("rol") == "admin") {
+                contenidoPerfil.innerHTML = `
         <div class="enlaces">
         <div class="enlace">
         <div class="icono">
@@ -391,15 +371,7 @@ const Vista = {
                 <button><a href= "../pages/admin/equipo.html">Equipos</a></button>
             </div>
             </div>
-            <div class="enlace">
-            <div class="icono">
-            <i class="fa-solid fa-certificate"></i>
-            </div>
 
-            <div class="texto">
-                <button><a href= "../pages/admin/calidad.html">Calidad</a></button>
-            </div>
-        </div>
 
             <div class="enlace">
             <div class="icono">
@@ -437,16 +409,6 @@ const Vista = {
 
             <div class="enlace">
                 <div class="icono">
-                    <i class="fa-solid fa-gear"></i>
-                </div>
-
-                <div class="texto">
-                    <button>Configurar</button>
-                </div>
-            </div>
-
-            <div class="enlace">
-                <div class="icono">
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </div>
 
@@ -456,34 +418,34 @@ const Vista = {
             </div>
         </div>      
         `;
-      }
+            }
 
-      const botonCerrarSesion = document.getElementById("cerrarSesion");
-      botonCerrarSesion.onclick = function () {
-        localStorage.clear();
-        location.href = "../pages/login.html";
-      };
-    } else {
-      location.href = "../pages/login.html";
-    }
-  },
+            const botonCerrarSesion = document.getElementById("cerrarSesion");
+            botonCerrarSesion.onclick = function () {
+                localStorage.clear();
+                location.href = "../pages/login.html";
+            };
+        } else {
+            location.href = "../pages/login.html";
+        }
+    },
 
-  mostrarDatosUsuario(res) {
-    const datos = res.data;
+    mostrarDatosUsuario(res) {
+        const datos = res.data;
 
-    const apodo = datos["apodo"];
-    const campana = datos["campana"];
-    const cedula = datos["cedula"];
-    const celular = datos["celular"];
-    const correo = datos["correo"];
-    const estado = datos["estado"];
-    const grupo = datos["grupo"];
-    const lider_equipo = datos["lider_equipo"];
-    const lider_responsable = datos["lider_responsable"];
-    const nombre = datos["nombre"];
-    const rol = datos["rol"];
+        const apodo = datos["apodo"];
+        const campana = datos["campana"];
+        const cedula = datos["cedula"];
+        const celular = datos["celular"];
+        const correo = datos["correo"];
+        const estado = datos["estado"];
+        const grupo = datos["grupo"];
+        const lider_equipo = datos["lider_equipo"];
+        const lider_responsable = datos["lider_responsable"];
+        const nombre = datos["nombre"];
+        const rol = datos["rol"];
 
-    const informacionPerfil = document.getElementById("informacionPerfil");
+        const informacionPerfil = document.getElementById("informacionPerfil");
         informacionPerfil.innerHTML = `
                 <div class="campo">
                     <div class="titulo">
@@ -588,63 +550,62 @@ const Vista = {
                 `;
     },
 
+    actualizarAgentes() {
+        const apodo = document.getElementById("apodoEditar").textContent;
+        const nombre = document.getElementById("campoNombreEditar").value;
+        const correo = document.getElementById("campoCorreoEditar").value;
+        const celular = document.getElementById("campoCelularEditar").value;
+        const campaña = document.getElementById("campañaComboBoxCampoEditar").value;
+        const liderResponsable = document.getElementById("responsableComboBoxCampoEditar").value;
+        const liderEquipo = document.getElementById("equipoComboBoxCampoEditar").value;
 
-  actualizarAgentes() {
-    const apodo = document.getElementById("apodoEditar").textContent;
-    const nombre = document.getElementById("campoNombreEditar").value;
-    const correo = document.getElementById("campoCorreoEditar").value;
-    const celular = document.getElementById("campoCelularEditar").value;
-    const campaña = document.getElementById("campañaComboBoxCampoEditar").value;
-    const liderResponsable = document.getElementById("responsableComboBoxCampoEditar").value;
-    const liderEquipo = document.getElementById("equipoComboBoxCampoEditar").value;
+        return {
+            apodo,
+            nombre,
+            correo,
+            celular,
+            campaña,
+            liderResponsable,
+            liderEquipo,
+        };
+    },
 
-    return {
-      apodo,
-      nombre,
-      correo,
-      celular,
-      campaña,
-      liderResponsable,
-      liderEquipo,
-    };
-  },
+    mostrarMensajeError(mensaje) {
+        Swal.fire({
+            icon: "error",
+            title: "Algo salió mal",
+            text: mensaje,
+        });
+    },
 
-  mostrarMensajeError(mensaje) {
-    Swal.fire({
-      icon: "error",
-      title: "Algo salió mal",
-      text: mensaje,
-    });
-  },
-
-  mostrarAlertaSatisfactorio(mensaje) {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: mensaje,
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  },
+    mostrarAlertaSatisfactorio(mensaje) {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    },
 };
 
 export default Vista;
 
 document.addEventListener("DOMContentLoaded", function () {
-  Controlador.datosAgente();
-  Vista.opcionesMenu();
-  General.horaActual();
-  setInterval(General.horaActual, 1000);
+    Controlador.datosAgente();
+    Vista.opcionesMenu();
+    General.horaActual();
+    setInterval(General.horaActual, 1000);
 });
 
 const abrirModal = document.getElementById("abrirModal");
 abrirModal.onclick = function () {
-  Vista.abrirModal();
+    Vista.abrirModal();
 };
 
 const editarAgente = document.getElementById("botonEditar");
 editarAgente.onclick = function () {
-  Controlador.editarAgente();
+    Controlador.editarAgente();
 };
 
 
@@ -652,12 +613,11 @@ const abrirMenuOpciones = document.getElementById("abrirMenuOpciones");
 const opcionesPerfil = document.getElementById("opcionesPerfil");
 
 abrirMenuOpciones.onclick = function () {
-  if (
-    opcionesPerfil.style.display === "none" ||
-    opcionesPerfil.style.display === ""
-  ) {
-    opcionesPerfil.style.display = "block";
-  } else {
-    opcionesPerfil.style.display = "none";
-  }
+    if (opcionesPerfil.style.display === "none" || opcionesPerfil.style.display === "") {
+        opcionesPerfil.style.display = "block";
+
+    } else {
+        opcionesPerfil.style.display = "none";
+    }
+
 };

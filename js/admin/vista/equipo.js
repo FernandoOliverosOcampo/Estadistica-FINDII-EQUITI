@@ -1,249 +1,100 @@
 import Controlador from "../controlador/controlador_equipo.js";
 import General from "../../general/general.js";
 const Vista = {
-  opcionesMenu() {
-    if (localStorage.getItem("access_token")) {
-        const contenidoPerfil = document.getElementById("contenidoPerfil");
-        if (localStorage.getItem("rol") == "team leader") {
-            contenidoPerfil.innerHTML = `
-                <div class="enlaces">
-                    <div class="enlace">
-                        <div class="icono">
-                            <i class="fa-solid fa-house"></i>
-                        </div>
 
-                        <div class="texto">
-                            <button><a href= "../home.html">Inicio</a></button>
-                        </div>
-                    </div>
+    opcionesMenu() {
+        if (localStorage.getItem("access_token")) {
+            const contenidoPerfil = document.getElementById("contenidoPerfil");
 
-                    <div class="enlace">
-                        <div class="icono">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                
-                        <div class="texto">
-                            <button><a href= "../pages/perfil.html">Mi perfil</a></button>
-                        </div>
-                    </div>
-
-                    <div class="enlace">
-                        <div class="icono">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                
-                        <div class="texto">
-                            <button><a href= "../pages/team_leader/inicio_team_leader.html">Mi equipo</a></button>
-                        </div>
-                    </div>
-
-                    
-                    <div class="enlace">
-                    <div class="icono">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-        
-                    <div class="texto">
-                        <button><a href= "../pages/formulario_ventas.html">Añadir Venta</a></button>
-                    </div>
-                </div>
-                    </div>
-                </div>
-            
-                <div class="pie-menu">
-            
-                    <div class="enlace">
-                        <div class="icono">
-                            <i class="fa-solid fa-gear"></i>
-                        </div>
-            
-                        <div class="texto">
-                            <button>Configurar</button>
-                        </div>
-                    </div>
-            
-                    <div class="enlace">
-                        <div class="icono">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                        </div>
-            
-                        <div class="texto">
-                            <button id = "cerrarSesion">Cerrar sesión</button>
-                        </div>
-                    </div>
-                </div>      
-            `;
-        }
-
-        if (localStorage.getItem("rol") == "agente") {
-            contenidoPerfil.innerHTML = `
-      <div class="enlaces">
-        <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-house"></i>
-            </div>
-
-            <div class="texto">
-                <button><a href= "../home.html">Inicio</a></button>
-            </div>
-        </div>
-
-        <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-user"></i>
-          </div>
-
-          <div class="texto">
-            <button><a href= "../pages/perfil.html">Mi perfil</a></button>
-          </div>
-        </div>
-
+            if (localStorage.getItem("rol") == "admin") {
+                contenidoPerfil.innerHTML = `
+        <div class="enlaces">
         <div class="enlace">
         <div class="icono">
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-house"></i>
         </div>
 
         <div class="texto">
-            <button><a href= "../pages/formulario_ventas.html">Añadir Venta</a></button>
-        </div>
-      </div>
+            <button><a href= "../admin.html">Inicio</a></button>
         </div>
     </div>
-    <div class="enlace">
-        <div class="icono">
-        <i class="fa-solid fa-location-crosshairs"></i>
-        </div>
-
-        <div class="texto">
-            <button><a href= "../pages/codigos_postales.html">Codigos postales</a></button>
-        </div>
-      </div>
-        </div>
-    </div>
-
-    <div class="pie-menu">
-
-        <div class="enlace">
+            <div class="enlace">
             <div class="icono">
-                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-user"></i>
             </div>
 
             <div class="texto">
-                <button>Configurar</button>
+                <button><a href= "../perfil.html">Mi perfil</a></button>
             </div>
-        </div>
+            </div>
 
-        <div class="enlace">
+            <div class="enlace">
             <div class="icono">
-                <i class="fa-solid fa-right-from-bracket"></i>
+                <i class="fa-solid fa-people-group"></i>
             </div>
 
             <div class="texto">
-                <button id = "cerrarSesion">Cerrar sesión</button>
+                <button><a href= "./equipo.html">Equipos</a></button>
+            </div>
+            </div>
+
+            <div class="enlace">
+            <div class="icono">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+            <div class="texto">
+                <button><a href= "../formulario_ventas.html">Ventas</a></button>
+            </div>
+            </div>
+            <div class="enlace">
+            <div class="icono">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="texto">
+            <button><a href= "../registro_agentes.html">Registrar agente</a></button>
             </div>
         </div>
-    </div>      
-            `;
-        }
 
-        if (localStorage.getItem("rol") == "admin") {
-            contenidoPerfil.innerHTML = `
-      <div class="enlaces">
-      <div class="enlace">
-      <div class="icono">
-          <i class="fa-solid fa-house"></i>
-      </div>
+            <div class="enlace">
+            <div class="icono">
+                <i class="fa-solid fa-file-pen"></i>
+            </div>
 
-      <div class="texto">
-          <button><a href= "../admin.html">Inicio</a></button>
-      </div>
-  </div>
-          <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-user"></i>
-          </div>
+            <div class="texto">
+                <button><a href="https://docs.google.com/forms/d/1zmWZxi-XVMlfp2KE7dv9EEhqIPYGcDDSZY75K1s4lDU/viewform?pli=1&pli=1&edit_requested=true" target="_blank" >Reporte diario</a></button>
+            </div>
+            </div>
 
-          <div class="texto">
-              <button><a href= "../perfil.html">Mi perfil</a></button>
-          </div>
-          </div>
+            </div>
+        </div>
 
-          <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-people-group"></i>
-          </div>
+        <div class="pie-menu">
 
-          <div class="texto">
-              <button><a href= "./equipo.html">Equipos</a></button>
-          </div>
-          </div>
+            <div class="enlace">
+                <div class="icono">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
 
-          <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-headset"></i>
-          </div>
+                <div class="texto">
+                    <button id = "cerrarSesion">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>      
+      `;
+            }
 
-          <div class="texto">
-              <button><a href= "../formulario_ventas.html">Ventas</a></button>
-          </div>
-          </div>
-          <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-user"></i>
-          </div>
-
-          <div class="texto">
-          <button><a href= "../registro_agentes.html">Registrar agente</a></button>
-          </div>
-      </div>
-
-          <div class="enlace">
-          <div class="icono">
-              <i class="fa-solid fa-file-pen"></i>
-          </div>
-
-          <div class="texto">
-              <button><a href="https://docs.google.com/forms/d/1zmWZxi-XVMlfp2KE7dv9EEhqIPYGcDDSZY75K1s4lDU/viewform?pli=1&pli=1&edit_requested=true" target="_blank" >Reporte diario</a></button>
-          </div>
-          </div>
-
-          </div>
-      </div>
-
-      <div class="pie-menu">
-
-          <div class="enlace">
-              <div class="icono">
-                  <i class="fa-solid fa-gear"></i>
-              </div>
-
-              <div class="texto">
-                  <button>Configurar</button>
-              </div>
-          </div>
-
-          <div class="enlace">
-              <div class="icono">
-                  <i class="fa-solid fa-right-from-bracket"></i>
-              </div>
-
-              <div class="texto">
-                  <button id = "cerrarSesion">Cerrar sesión</button>
-              </div>
-          </div>
-      </div>      
-  `;
-        }
-
-        const botonCerrarSesion = document.getElementById("cerrarSesion");
-        botonCerrarSesion.onclick = function () {
-            localStorage.clear();
+            const botonCerrarSesion = document.getElementById("cerrarSesion");
+            botonCerrarSesion.onclick = function () {
+                localStorage.clear();
+                location.href = "../login.html";
+            };
+        } else {
             location.href = "../login.html";
-        };
-    } else {
-        location.href = "../login.html";
-    }
-},
+        }
+    },
+
   obtenerNombre() {
     const combobox = document.getElementById('teamLeader');
     combobox.addEventListener('change', () => {
@@ -254,24 +105,85 @@ const Vista = {
         });
         Controlador.traerAgentesPertenecientes(nombre)
       } else {
+        this.limpiarCuadrosVentasTotales()
+        const datos = document.getElementById("contenedorDatos");
+
         // Eliminar cuadros si no se selecciona ningún equipo líder
-        Vista.limpiarCuadrosVentasTotales();
+        datos.innerHTML = 
+        `
+        <div class="estadistica">
+        <div class="titulo">
+            <p>Ventas Totales</p>
+        </div>
+         
+        <div class="valor">
+           <p></p>
+        </div>
+
+        <div class="icono">
+           <i class="fa-solid fa-money-check-dollar"></i>
+        </div>                                
+    </div>
+
+    <div class="estadistica">
+        <div class="titulo">
+            <p>Ventas Diciembre</p>
+        </div>
+         
+        <div class="valor">
+           <p></p>
+        </div>
+
+        <div class="icono">
+           <i class="fa-solid fa-money-check-dollar"></i>
+        </div>                                
+    </div>
+
+    <div class="estadistica">
+        <div class="titulo">
+            <p>Ventas Enero</p>
+        </div>
+         
+        <div class="valor">
+           <p></p>
+        </div>
+
+        <div class="icono">
+           <i class="fa-solid fa-money-check-dollar"></i>
+        </div>                                
+    </div>
+
+    <div class="estadistica">
+        <div class="titulo">
+            <p>Ventas Febrero</p>
+        </div>
+         
+        <div class="valor">
+           <p></p>
+        </div>
+
+        <div class="icono">
+           <i class="fa-solid fa-money-check-dollar"></i>
+        </div>                                
+    </div>        
+        `;
       }
     });
   },
   
   datosEstadisticos(res) {
     const datosVentas = res.data;
+    this.limpiarCuadrosVentasTotales()
     this.llenarCuadroVentasTotales('ventasTotales', datosVentas.cant_ventas_realizadas, "Ventas Totales");
     this.llenarCuadroVentasTotales('ventasDiciembre', datosVentas.cant_ventas_diciembre, "Ventas Diciembre");
     this.llenarCuadroVentasTotales('ventasEnero', datosVentas.cant_ventas_enero, "Ventas Enero");
     this.llenarCuadroVentasTotales('ventasFebrero', datosVentas.cant_ventas_febrero, "Ventas Febrero");
+
   },
   
   llenarCuadroVentasTotales(nombreCuadro, cant_venta_totales, titulo) {
     const datos = document.getElementById("contenedorDatos");
     let contenidoDatos = document.getElementById(nombreCuadro);
-  
     if (!contenidoDatos) {
       contenidoDatos = document.createElement('div');
       contenidoDatos.id = nombreCuadro;
@@ -299,7 +211,6 @@ const Vista = {
     datos.innerHTML = ""; // Eliminar todos los cuadros de ventas
   },
   
-
   agentesPertenecientes(res) {
     const dataAgentes = res.data["agentes_pertenecientes"];
     const agentesPertenecientesContenedor = document.getElementById(
@@ -383,9 +294,20 @@ const Vista = {
       this.crearGraficoLineas(myChart, ventasMiguel, ventasRay, ventasDavina, ventasLaureano)
 
   },
+
+  redirigirAIndex() {
+    location.href = ("../../home.html");
+},
 };
+
 export default Vista;
 document.addEventListener("DOMContentLoaded", function () {
+
+  const rol = localStorage.getItem("rol");
+  if(rol == "agente"){
+      Vista.redirigirAIndex()
+  }
+
   Vista.opcionesMenu();
   Vista.obtenerNombre()
   Controlador.ventasPorLiderEquipo();

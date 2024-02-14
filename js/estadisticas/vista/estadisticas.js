@@ -25,6 +25,9 @@ const Vista = {
     },
 
     datosEstadisticos(res) {
+
+        console.log(res)
+        
         const cant_ventas_totales_realizadas = res.data.cant_ventas_realizadas
         const cant_ventas_totales_diciembre = res.data.cant_ventas_diciembre
         const cant_ventas_totales_enero = res.data.cant_ventas_enero
@@ -158,16 +161,6 @@ const Vista = {
         </div>
     
         <div class="pie-menu">
-    
-            <div class="enlace">
-                <div class="icono">
-                    <i class="fa-solid fa-gear"></i>
-                </div>
-    
-                <div class="texto">
-                    <button>Configurar</button>
-                </div>
-            </div>
     
             <div class="enlace">
                 <div class="icono">
@@ -339,9 +332,9 @@ const Vista = {
     llenarPromedios(res){
 
         //promedios
+        const ventasSemanaActual = res.data.cant_ventas_semana_actual
         const promedioMesActual = res.data.prom_venta_mes_actual
         const promedioSemanaActual = res.data.prom_venta_semana_actual
-        const ventasSemana = res.data.cant_ventas_semana_actual
         const vistaPromedioSemanal = document.getElementById('promedioSemanal');
         const vistaPromedioMensual = document.getElementById("promedioMensual");
         const vistaVentaSemanal = document.getElementById("ventaSemanal");
@@ -377,64 +370,98 @@ const Vista = {
             <p>Cantidad ventas semanal</p>
         </div>
         <div class="numero_promedio">
-            <p>${ventasSemana}</p>
+            <p>${ventasSemanaActual}</p>
         </div>
     `;
 
-        //ventas
-        const ventasActivas = res.data.cant_ventas_activas
-        const ventasNoFacturable = res.data.cant_ventas_no_facturables
-        const ventasOpcionNoSeleccionada = res.data.cant_ventas_opcion_no_seleccionada
-        const ventasPendientes = res.data.cant_ventas_pendiente
-        const vistaVentasActivas = document.getElementById('ventasActivas')
-        const vistaVentasNoFacturables = document.getElementById('ventasNoFacturables')
-        const vistaVentasNoSeleccionada = document.getElementById('ventasNoSeleccionada');
-        const vistaVentasPendientes = document.getElementById('ventasPendiente')
-        vistaVentasActivas.innerHTML = `
-        <div class="icono">
-             <p><i class="fa-solid fa-check"></i></p>
-        </div>
-        <div class="titulo_promedio">
-            <p>Ventas Activas</p>
-        </div>
-        <div class="numero_promedio">
-            <p>${ventasActivas}</i></p>
-        </div>
-        `;
-        vistaVentasNoFacturables.innerHTML = `
-        <div class="icono">
-        <p><i class="fa-solid fa-x"></i></p>
-        </div>
-        <div class="titulo_promedio">
-            <p>Ventas no facturables</p>
-        </div>
-        <div class="numero_promedio">
-            <p>${ventasNoFacturable}</p>
-        </div>
-        `;
-        vistaVentasNoSeleccionada.innerHTML = `
-        <div class="icono">
-        <p><i class="fa-solid fa-question"></i></p>
-        </div>
-        <div class="titulo_promedio">
-            <p>Ventas opcion no seleccionada</p>
-        </div>
-        <div class="numero_promedio">
-            <p>${ventasOpcionNoSeleccionada}</p>
-        </div>
-        `;
-        vistaVentasPendientes.innerHTML = `
-        <div class="icono">
-        <p> <i class="fa-solid fa-clock-rotate-left"></i></p>
-        </div>
-        <div class="titulo_promedio">
-            <p>Ventas pendientes</p>
-        </div>
-        <div class="numero_promedio">
-            <p>${ventasPendientes}</p>
-        </div>
-        `;
 
+        //ventas
+        const cantVentasActivas = res.data.ventas_activas.length
+        const cantVentasTemporal = res.data.ventas_temporal.length
+        const cantVentasBaja = res.data.ventas_baja.length
+        const cantVentasFirmado = res.data.ventas_firmado.length
+        const cantVentasVerificado = res.data.ventas_verificado.length
+        const cantVentasCancelada = res.data.ventas_cancelada.length
+        const cantVentasDesistimiento= res.data.ventas_desistimiento.length
+        const cantVentasPendiente = res.data.ventas_pendiente.length
+
+        const cantVentasDevuelta = res.data.ventas_devuelta.length
+        const ventas = document.getElementById('ventas')
+        
+        ventas.innerHTML = `
+        <div class="ventas_estado" id="ventasActivas">
+            <div class="icono">
+                <p><i class="fa-solid fa-check"></i></p>
+            </div>
+            <div class="titulo_promedio">
+                <p>Ventas Activas</p>
+            </div>
+            <div class="numero_promedio">
+                <p>${cantVentasActivas}</i></p>
+            </div>
+        </div>
+
+        <div class="ventas_estado" id="ventasBajas">
+            <div class="icono">
+                <p><i class="fa-solid fa-check"></i></p>
+            </div>
+            <div class="titulo_promedio">
+                <p>Ventas temporales</p>
+            </div>
+            <div class="numero_promedio">
+                <p>${cantVentasTemporal}</i></p>
+            </div>
+        </div>
+
+        <div class="ventas_estado" id="ventasPendiente">
+            <div class="icono">
+                <p><i class="fa-solid fa-check"></i></p>
+            </div>
+            <div class="titulo_promedio">
+                <p>Ventas bajas</p>
+            </div>
+            <div class="numero_promedio">
+                <p>${cantVentasBaja}</i></p>
+            </div>
+        </div>
+
+        <div class="ventas_estado" id="ventasPendiente">
+            <div class="icono">
+                <p><i class="fa-solid fa-check"></i></p>
+            </div>
+            <div class="titulo_promedio">
+                <p>Ventas pendientes</p>
+            </div>
+            <div class="numero_promedio">
+                <p>${cantVentasPendiente}</i></p>
+            </div>
+        </div>
+
+        <div class="ventas_estado" id="ventasPendiente">
+            <div class="icono">
+                <p><i class="fa-solid fa-check"></i></p>
+            </div>
+            <div class="titulo_promedio">
+                <p>Ventas canceladas</p>
+            </div>
+            <div class="numero_promedio">
+                <p>${cantVentasCancelada}</i></p>
+            </div>
+        </div>
+
+        <div class="ventas_estado" id="ventasNoSeleccionada">
+            <div class="icono">
+                <p><i class="fa-solid fa-check"></i></p>
+            </div>
+            <div class="titulo_promedio">
+                <p>Ventas devueltas</p>
+            </div>
+            <div class="numero_promedio">
+                <p>${cantVentasDevuelta}</i></p>
+            </div>
+        </div>
+
+        `;
 
     }
 
@@ -443,10 +470,10 @@ export default Vista;
 document.addEventListener('DOMContentLoaded', function () {
     Controlador.ventasRealizadasAgente();
     Controlador.datosAgenteGraficas();
-    Controlador.mostrarEstadisticas()
+    Controlador.mostrarEstadisticas();
     
     Vista.opcionesMenu();
-    General.horaActual()
+    General.horaActual();
     setInterval(General.horaActual, 1000);
 })
 

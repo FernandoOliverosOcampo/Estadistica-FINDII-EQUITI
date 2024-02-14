@@ -8,41 +8,41 @@ const Modelo = {
             marca_temporal: fechaActual,
             compania: compania,
             fecha_ingreso_venta: fechaActual || 'no dado',
-            nombre: nombre || 'no dado',
+            nombre: nombre.trim() || 'no dado',
             dni: dni,
-            telefono: telefono || 'no dado',
-            correo: correo || 'no dado',
+            telefono: telefono.trim() || 'no dado',
+            correo: correo.trim() || 'no dado',
             direccion: direccion.trim() || 'no dado',
             fecha_nacimiento: fechaNacimiento || 'no dado',
             cups_luz: cupsLuz || 'no tiene',
             cups_gas: cupsGas || 'no tiene',
-            iban: iban,
+            iban: iban.trim(),
             base_de_datos: datos,
-            numero_contrato: numeroContrato || 'no dado',
-            potencia: potencia || 'no dado',
-            peaje_gas: peajeGas || 'no dado',
+            numero_contrato: numeroContrato.trim() || 'no dado',
+            potencia: potencia.trim() || 'no dado',
+            peaje_gas: peajeGas.trim() || 'no dado',
             observaciones_venta: observacionesVenta.trim() || 'no dado',
-            verificacion_calidad: 'no realizada',
+            verificacion_calidad: 'pendiente',
             responsable_calidad: 'leidy',
             llamada_calidad: 'pendiente', //
-            calidad_enviada: 'no', //
-            observaciones_calidad: 'no dado', //
+            calidad_enviada: 'pendiente', //
+            observaciones_calidad: 'pendiente', //
             lider_responsable: liderResponsable, //
-            audios_cargados: 'opcion no seleccionada', //
+            audios_cargados: 'pendiente', //
             estado: 'pendiente', //
-            observaciones_adicionales: 'no dado', //
+            observaciones_adicionales: 'pendiente', //
             cedula: cedula,
             lider_equipo: liderEquipo,
             nombre_agente: nombreAgente,
             mantenimiento: valorMantenimiento || 'no aplica',
             tipo_mantenimiento: valorTipoMantenimiento || 'no aplica',
-            legalizacion: 'no aplica'
+            legalizacion: 'pendiente'
         }
 
         const res = await axios({
             method: 'POST',
-            // url: "http://equitisoporte.pythonanywhere.com/registrar-venta/",
-            url: "http://equitisoporte.pythonanywhere.com/registrar-venta/",
+            // url: "http://127.0.0.1:5700/registrar-venta/",
+            url: "http://127.0.0.1:5700/registrar-venta/",
 
             headers: config.headers,
             data: datos_insertar_bd
@@ -56,8 +56,8 @@ const Modelo = {
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            // url: "http://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
-            url: "http://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
+            // url: "http://127.0.0.1:5700/mostrar-datos-personales/" + cedula,
+            url: "http://127.0.0.1:5700/mostrar-datos-personales/" + cedula,
             headers: config.headers,
         });
         return res

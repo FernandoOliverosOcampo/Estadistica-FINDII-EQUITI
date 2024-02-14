@@ -1,6 +1,6 @@
 @import url(./config/global.css);
-@import url(./tabla2.css);
-@import url(./menu2.css);
+@import url(./tabla.css);
+@import url(./menu.css);
 
 .hero {
     color: #191919;
@@ -194,12 +194,11 @@
     resize: none;
 }
 
-
-
 .modal-footer{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    column-gap: 2vw;
     padding: 2vw 0;
 }
 .modal-footer .boton{
@@ -235,15 +234,18 @@
     background-color: var(--primario);
     color: #ffffff;
     border-radius: 0.5vw;
-    padding: 1vw 2vw;
     cursor: pointer;
     font-size: 1vw;
     padding: 1vw 2vw;
     border: none;
+    width: 15vw;
+}
+
+.boton-descargar{
+    width: 12vw;
 }
 
 /* FIN TABLA */
-
 
 @media only screen and (max-width: 700px) {
     .contenido-datos-estadisticos .estadistica {

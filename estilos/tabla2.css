@@ -47,7 +47,7 @@
 }
 
 .no-padding {
-    padding: 1vw;
+    padding: 20px;
     border: none;
 }
 
@@ -72,17 +72,40 @@ td {
 .contenido-tabla .tabla td {
     overflow: hidden;
     /* Otra opción es ocultar el contenido que excede el ancho máximo */
-    text-overflow: ellipsis;
     /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
     white-space: nowrap;
-    max-width: 7.5vw;
+    max-width: 10vw;
 }
 
 .contenido-tabla .tabla table tbody tr td {
     width: 10%;
 }
 
-.contenido-tabla .tabla tr th{
+
+.tabla tr td select{
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    font-weight: 500;
+    width: 160px;
+    font-size: 13px;
+    text-align: center;
+    text-transform: capitalize;
+    box-shadow: rgba(149, 157, 165, 0.3) 0px 2px 20px;
 }
 
+.estado-verde{    
+    background-color: #caffb9;
+    color: #29b929;
+}
+
+.estado-rojo{    
+    color: #f2083e;
+    background-color: #ffadc0;
+}
+
+.estado-azul{    
+    color: #003cff;
+    background-color: #08def2;
+}
 /* FIN TABLA */

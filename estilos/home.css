@@ -2,12 +2,9 @@
 @import url(./menu.css);
 @import url(./tabla.css);
 
+
 body{
     background-color: #EFF0F8;
-}
-
-.contenido-tabla .tabla {
-    height: 50vh;
 }
 
 /* TABLA */
@@ -22,7 +19,7 @@ body{
     padding: 0 2vw;
     background-color: var(--blanco);
     border-radius: 0.5vw;
-    width: 80vw;
+    width: 85vw;
     height: 90vh;
     overflow: auto;
 }
@@ -35,7 +32,7 @@ body{
     display: grid;
     grid-template-areas:
     "agente"
-    "editar"
+    "editar";
 }
 .editar-formulario .contenido .modal-cuerpo .informacion-agente-venta{
     grid-area: agente;
@@ -48,48 +45,56 @@ body{
     padding: 2vw 0;
     justify-content: space-around;
 }
-
-
 .editar-formulario .contenido .modal-cuerpo .informacion-editar{
     grid-area: editar;
-    display: grid;
-    grid-template-areas: 
-    "info-venta info-editable";
-    grid-template-columns: 2fr 1fr;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
 }
 
-.informacion-editar .contenido-venta{
-    grid-area: info-venta;
-    display: grid;
-    row-gap: 20px;
-}
-
-.informacion-editar .campo .texto{
+.modal-cuerpo .informacion-editar .contenido-venta .campo .texto p{
     font-weight: bold;
 }
 
-.informacion-editar .contenido-editable{
-    grid-area: info-editable;
-    height: 20vh;
-    display: grid;
-    column-gap: 50px;
-    justify-content: center;
-    row-gap: 20px;
+.editar-formulario .contenido .modal-cuerpo .contenido-venta{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 5vh;
+    column-gap: 2vw;
+    padding: 2vw 0;
+    justify-content: space-evenly;
 }
 
-.entrada textarea{
-    height: 80px;
-    width: 30vw;
-    resize: none;
+.editar-formulario .contenido .modal-cuerpo .descripcion textarea {
+    width: 50vw;
+    height: 20vh;
+}
+
+input[type=text],
+input[type=date],
+input[type=time],
+input[type=email],
+input[type=password],
+input[type=phone],
+input[type=number],
+select {
+    width: 15vw;
+    font-size: 1vw;
+}
+
+textarea{
+    width: 40vw;
+    height: 30vh;
 }
 
 .modal-footer{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    column-gap: 2vw;
     padding: 2vw 0;
 }
+
 .modal-footer .boton{
     background-color: var(--primario);
     color: var(--blanco);
@@ -100,6 +105,7 @@ body{
     padding: 1vw 2vw;
     border: none;
 }
+
 .btn-danger{
     background-color: red;
     padding: 1vw;
@@ -109,6 +115,7 @@ body{
     margin: 20px;
     width: 10vw;
 }
+
 .btn-success{
     background-color: blue;
     padding: 1vw;
@@ -116,33 +123,26 @@ body{
     border-radius: 0.5vw;
     margin: 20px;
     font-size: 1.1vw;
-    width: 10vw;
+    width: 10vw; 
 }
-
 
 .pagina .contenedor {
     padding: 2vw;
     display: grid;
     grid-template-areas:
         "estadisticas opciones"
-        "tabla1 opciones"
-        "agentes opciones"
-        "graficas opciones";
-    grid-template-columns: 70%;
-    column-gap: 2vw;
-    row-gap: 5vh;
+        "tabla opciones";
+    grid-template-columns: 2fr 1fr;
+    justify-content: center;
+    justify-items: center;
 }
 
 .contenedor .graficas{
     grid-area: graficas;
 }
 
-.contenido-tabla{
-    grid-area: tabla1;
-}
-
 .cont-grafica {
-    padding: 1vw 1vw;
+    padding: 1vw 2vw;
     border-radius: 0.5vw;
     background-color: #ffffff;
     display: flex;
@@ -181,7 +181,7 @@ body{
 }
 
 .ventas-realizar #myDona {
-    height: 40vh;
+    height: 20vh;
 }
 
 .contenedor .datos-estadisticos{
@@ -191,9 +191,7 @@ body{
 .datos-estadisticos .contenido-datos-estadisticos {
     display: flex;
     column-gap: 2vw;
-    flex-wrap: wrap;
-    row-gap: 2vh;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
 
 .contenido-datos-estadisticos .estadistica {
@@ -241,87 +239,82 @@ body{
     font-size: 5vh;
 }
 
-.pagina .contenedor .agentes{
-    grid-area: agentes;
-    height: auto;
-    background-color: var(--blanco);
-    border-radius: 0.5vw;
-}
-
-.pagina .contenedor .agentes .contenido-agentes{
-    display: flex;
-    flex-direction: column;
-    column-gap: 2vw;
-    padding: 1vw;
-    row-gap: 5vh;
-}
-
-.contenido-abajo-agentes{
-    display: flex;
-    flex-direction: column;
-    row-gap: 5vh;
-}
-
-.contenido-abajo-agentes .datos-agente, .estadisticas-agente, .estado-ventas-agente{
-    display: flex;
-    flex-direction: column;
-    row-gap: 3vh;
-}
-
-.contenedor-abajo .lista-agentes{
-    height: 40vh;
-    overflow: auto;
-}
-
-.contenedor-arriba{
-    display: flex;
-    flex-direction: column;
-    row-gap: 2vh;
-}
-
-.contenedor-arriba .titulo-arriba p{
-    font-size: 2vw;
-    font-weight: 500;
-}
-
-.contenedor-arriba .lista-agentes .agente{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.titulo-contenido p{
-    font-size: 2vw;
-    border-bottom: 1px solid black;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .pagina .contenedor .opciones{
     grid-area: opciones;
 }
+
+/* TABLA */
+
+/* INFORMACION DATOS (MODAL)*/
+
+.pagina .contenedor .contenido-tabla .editar-formulario .contenido {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vw;
+    margin: 2% auto;
+    padding: 0 2vw;
+    background-color: var(--blanco);
+    border-radius: 0.5vw;
+    width: 85vw;
+    height: 90vh;
+    overflow: auto;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cabecera{
+    display: flex;
+    border-bottom: 1px solid var(--fondo);
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo{
+    row-gap: 3vh;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .nombre{
+    grid-area: nombre;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .tipo{
+    grid-area: tipo;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .cantidad{
+    grid-area: cantidad;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion{
+    grid-area: descripcion;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .ubicacion{
+    grid-area: ubicacion;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion .entrada textarea{
+    width: 48vw;
+    height: 15vh;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-footer{
+    text-align: end;
+}
+
+.pagina .contenedor .contenido-tabla .tabla {
+    height: 45vh;
+    width: 60vw;
+}
+
+.pagina .contenedor .contenido-tabla .tabla {
+    text-align: center;
+    border-radius: 0.5vw;
+    font-size: 1vw;
+    padding: 0.2vw;
+}
+
+.pagina .contenedor .contenido-tabla .tabla td {
+    text-overflow: ellipsis;
+}
+
+/* FIN TABLA */
 
 .contenedor .opciones .tarjetas{
     display: flex;
@@ -337,29 +330,6 @@ body{
     height: 20vh;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.contenedor .opciones .tarjetas .tarjeta-equipo{
-    display: flex;
-    row-gap: 2vh;
-    height: 60vh;
-
-}
-
-.tarjeta-equipo .cuerpo .descripcion{
-    height: 45vh;
-    overflow: auto;
-}
-
-.tarjeta-equipo .cuerpo .descripcion ul{
-    display: flex;
-    flex-direction: column;
-    row-gap: 2vh;
-    align-items: flex-start;
-}
-
-.tarjeta-equipo .cuerpo .descripcion ul li{
-    font-size: 1.3vw;
 }
 
 .tarjeta .cabecera{

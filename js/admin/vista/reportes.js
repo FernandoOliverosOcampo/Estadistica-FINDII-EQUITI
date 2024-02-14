@@ -1,194 +1,72 @@
-import Controlador from "../controlador/controlador_admin.js"
+import Controlador from "../controlador/controlador_reportes.js"
 import General from "../../general/general.js"
-import Modelo from "../modelo/modelo_admin.js"
+import Modelo from "../modelo/modelo_reportes.js"
 
 const Vista = {
 
-    llenarCuadroVentasTotales(cant_venta_totales, titulo) {
-        const datos = document.getElementById("contenedorDatos")
-        const contenidoDatos = document.createElement('div')
+    datosAgente(res) {
 
-        contenidoDatos.classList.add("estadistica")
-        contenidoDatos.innerHTML = `
-        <div class="titulo">
-            <p>${titulo}</p>
-        </div>
-         
-        <div class="valor">
-           <p>${cant_venta_totales}</p>
-        </div>
+        const menuNombreAgente = document.getElementById('menuNombreAgente')
+        const menuRolUsuario = document.getElementById('menuRolUsuario')
 
-        <div class="icono">
-           <i class="fa-solid fa-money-check-dollar"></i>
-        </div>
-    `
-        datos.append(contenidoDatos)
+        const parrafoNombreAgente = document.createElement('p')
+        const textoNombreAgente = document.createTextNode(res.data.nombre)
+
+        parrafoNombreAgente.appendChild(textoNombreAgente)
+
+
+        const parrafoRolAgente = document.createElement('p')
+        const textoRolAgente = document.createTextNode(res.data.rol)
+
+        parrafoRolAgente.appendChild(textoRolAgente)
+
+
+        menuNombreAgente.appendChild(parrafoNombreAgente)
+        menuRolUsuario.appendChild(parrafoRolAgente)
+
     },
 
-   
     opcionesMenu() {
         if (localStorage.getItem("access_token")) {
             const contenidoPerfil = document.getElementById("contenidoPerfil");
 
-            if (localStorage.getItem("rol") == "admin") {
+            if (localStorage.getItem("rol") == "reportes") {
                 contenidoPerfil.innerHTML = `
-        <div class="enlaces">
-        <div class="enlace">
-        <div class="icono">
-            <i class="fa-solid fa-house"></i>
-        </div>
+                <div class="enlaces">
+                    <div class="enlace">
+                    <div class="icono">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
 
-        <div class="texto">
-            <button><a href= "../pages/admin.html">Inicio</a></button>
-        </div>
-    </div>
-            <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-user"></i>
-            </div>
-
-            <div class="texto">
-                <button><a href= "../pages/perfil.html">Mi perfil</a></button>
-            </div>
-            </div>
-
-            <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-people-group"></i>
-            </div>
-
-            <div class="texto">
-                <button><a href= "../pages/admin/equipo.html">Equipos</a></button>
-            </div>
-            </div>
-
-            <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-headset"></i>
-            </div>
-
-            <div class="texto">
-                <button><a href= "../pages/formulario_ventas.html">Ventas</a></button>
-            </div>
-            </div>
-            <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-user"></i>
-            </div>
-
-            <div class="texto">
-            <button><a href= "../pages/registro_agentes.html">Registrar agente</a></button>
-            </div>
-        </div>
-
-            <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-file-pen"></i>
-            </div>
-
-            <div class="texto">
-                <button><a href="https://docs.google.com/forms/d/1zmWZxi-XVMlfp2KE7dv9EEhqIPYGcDDSZY75K1s4lDU/viewform?pli=1&pli=1&edit_requested=true" target="_blank" >Reporte diario</a></button>
-            </div>
-            </div>
-
-            </div>
-        </div>
-
-        <div class="pie-menu">
-
-            <div class="enlace">
-                <div class="icono">
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <div class="texto">
+                        <button><a href= "./reportes.html">Inicio</a></button>
+                    </div>
                 </div>
+                    </div>
 
-                <div class="texto">
-                    <button id = "cerrarSesion">Cerrar sesión</button>
-                </div>
-            </div>
-        </div>      
-      `;
+                    <div class="pie-menu">
+
+                        <div class="enlace">
+                            <div class="icono">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </div>
+
+                            <div class="texto">
+                                <button id = "cerrarSesion">Cerrar sesión</button>
+                            </div>
+                        </div>
+                    </div>      
+                `;
             }
 
             const botonCerrarSesion = document.getElementById("cerrarSesion");
             botonCerrarSesion.onclick = function () {
                 localStorage.clear();
-                location.href = "../pages/login.html";
+                location.href = "../login.html";
             };
         } else {
-            location.href = "../pages/login.html";
+            location.href = "../login.html";
         }
-    },
-
-    crearGrafico(myChart, labels_barra, datos_barra, tipo) {
-
-        new Chart(myChart, {
-            type: tipo,
-            data: {
-                labels: labels_barra,
-                datasets: [{
-                    label: '# de ventas',
-                    data: datos_barra,
-                    borderWidth: 1
-                }]
-            },
-        });
-    },
-
-    crearGraficoLineas(myChart, ventasMiguel, ventasRay, ventasDavina, ventasLaureano) {
-
-        new Chart(myChart, {
-            type: 'line',
-            data: {
-                labels: ['Octubre', 'Noviembre', 'Diciembre', 'Enero'],
-                datasets: [
-                    {
-                        label: 'Ventas Miguel',
-                        data: ventasMiguel,
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Ventas Ray',
-                        data: ventasRay,
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Ventas Davina',
-                        data: ventasDavina,
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Ventas Laureano',
-                        data: ventasLaureano,
-                        borderWidth: 1
-                    },
-                ],
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Chart.js Line Chart'
-                        }
-                    }
-                },
-            },
-        });
-    },
-
-    mostrarGraficas(ventas_miguel, ventas_ray, ventas_davina, ventas_laureano) {
-
-        const myChart = document.getElementById('myChart')
-
-        const ventasMiguel = [ventas_miguel.data['cant_ventas_octubre'], ventas_miguel.data['cant_ventas_noviembre'], ventas_miguel.data['cant_ventas_diciembre'], ventas_miguel.data['cant_ventas_enero']]
-        const ventasRay = [ventas_ray.data['cant_ventas_octubre'], ventas_ray.data['cant_ventas_noviembre'], ventas_ray.data['cant_ventas_diciembre'], ventas_ray.data['cant_ventas_enero']]
-        const ventasDavina = [ventas_davina.data['cant_ventas_octubre'], ventas_davina.data['cant_ventas_noviembre'], ventas_davina.data['cant_ventas_diciembre'], ventas_davina.data['cant_ventas_enero']]
-        const ventasLaureano = [ventas_laureano.data['cant_ventas_octubre'], ventas_laureano.data['cant_ventas_noviembre'], ventas_laureano.data['cant_ventas_diciembre'], ventas_laureano.data['cant_ventas_enero']]
-
-        this.crearGraficoLineas(myChart, ventasMiguel, ventasRay, ventasDavina, ventasLaureano)
-
     },
 
     modalIncrustado(targetModal, btnAbrir, claseCerrarModal) {
@@ -205,13 +83,13 @@ const Vista = {
         btnCerrarModal.onclick = function () {
             modal.style.display = "none";
         }
-
+        /*
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-
+        */
     },
 
     modalCero(targetModal, claseCerrarModal) {
@@ -245,7 +123,7 @@ const Vista = {
         const legalizacion = dato['legalizacion']
         const estado = dato['estado']
 
-        if (calidad == calidad || envioCalidad == "pendiente" || verificacionCalidad == "pendiente" || audio == "pendiente" || legalizacion == "pendiente"  || estado == estado){
+        if (calidad === "pendiente" || envioCalidad === "pendiente" || verificacionCalidad === "pendiente" || audio === "pendiente" || legalizacion === "pendiente"  || estado === "pendiente"){
                 modalCabecera.innerHTML =
                 `
                     <h1>Información</h1>
@@ -415,7 +293,6 @@ const Vista = {
                                 <select name="" id="llamadaCalidadComboBoxCampoEditar">
                                     <option value="${dato['llamada_calidad']}">${dato['llamada_calidad']}</option>
                                     <option value="corregida">Corregida</option>
-                                
                                     <option value="realizada">Realizada</option>
                                 </select>
                             </div>
@@ -440,10 +317,9 @@ const Vista = {
                             </div>
                             <div class="entrada">
                                 <select name="" id="verificacionComboBoxCampoEditar">
-                                    <option value="${dato['verificacion_calidad']}">${dato['verificacion_calidad']}</option>
-                                    <option value="cumple calidad">Cumple calidad</option>
-                                    <option value="no cumple calidad">No cumple calidad</option>
-                                    
+                                <option value="${dato['verificacion_calidad']}">${dato['verificacion_calidad']}</option>
+                                <option value="cumple calidad">Cumple calidad</option>
+                                <option value="no cumple calidad">No cumple calidad</option>                       
                                 </select>
                             </div>
                         </div>
@@ -713,8 +589,9 @@ const Vista = {
                         <div class="entrada">
                             <select name="" id="verificacionComboBoxCampoEditar">
                                 <option value="${dato['verificacion_calidad']}">${dato['verificacion_calidad']}</option>
-                                <option value="cumple calidad">Cumple calidad</option>
-                                <option value="no cumple calidad">No cumple calidad</option>
+                                <option value="realizada">Realizada</option>
+                                <option value="no facturables">No facturables</option>
+                                <option value="pendiente">Pendiente</option>
                             </select>
                         </div>
                     </div>
@@ -788,43 +665,39 @@ const Vista = {
              </div>
     
             `
-            
     return modalCabecera, modalCuerpo
 
         }
     },
 
     mostrarTodasLasVentas(res) {
-        const datos = res.data.ventas
-
-        //const datos = response.data['ventas_realizadas'];
+        const datos = res.data.ventas;
         const tablaDatos = document.getElementById('tablaDatos');
         tablaDatos.innerHTML = '';
-
+    
         // Definir las columnas que deseas mostrar
-        const columnasAMostrar = ['fecha_ingreso_venta', 'nombre_agente', 'lider_equipo', 'compania', 'dni', 'nombre', 'correo', 'cups_luz', 'cups_gas', 'iban', 'numero_contrato', 'potencia', 'peaje_gas', 'observaciones_venta', 'llamada_calidad', 'calidad_enviada', 'verificacion_calidad' , 'audios_cargados', 'observaciones_calidad', 'observaciones_adicionales', 'legalizacion'];
-        
+        const columnasAMostrar = ['fecha_ingreso_venta', 'compania', 'dni', 'nombre', 'nombre_agente', 'cups_luz', 'observaciones_adicionales'];
+
         // Crear encabezado
         const encabezadoRow = document.createElement('tr');
         for (const columna of columnasAMostrar) {
-            
             const th = document.createElement('th');
             th.textContent = columna;
             encabezadoRow.appendChild(th);
         }
         const thEstado = document.createElement('th');
-            thEstado.textContent = 'estado';
-            encabezadoRow.appendChild(thEstado);
+        thEstado.textContent = 'estado';
+        encabezadoRow.appendChild(thEstado);
         tablaDatos.appendChild(encabezadoRow);
 
         // Crear filas de datos
         datos.forEach(dato => {
 
-
             const fila = document.createElement('tr');
             for (const columna of columnasAMostrar) {
                 const celda = document.createElement('td');
                 celda.textContent = dato[columna];
+
 
                 // Agregar la clase "estado-verde" a la celda específica
                 if (columna === 'verificacion_calidad' && dato[columna] === 'cumple calidad') {
@@ -834,16 +707,10 @@ const Vista = {
                 // Agregar la clase "estado-verde" a la celda específica
                 if (columna === 'verificacion_calidad' && dato[columna] === 'no cumple calidad') {
                     celda.classList.add('letras-estado-rojo');
-                }                    
-
-                if (columna === 'verificacion_calidad' && dato[columna] === 'pendiente') {
-                    celda.classList.add('letras-estado-amarillo');
-                }
-
+                }                 
 
                 fila.appendChild(celda);
             }
-            
             const estado = dato['estado']
             const idVenta = dato['id']
 
@@ -852,7 +719,6 @@ const Vista = {
             const estadoSelect = document.createElement('select');
             estadoSelect.setAttribute('id', 'actualizarEstado')
             const estadosPosibles = [estado, 'firmado', 'verificado', 'temporal', 'activa', 'devuelta', 'cancelado', 'baja', 'desistimiento'];
-            
 
             estadosPosibles.forEach(estado => {
                 const option = document.createElement('option');
@@ -893,16 +759,14 @@ const Vista = {
 
             if (estado === 'verificado'){
                 estadoSelect.classList.add('estado-azul');
-            }
-
-            // Agregar el select a la celda del estado
+            }   
 
             estadoCell.appendChild(estadoSelect);
             fila.appendChild(estadoCell);
 
 
             // Agregar botones de editar, eliminar y ver a cada fila
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 1; i++) {
                 const celda = document.createElement('td');
                 const boton = document.createElement('button');
                 const icono = document.createElement('i');
@@ -929,11 +793,6 @@ const Vista = {
 
             tablaDatos.appendChild(fila);
         });
-    },
-
-    eliminarVenta(){
-        const id = document.getElementById('idVenta').textContent;
-        return id
     },
 
     editarVenta() {
@@ -1003,7 +862,7 @@ const Vista = {
             icon: 'success',
             title: mensaje,
             showConfirmButton: false,
-            timer: 1500
+            timer: 500
         })
     },
 
@@ -1011,38 +870,13 @@ const Vista = {
         setTimeout(function () {
             window.location.reload()
         }, tiempo);
-    },
-
-    redirigirCalidad() {
-        location.href = ("../pages/admin/calidad.html");
-    },
-
-    redirigirAIndex() {
-        location.href = ("../home.html");
-    },
-    
-    tomarFecha(){
-
-        const fecha  = document.getElementById('buscarPorFecha').value;
-        return {fecha}
-    },
-  
+    }
 }
 
 export default Vista;
 
 document.addEventListener('DOMContentLoaded', function () {
-    const rol = localStorage.getItem("rol");
-
-    if(rol == "calidad"){
-        Vista.redirigirCalidad()
-        
-    } else if (rol == "team leader" || rol == "agente"){
-        Vista.redirigirAIndex()
-    }
-    
     Vista.opcionesMenu();
-    Controlador.ventasPorLiderEquipo();
     General.horaActual()
     setInterval(General.horaActual, 1000);
     Controlador.mostrarTodasLasVentas()
@@ -1054,11 +888,9 @@ const opcionesPerfil = document.getElementById('opcionesPerfil');
 abrirMenuOpciones.onclick = function () {
     if (opcionesPerfil.style.display === "none" || opcionesPerfil.style.display === "") {
         opcionesPerfil.style.display = "block";
-
     } else {
         opcionesPerfil.style.display = "none";
     }
-
 };
 
 const botonEditar = document.getElementById('botonEditar');
@@ -1094,51 +926,12 @@ botonEditar.onclick = function () {
 
 }
 
-const botonEliminar = document.getElementById('botonEliminar');
-
-
-botonEliminar.onclick = function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-        title: '¿Estás seguro?',
-        text: 'Se eliminará el registro de forma permanente',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Controlador.eliminarVenta()
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire(
-                'Cancelado',
-                'No se ha ingresado nada',
-                'error'
-            );
-        }
-    });
-
-}
-
 const descargarVentas = document.getElementById('descargarVentas');
 
 descargarVentas.onclick = async function () {
     Controlador.descargarVentas()
 };
 
-const btnBuscarFecha = document.getElementById('btnBuscarFecha');
-
-btnBuscarFecha.onclick = function () {
-    Controlador.datosPorFecha()
-}
 
 
 

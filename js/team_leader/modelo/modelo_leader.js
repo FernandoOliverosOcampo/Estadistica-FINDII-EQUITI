@@ -7,40 +7,37 @@ const Modelo = {
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://equitisoporte.pythonanywhere.com/mostrar-ventas-realizadas/" + cedula,
+            url: "http://127.0.0.1:5700/mostrar-ventas-realizadas/" + cedula,
             headers: config.headers,
         });
         return res
     },
 
     async infoEquipo(liderEquipo) {
-        console.log("ejecutando info equipo")
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://equitisoporte.pythonanywhere.com/info-equipo/" + liderEquipo,
+            url: "http://127.0.0.1:5700/info-equipo/" + liderEquipo,
             headers: config.headers,
         });
         return res
     },
 
     async traerDatosPersonalesAgente(cedula) {
-
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
+            url: "http://127.0.0.1:5700/mostrar-datos-personales/" + cedula,
             headers: config.headers,
         });
         return res
     },
 
     async agentesPertenecientes(liderEquipo) {
-
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://equitisoporte.pythonanywhere.com/agentes-pertenecientes/" + liderEquipo,
+            url: "http://127.0.0.1:5700/agentes-pertenecientes/" + liderEquipo,
             headers: config.headers,
         });
         return res
@@ -49,7 +46,7 @@ const Modelo = {
     async mostrarEstadisticas(cedula) {
         const res = axios({
             method: "GET",
-            url: "http://equitisoporte.pythonanywhere.com/estadisticas/" + cedula,
+            url: "http://127.0.0.1:5700/estadisticas/" + cedula,
             headers: config.headers,
         });
         return res

@@ -53,7 +53,7 @@ const Vista = {
         modalCabecera.innerHTML =
             `
          <h1>Información</h1>
-        `
+            `
         modalCuerpo.innerHTML =
             `
         <div class="informacion-agente-venta">
@@ -202,8 +202,6 @@ const Vista = {
                 <textarea id="observacionesVenta" disabled>${dato['observaciones_venta']}</textarea>
             </div>
         </div>
-
-
     </div>
 
     <div class="contenido-editable">
@@ -216,7 +214,6 @@ const Vista = {
                 <select name="" id="llamadaCalidadComboBoxCampoEditar">
                     <option value="${dato['llamada_calidad']}">${dato['llamada_calidad']}</option>
                     <option value="corregida">Corregida</option>
-                    <option value="pendiente">Pendiente</option>
                     <option value="realizada">Realizada</option>
                 </select>
             </div>
@@ -242,9 +239,8 @@ const Vista = {
             <div class="entrada">
                 <select name="" id="verificacionComboBoxCampoEditar">
                     <option value="${dato['verificacion_calidad']}">${dato['verificacion_calidad']}</option>
-                    <option value="realizada">Realizada</option>
-                    <option value="no facturables">No facturables</option>
-                    <option value="pendiente">Pendiente</option>
+                    <option value="cumple calidad">Cumple calidad</option>
+                    <option value="no cumple calidad">No cumple calidad</option>
                 </select>
             </div>
         </div>
@@ -286,33 +282,11 @@ const Vista = {
             </div>
         </div>
 
-        <div class="campo estado">
-            <div class="texto">
-                <p>Estado:</p>
-            </div>
-            <div class="entrada">
-                <select name="" id="estadoComboBoxCampoEditar">
-                    <option value="${dato['estado']}">${dato['estado']}</option>
-                    <option value="opcion no seleccionada">Opcion no seleccionada</option>
-                    <option value="cumple calidad">Cumple calidad</option>
-                    <option value="no cumple calidad">No cumple calidad</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="campo descripcion">
-            <div class="texto">
-                <p>Observaciones adicionales:</p>
-            </div>
-            <div class="entrada">
-                <textarea id="observacionesAdicionalesCampoEditar">${dato['observaciones_adicionales']}</textarea>
-            </div>
-        </div>
     </div>
 
 </div>
         
-        `
+            `
         return modalCabecera, modalCuerpo
     },
 
@@ -324,7 +298,7 @@ const Vista = {
         tablaDatos.innerHTML = '';
 
         // Definir las columnas que deseas mostrar
-        const columnasAMostrar = ['fecha_ingreso_venta', 'compania', 'dni', 'nombre', 'correo', 'cups_luz', 'cups_gas', 'iban', 'numero_contrato', 'potencia', 'peaje_gas', 'observaciones_venta', 'llamada_calidad', 'calidad_enviada', 'verificacion_calidad', 'audios_cargados', 'observaciones_calidad', 'observaciones_adicionales', 'legalizacion', 'estado'];
+        const columnasAMostrar = ['fecha_ingreso_venta', 'compania', 'dni', 'nombre', 'direccion', 'verificacion_calidad', 'audios_cargados', 'observaciones_calidad'];
         //const columnas = Object.keys(datos[0]);
 
         // Crear encabezado
@@ -341,13 +315,24 @@ const Vista = {
             const fila = document.createElement('tr');
             for (const columna of columnasAMostrar) {
                 const celda = document.createElement('td');
-                if (columna === 'created_at') {
-                    const fechaCompleta = dato[columna];
-                    const soloFecha = fechaCompleta.split('T')[0];
-                    celda.textContent = soloFecha;
-                } else {
-                    celda.textContent = dato[columna];
+                celda.textContent = dato[columna];
+
+                // Agregar la clase "estado-verde" a la celda específica
+                if (columna === 'verificacion_calidad' && dato[columna] === 'cumple calidad') {
+                    celda.classList.add('letras-estado-verde');
                 }
+
+                // Agregar la clase "estado-verde" a la celda específica
+                if (columna === 'verificacion_calidad' && dato[columna] === 'no cumple calidad') {
+                    celda.classList.add('letras-estado-rojo');
+                }                    
+
+                if (columna === 'verificacion_calidad' && dato[columna] === 'pendiente') {
+                    celda.classList.add('letras-estado-amarillo');
+                }
+            
+
+
                 fila.appendChild(celda);
             }
             // Agregar botones de editar, eliminar y ver a cada fila
@@ -408,8 +393,6 @@ const Vista = {
         const verificacion_calidad = document.getElementById('verificacionComboBoxCampoEditar').value;
         const observaciones_calidad = document.getElementById('observacionesCalidadCampoEditar').value;
         const audios_cargados = document.getElementById('audiosCargadosComboBoxCampoEditar').value;
-        const estado = document.getElementById('estadoComboBoxCampoEditar').value;
-        const observaciones_adicionales = document.getElementById('observacionesAdicionalesCampoEditar').value;
         const legalizacion = document.getElementById('legalizacion').value
 
         return {
@@ -420,8 +403,6 @@ const Vista = {
             verificacion_calidad,
             observaciones_calidad,
             audios_cargados,
-            estado,
-            observaciones_adicionales,
             legalizacion
         };
 
@@ -443,17 +424,6 @@ const Vista = {
                                 <button><a href= "./calidad.html">Inicio</a></button>
                             </div>
                         </div>
-
-                        <div class="enlace">
-                            <div class="icono">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                    
-                            <div class="texto">
-                                <button><a href= "../perfil.html">Mi perfil</a></button>
-                            </div>
-                        </div>
-                    </div>
                 
                     <div class="pie-menu">          
                 
@@ -504,13 +474,22 @@ const Vista = {
         setTimeout(function () {
             window.location.reload()
         }, tiempo);
-    }
+    },
+
+    redirigirAIndex() {
+        location.href = ("../../home.html");
+    },
 
 }
 
 export default Vista;
 
 document.addEventListener('DOMContentLoaded', function () {
+    const rol = localStorage.getItem("rol");
+    if(rol != "calidad"){
+        Vista.redirigirAIndex()
+    }
+
     Controlador.mostrarTodasLasVentas()
     Vista.opcionesMenu()
     General.horaActual()

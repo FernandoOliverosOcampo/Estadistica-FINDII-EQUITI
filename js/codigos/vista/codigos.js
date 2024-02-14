@@ -224,16 +224,6 @@ const Vista = {
     
             <div class="enlace">
                 <div class="icono">
-                    <i class="fa-solid fa-gear"></i>
-                </div>
-    
-                <div class="texto">
-                    <button>Configurar</button>
-                </div>
-            </div>
-    
-            <div class="enlace">
-                <div class="icono">
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </div>
     
@@ -276,15 +266,6 @@ const Vista = {
               <button><a href= "../pages/admin/equipo.html">Equipos</a></button>
           </div>
         </div>
-        <div class="enlace">
-        <div class="icono">
-        <i class="fa-solid fa-certificate"></i>
-        </div>
-
-        <div class="texto">
-            <button><a href= "../pages/admin/calidad.html">Calidad</a></button>
-        </div>
-      </div>
 
         <div class="enlace">
           <div class="icono">
@@ -319,16 +300,6 @@ const Vista = {
     </div>
 
     <div class="pie-menu">
-
-        <div class="enlace">
-            <div class="icono">
-                <i class="fa-solid fa-gear"></i>
-            </div>
-
-            <div class="texto">
-                <button>Configurar</button>
-            </div>
-        </div>
 
         <div class="enlace">
             <div class="icono">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../estilos/admin.css">
+    <link rel="stylesheet" href="../../estilos/admin/reportes.css">
     <link rel="shortcut icon" href="../img/descarga.ico" type="image/x-icon">
     <title>Findii - Estadísticas</title>
 </head>
@@ -14,7 +14,7 @@
         <nav class="menu">
             <div class="izquierda">
                 <div class="logo-empresa">
-                    <img src="../img/FINDII.png" alt="">
+                    <img src="../../img/FINDII.png" alt="">
                 </div>
                 <div class="hora-actual">
                     <p id="horaActual"></p>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="foto-usuario" id="abrirMenuOpciones">
-                    <img src="../img/undraw_male_avatar_g98d.svg" alt="">
+                    <img src="../../img/undraw_male_avatar_g98d.svg" alt="">
                 </div>
 
                 <div class="opciones-perfil" id="opcionesPerfil">
@@ -44,25 +44,11 @@
     <div class="hero">
         <section class="pagina-principal">
             <div class="grilla">
+
                 <div class="boton-descarga">
                     <a id = "descargarVentas" class="decargar-venta" download> <button class="boton"><i class="fa-regular fa-circle-down"></i> Descargar Ventas</button></a>   
                 </div>
-                <div class="buscar-fecha">
-                    <label>Fecha:
-                        <input type="date" id="buscarPorFecha" placeholder="ingresa la fecha, dd/mm/aaaa">
-                    </label>
-                    
-                    <button id="btnBuscarFecha" ><i class="fa-solid fa-magnifying-glass fa-2x"></i></button>
-                </div>
-               
-<!--
--->
-                <div class="datos-estadisticos" >
-                    <div class="contenido-datos-estadisticos" id="contenedorDatos">
-
-                    </div>
-
-                </div>
+                
                 <div class="contenido-tabla">
                 
                     <div class="tabla" id="tablaDatos">
@@ -85,38 +71,10 @@
     
                             <div class="botones modal-footer">
                                 <button id="botonEditar" class="boton">Editar</button>
-                                <button id="botonEliminar" class="boton">Eliminar</button>
                             </div>
                         </div>
                     </div>
     
-                </div>
-
-
-
-                <div class="graficas">
-                    <div class="contenido-graficas">
-
-                        <div class="ventas-mes cont-grafica">
-                            <div class="titulo-grafica">
-                                <p>Ventas de equipos por mes</p>
-                            </div>
-
-                            <div class="grafica-ventas-mes">
-                                <canvas id="myChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="ventas-realizar cont-grafica">
-                            <div class="titulo-grafica" id="tituloGrafica">
-
-                            </div>
-                            <div class="grafica-ventas-realizar">
-                                <canvas id="myDona"></canvas>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
 
             </div>
@@ -127,7 +85,7 @@
 
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/admin/vista/admin.js" type="module"></script>
+    <script src="../../js/admin/vista/reportes.js" type="module"></script>
     <script src="https://kit.fontawesome.com/1a5bcd4a97.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

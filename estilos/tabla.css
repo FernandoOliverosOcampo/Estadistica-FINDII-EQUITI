@@ -13,8 +13,7 @@ tr:hover {
 
 .contenido-tabla {
     grid-area: tabla;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     /* margin: 1vw; */
     /* padding: 0 2vw; */
     row-gap: 1.5vw;

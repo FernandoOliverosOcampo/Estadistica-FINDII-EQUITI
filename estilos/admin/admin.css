@@ -238,6 +238,85 @@
     width: 15dvw;
 }
 
+.filtros-tabla{
+    display: flex;
+    padding: 25px;
+    background-color: #f2f2f2;
+    border-radius: 0.5vw;
+    justify-content: space-around
+}
+
+.filtros-tabla .buscar-por-estado, .buscar-por-intervalo, .buscar-fecha{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5vw;
+}
+
+.filtros-tabla 
+select{
+    width: 12.5vw;
+    padding: 0.5vw 1vw;
+    box-sizing: border-box;
+}
+
+.buscar-fecha input {
+    width: 11vw;
+    padding: 0.5vw 1vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.buscar-por-estado input{
+    width: 11vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.buscar-por-estado select{
+    width: 11vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.filtros-tabla .buscar-por-intervalo .filtros-intervalo{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5vw;
+}
+
+.buscar-por-intervalo .boton-buscar button{
+    margin: 0 0.5dvw;
+}
+
+.buscar-por-intervalo input{
+    width: 11vw;
+    padding: 0.5vw 1vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.filtros-activos{
+    display: grid;
+    justify-items: center;
+    justify-content: end;
+}
+
+.filtros-activos .filtro {
+    display: inline-block;
+    background-color: var(--primario);
+    padding: 5px 20px;
+    border-radius: 0.5vw;
+}
+
+.filtros-activos .filtro p {
+    color: var(--blanco);
+}
+
+.filtros-activos .filtro .quitar-filtro{
+    cursor: pointer;
+}
+
+
 @media only screen and (max-width: 700px) {
     .contenido-datos-estadisticos .estadistica {
       

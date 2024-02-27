@@ -37,17 +37,13 @@ const Controlador = {
         const apodo = `${primerNombre.trim().toLowerCase()} ${primerApellido.trim().toLowerCase()}`
         const cedulaFinal = this.generarNumeroAleatorio(cedula);
 
-
         try {
             await Modelo.insertarAgente(apodo, nombre, usuario, cedulaFinal, correo, celular, grupo, campaña, liderResponsable, liderEquipo)
-            let mensaje = "Los datos fueron insertados correctamente"
-            Vista.mostrarAlertaSatisfactorio(mensaje)
+            Vista.mostrarAlertaSatisfactorio("Los datos fueron insertados correctamente")
 
         } catch (error) {
             console.log(error)
-            let mensaje = "Error al insertar los datos"
-            Vista.mostrarMensajeError(mensaje)
-
+            Vista.mostrarMensajeError("Error al insertar los datos")
         }
 
     },

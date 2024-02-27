@@ -1,7 +1,40 @@
 import General from "../../general/general.js";
 import Controlador from "../controlador/controlador_calidad.js";
+import ControladorGeneral from "../../general/controlador/controlador_general.js";
+import swalAlert from "../../otros/alertas.js"
 
 const Vista = {
+
+    llenarCuadroVentasTotales(cant_venta_totales, titulo) {
+        const datos = document.getElementById("contenedorDatos")
+        const contenidoDatos = document.createElement('div')
+
+        contenidoDatos.classList.add("estadistica")
+        contenidoDatos.innerHTML = `
+        <div class="titulo">
+            <p>${titulo}</p>
+        </div>
+         
+        <div class="valor">
+           <p>${cant_venta_totales}</p>
+        </div>
+
+        <div class="icono">
+           <i class="fa-solid fa-money-check-dollar"></i>
+        </div>
+    `
+        datos.append(contenidoDatos)
+    },
+
+    datosEstadisticos(cant_ventas_dia_actual, response_semana_actual, response_mes_actual) {
+        const cant_ventas_semana_actual = response_semana_actual.data['cant_ventas_semana_actual']
+        const cant_ventas_mes_actual = response_mes_actual.data['cant_ventas_mes_actual']
+
+        this.llenarCuadroVentasTotales(cant_ventas_dia_actual, "Ventas dia actual")
+        this.llenarCuadroVentasTotales(cant_ventas_semana_actual, "Ventas semana actual")
+        this.llenarCuadroVentasTotales(cant_ventas_mes_actual, "Ventas mes actual")
+
+    },
 
     modalIncrustado(targetModal, btnAbrir, claseCerrarModal) {
 
@@ -298,7 +331,7 @@ const Vista = {
         tablaDatos.innerHTML = '';
 
         // Definir las columnas que deseas mostrar
-        const columnasAMostrar = ['fecha_ingreso_venta', 'compania', 'dni', 'nombre', 'direccion', 'verificacion_calidad', 'audios_cargados', 'observaciones_calidad'];
+        const columnasAMostrar = ['fecha_ingreso_venta', 'compania', 'dni', 'nombre_agente', 'nombre', 'direccion', 'verificacion_calidad', 'audios_cargados', 'observaciones_calidad'];
         //const columnas = Object.keys(datos[0]);
 
         // Crear encabezado
@@ -452,24 +485,6 @@ const Vista = {
         }
     },
 
-    mostrarMensajeError(mensaje) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Algo salió mal',
-            text: mensaje,
-        })
-    },
-
-    mostrarAlertaSatisfactorio(mensaje) {
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: mensaje,
-            showConfirmButton: false,
-            timer: 1500
-        })
-    },
-
     recargarPagina(tiempo) {
         setTimeout(function () {
             window.location.reload()
@@ -480,6 +495,61 @@ const Vista = {
         location.href = ("../../home.html");
     },
 
+    filtrarTabla(){
+        const columnaBuscarComboBox = document.getElementById('columnaBuscar');
+        const textoBuscar  = document.getElementById('textoBuscar').value;
+        
+        columnaBuscarComboBox.addEventListener('change', () => {
+            const estado  = columnaBuscarComboBox.value;
+
+            if(estado === "sin filtros"){
+                this.recargarPagina(500)
+                let textoBuscar  = document.getElementById('textoBuscar');
+                textoBuscar.value = ""
+            }          
+
+        })
+
+        const columnaBuscar =  columnaBuscarComboBox.value;
+
+        return { columnaBuscar, textoBuscar }
+
+    },
+
+    tomarFecha(){
+        const fecha  = document.getElementById('buscarPorFecha').value;
+        return { fecha }
+    },
+
+    buscarPorIntervalo(){
+        const fechaInicio = document.getElementById('start_date').value;
+        const fechaFinal = document.getElementById('end_date').value;
+
+        return { fechaInicio, fechaFinal }
+    },
+
+    mostrarFiltrosActivos(filtroActivo, filtroValor){
+        const contenedorFiltrosActivos = document.getElementById('contenedorFiltrosActivos');
+        const filtro = document.createElement('div')
+
+        contenedorFiltrosActivos.innerHTML = '';
+
+        filtro.innerHTML = 
+        `
+        <div class="filtro">
+            <p>${filtroActivo}: ${filtroValor} <i id = "quitarFiltro" class="fa-solid fa-xmark quitar-filtro"></i></p>
+        </div>
+        `;
+
+        contenedorFiltrosActivos.append(filtro);
+
+        const quitarFiltro = document.getElementById('quitarFiltro');
+        quitarFiltro.onclick = function () {
+            Vista.recargarPagina(500);
+        }
+
+    }
+
 }
 
 export default Vista;
@@ -487,13 +557,14 @@ export default Vista;
 document.addEventListener('DOMContentLoaded', function () {
     const rol = localStorage.getItem("rol");
     if(rol != "calidad"){
-        Vista.redirigirAIndex()
+        Vista.redirigirAIndex();
     }
 
-    Controlador.mostrarTodasLasVentas()
-    Vista.opcionesMenu()
-    General.horaActual()
-    setInterval(General.horaActual, 1000)
+    Controlador.mostrarTodasLasVentas();
+    Vista.opcionesMenu();
+    General.horaActual();
+    setInterval(General.horaActual, 1000);
+    Controlador.estadisticasSemanaMesDiaActual();
 })
 
 abrirMenuOpciones.onclick = function () {
@@ -504,35 +575,30 @@ abrirMenuOpciones.onclick = function () {
     }
 };
 
+// Botón dentro del modal al seleccionar un registro que edita la info de una venta
 const botonEditar = document.getElementById('botonEditar');
-
 botonEditar.onclick = function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
+    swalAlert.confirmarAccion({
+        texto: '¿Estás seguro de actualizar la venta?',
+        funcionAlAceptar: Controlador.editarventa,
+        mensajeAlCancelar: "No se ha editado nada"
     })
+}
 
-    swalWithBootstrapButtons.fire({
-        title: '¿Estás seguro?',
-        text: 'Deseas actualizar esta información de la venta en la BD',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Controlador.editarventa()
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire(
-                'Cancelado',
-                'No se ha ingresado nada',
-                'error'
-            );
-        }
-    });
+// Boton que permite filtrar los registros para una fecha en especifico
+const btnBuscarFecha = document.getElementById('btnBuscarFecha');
+btnBuscarFecha.onclick = function () {
+    Controlador.datosPorFecha();
+}
 
+// Boton que permite filtrar los registros para un intervalo de fechas
+const btnBuscarIntervalo = document.getElementById('btnIntervalo');
+btnBuscarIntervalo.onclick = function () {
+    Controlador.datosPorIntervalo();
+}
+
+// Boton que permite filtrar los registros según una columna y texto a buscar
+const btnFiltrarTabla = document.getElementById('btnFiltrarTabla');
+btnFiltrarTabla.onclick = function () {
+    Controlador.filtrarTabla();
 }

@@ -7,15 +7,25 @@ const Controlador = {
         const cedula = localStorage.getItem('cedula')
         const res = await Modelo.mostrarEstadisticas(cedula)
 
-        //Vista.datosEstadisticos(res)
+        // Vista.datosEstadisticos(res)
     },
 
     async datosAgenteGraficas() {
+        const rol = localStorage.getItem('rol')
         const res2 = await Modelo.traerDatosPersonalesAgente(localStorage.getItem('cedula'))
 
-        const liderEquipo = res2.data['apodo']
-        const res = await Modelo.infoEquipo(liderEquipo)
-        Vista.mostrarGraficas(res)
+        if (rol == "team leader"){
+            const liderEquipo = res2.data['apodo']
+            const res = await Modelo.infoEquipo(liderEquipo)
+            Vista.mostrarGraficas(res)
+        }
+
+        if (rol == "agente"){
+            const cedula = res2.data['cedula']
+            const resAgente = await Modelo.mostrarEstadisticasAgente(cedula)
+            Vista.mostrarGraficas(resAgente)
+        }
+
     },
 
     async mostrarEstadisticas() {
@@ -36,7 +46,13 @@ const Controlador = {
             Vista.datosEstadisticos(res)
             Vista.llenarPromedios(res)
         }
-
+    },
+    
+    async mostrarEstadoVentasTabla(){
+        const res = await Modelo.traerDatosPersonalesAgente(localStorage.getItem('cedula'))
+        const cedula = res.data['cedula']
+        const resAgente = await Modelo.mostrarEstadisticasAgente(cedula)
+        Vista.mostrarTodasLasVentas(resAgente)
     }
 
 }

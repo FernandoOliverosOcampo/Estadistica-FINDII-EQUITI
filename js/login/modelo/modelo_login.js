@@ -13,7 +13,7 @@ const Modelo = {
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "POST",
-            url: "http://127.0.0.1:5700/iniciar-sesion",
+            url: "https://equitisoporte.pythonanywhere.com/iniciar-sesion/",
             headers: config.headers,
             data: datos_insertar_bd,
         });

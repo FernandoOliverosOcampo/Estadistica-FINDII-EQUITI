@@ -105,11 +105,10 @@
 
                             </div>
 
-                            <!--
                             <div class="botones modal-footer">
                                 <button id="botonEditar" class="boton">Editar</button>
                             </div>
-                            -->
+
                         </div>
                     </div>
                 </div>
@@ -121,11 +120,13 @@
                                 <div class="titulo-arriba">
                                     <p><i class="fa-solid fa-user"></i> Agentes pertenecientes</p>
                                 </div>
-                                <div class="buscar-agente">
-                                    <label for="">Buscar agente:</label>
-                                    <input type="text" placeholder="cedula" id="cedulaAgenteBuscar">
+                                <div class="buscar-agente" id="buscarAgente">
+                                    <label>Buscar agente: </label>
+                                    
+
+                                    <!-- <input type="text" placeholder="cedula" id="cedulaAgenteBuscar"> -->
                                     <button id="btnEnviarCedulaAgente"><i
-                                            class="fa-solid fa-magnifying-glass"></i></button>
+                                        class="fa-solid fa-magnifying-glass"></i></button>
                                 </div>
 
                             </div>
@@ -225,6 +226,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../js/team_leader/vista/team_leader.js" type="module"></script>
     <script src="https://kit.fontawesome.com/1a5bcd4a97.js" crossorigin="anonymous"></script>

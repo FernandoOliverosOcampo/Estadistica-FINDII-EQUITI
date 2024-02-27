@@ -13,9 +13,6 @@ const Controlador = {
   },
 
   async traerAgentesPertenecientes(nombre) {
-    // const res = await Modelo.traerDatosPersonalesAgente(localStorage.getItem('cedula'))
-    // const nombre_formatear = res.data['apodo']
-    // const liderEquipo = nombre_formatear.split(' ')[0];
     const res2 = await Modelo.agentesPertenecientes(nombre)
     Vista.agentesPertenecientes(res2)
   },
@@ -23,7 +20,6 @@ const Controlador = {
   async ventasRealizadasAgente(nombre) {
     // const res2 = await Modelo.traerDatosPersonalesAgente(localStorage.getItem('cedula'))
     const res = await Modelo.infoEquipo(nombre)
-    console.log(res)
     Vista.datosEstadisticos(res)
   },
 

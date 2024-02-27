@@ -41,8 +41,8 @@ const Modelo = {
 
         const res = await axios({
             method: 'POST',
-            // url: "http://127.0.0.1:5700/registrar-venta/",
-            url: "http://127.0.0.1:5700/registrar-venta/",
+            // url: "https://equitisoporte.pythonanywhere.com/registrar-venta/",
+            url: "https://equitisoporte.pythonanywhere.com/registrar-venta/",
 
             headers: config.headers,
             data: datos_insertar_bd
@@ -56,8 +56,8 @@ const Modelo = {
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            // url: "http://127.0.0.1:5700/mostrar-datos-personales/" + cedula,
-            url: "http://127.0.0.1:5700/mostrar-datos-personales/" + cedula,
+            // url: "https://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
+            url: "https://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
             headers: config.headers,
         });
         return res

@@ -15,11 +15,10 @@ const Controlador = {
     async editarAgente(){
         try {
             const datos = Vista.actualizarAgentes()
-            console.log(datos)
+
             const res =  await Modelo.actualizarAgente(datos)
             if (res.status == 200){
-                let mensaje = "Se actualizo el registro de la venta correctamente";
-                Vista.mostrarAlertaSatisfactorio(mensaje);
+                Vista.mostrarAlertaSatisfactorio("Se actualizo el registro de la venta correctamente");
                 this.recargarPagina(2000)
             }else{
                 Vista.mostrarMensajeError("No se pudo actualizar")

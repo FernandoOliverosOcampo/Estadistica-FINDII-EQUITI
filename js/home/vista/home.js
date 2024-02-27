@@ -1,5 +1,7 @@
 import Controlador from "../controlador/controlador_home.js"
 import General from "../../general/general.js"
+import swalAlert from "../../otros/alertas.js"
+
 const Vista = {
 
     llenarCuadroVentasTotales(cant_venta_totales, titulo) {
@@ -24,8 +26,6 @@ const Vista = {
     },
 
     datosEstadisticos(res) {
-
-        console.log(res)
 
         const cant_ventas_totales_realizadas = res.data.cant_ventas_realizadas
         const cant_ventas_totales_diciembre = res.data.cant_ventas_diciembre
@@ -91,52 +91,53 @@ const Vista = {
          <h1>Información</h1>
         `
         modalCuerpo.innerHTML =
-            `
+        `
         <div class="informacion-agente-venta">
-                    <h3>Informacion agente</h3>
-                <div class="informacion-agente">
-                    <p>Id venta:</p>
-                    <p id = "idVenta" ><i class="fa-solid fa-hashtag"></i> ${dato['id']}</p>
-                    <p><i class="fa-solid fa-calendar-days"></i> Fecha: ${dato['fecha_ingreso_venta']}</p>
-                    <p><i class="fa-solid fa-people-group"></i> Lider Equipo: ${dato['lider_equipo']}</p>
-                    <p><i class="fa-solid fa-address-card"></i>Cedula:</p>
-                    <p id = "cedula" >${dato['cedula']}</p>
-                    <p><i class="fa-solid fa-user"></i> Agente: ${dato['nombre_agente']}</p>
-                    <p><i class="fa-solid fa-database"></i> Base de datos: ${dato['base_de_datos']}</p>                      
-                </div>
+        <h3>Informacion agente</h3>
 
+        <div class="informacion-agente">
+            <p>Id venta:</p>
+            <p id="idVenta"><i class="fa-solid fa-hashtag"></i> ${dato['id']}</p>
+            <p><i class="fa-solid fa-calendar-days"></i> Fecha: ${dato['fecha_ingreso_venta']}</p>
+            <p><i class="fa-solid fa-people-group"></i> Lider Equipo: ${dato['lider_equipo']}</p>
+            <p id="cedula"><i class="fa-solid fa-address-card"> </i> Cedula: ${dato['cedula']}</p>
+            <p><i class="fa-solid fa-user"></i> Agente: ${dato['nombre_agente']}</p>
+            <p><i class="fa-solid fa-database"></i> Base de datos: ${dato['base_de_datos']}</p>
         </div>
 
-        <div class="informacion-editar">
-             <h3>Informacion venta</h3>
+    </div>
 
-            <div class="contenido-venta">
+    <div class="informacion-editar">
+        
+
+        <div class="contenido-venta">
+                <h3>Informacion venta</h3>
 
                 <div class="campo compania">
                     <div class="texto">
                         <p>Compañia:</p>
                     </div>
                     <div class="entrada">
-                       <p id="campoCompañiaEditar">${dato['compania']}</p>
+                        <p id="campoCompañiaEditar">${dato['compania']}</p>
                     </div>
                 </div>
 
-            <div class="campo dni">
-                <div class="texto">
-                    <p>DNI:</p>
+                <div class="campo dni">
+                    <div class="texto">
+                        <p>DNI:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="campoDniEditar">${dato['dni']}</p>
+                    </div>
                 </div>
-                <div class="entrada">
-                   <p id="campoDniEditar">${dato['dni']}</p>
-                </div>
-            </div>
-        
+
                 <div class="campo nombre">
-                <div class="texto">
-                    <p>Nombre:</p>
-                </div>
-                <div class="entrada">
-                   <p id="campoNombreEditar">${dato['nombre']}</p>
-                </div>
+                    <div class="texto">
+                        <p>Nombre:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="campoNombreEditar">${dato['nombre']}</p>
+                    </div>
                 </div>
 
                 <div class="campo telefono">
@@ -144,26 +145,26 @@ const Vista = {
                         <p>Telefono:</p>
                     </div>
                     <div class="entrada">
-                       <p id="campoTelefonoEditar">${dato['telefono']}</p>
+                        <p id="campoTelefonoEditar">${dato['telefono']}</p>
                     </div>
                 </div>
 
                 <div class="campo correo">
-                <div class="texto">
-                    <p>Correo:</p>
-                </div>
-                <div class="entrada">
-                   <p id="campoCorreoEditar">${dato['correo']}</p>
-                </div>
+                    <div class="texto">
+                        <p>Correo:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="campoCorreoEditar">${dato['correo']}</p>
+                    </div>
                 </div>
 
                 <div class="campo direccion">
-                <div class="texto">
-                    <p>Dirección:</p>
-                </div>
-                <div class="entrada">
-                   <p id="campoDireccionEditar">${dato['direccion']}</p>
-                </div>
+                    <div class="texto">
+                        <p>Dirección:</p>
+                    </div>
+                    <div class="entrada">
+                        <p id="campoDireccionEditar">${dato['direccion']}</p>
+                    </div>
                 </div>
 
                 <div class="campo fecha-nacimiento">
@@ -171,7 +172,7 @@ const Vista = {
                         <p>Fecha de nacimiento:</p>
                     </div>
                     <div class="entrada">
-                       <p id="campoFechaNacimientoEditar">${dato['fecha_nacimiento']}</p>
+                        <p id="campoFechaNacimientoEditar">${dato['fecha_nacimiento']}</p>
                     </div>
                 </div>
 
@@ -181,7 +182,7 @@ const Vista = {
                         <p>CUPS LUZ:</p>
                     </div>
                     <div class="entrada">
-                       <p id="campoCupsLuzEditar">${dato['cups_luz']}</p>
+                        <p id="campoCupsLuzEditar">${dato['cups_luz']}</p>
                     </div>
                 </div>
 
@@ -190,7 +191,7 @@ const Vista = {
                         <p>CUPS GAS:</p>
                     </div>
                     <div class="entrada">
-                       <p id="campoCupsGasEditar">${dato['cups_gas']}</p>
+                        <p id="campoCupsGasEditar">${dato['cups_gas']}</p>
                     </div>
                 </div>
 
@@ -199,7 +200,7 @@ const Vista = {
                         <p>IBAN:</p>
                     </div>
                     <div class="entrada">
-                       <p id="campoIbanEditar">${dato['iban']}</p>
+                        <p id="campoIbanEditar">${dato['iban']}</p>
                     </div>
                 </div>
 
@@ -208,7 +209,7 @@ const Vista = {
                         <p>Numero de Contrato:</p>
                     </div>
                     <div class="entrada">
-                       <p id="campoNumeroContratoEditar">${dato['numero_contrato']}</p>
+                        <p id="campoNumeroContratoEditar">${dato['numero_contrato']}</p>
                     </div>
                 </div>
 
@@ -238,85 +239,89 @@ const Vista = {
                         <p id="observacionesVenta">${dato['observaciones_venta']}</p>
                     </div>
                 </div>
+                
 
-                <div class="campo llamada-calidad">
-                    <div class="texto">
-                        <p>Llamada calidad:</p>
-                    </div>
-                    <div class="entrada">
-                        <p id="llamadaCalidadComboBoxCampoEditar">${dato['llamada_calidad']}</p>
-                    </div>
-                </div>
-
-                <div class="campo calidad-enviada">
-                    <div class="texto">
-                        <p>Calidad enviada:</p>
-                    </div>
-                    <div class="entrada">
-                     <p id="calidadEnviadaComboBoxCampoEditar">${dato['calidad_enviada']}</p>
-                    </div>
-                </div>
-
-                <div class="campo legalizacion">
-                    <div class="texto">
-                        <p>Legalización:</p>
-                    </div>
-                    <div class="entrada">
-                        <p id="legalizacion">${dato['legalizacion']}</p>
-                    </div>
-                </div>
-
-                <div class="campo verificacion-calidad">
-                    <div class="texto">
-                        <p>Verificación calidad:</p>
-                    </div>
-                    <div class="entrada">
-                        <p id="verificacionComboBoxCampoEditar">${dato['verificacion_calidad']}</p>
-                    </div>
-                </div>
-
-                <div class="campo audios-cargados">
-                    <div class="texto">
-                        <p>Audios cargados:</p>
-                    </div>
-                    <div class="entrada">
-                        <p id="audiosCargadosComboBoxCampoEditar">${dato['audios_cargados']}</p>
-                    </div>
-                </div>
-
-                <div class="campo estado">
-                    <div class="texto">
-                        <p>Estado:</p>
-                    </div>
-                    <div class="entrada">
-                        <select name="" id="estadoComboBoxCampoEditar">
-                            <option value="${dato['estado']}">${dato['estado']}</option>
-                            <option value="recuperada">Recuperada</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="campo descripcion">
-                    <div class="texto">
-                        <p>Observaciones calidad:</p>
-                    </div>
-                    <div class="entrada">
-                        <p id="observacionesCalidadCampoEditar">${dato['observaciones_calidad']}</p>
-                    </div>
-                </div>
-
-                <div class="campo descripcion">
-                    <div class="texto">
-                        <p>Observaciones adicionales:</p>
-                    </div>
-                    <div class="entrada">
-                        <p id="observacionesAdicionalesCampoEditar">${dato['observaciones_adicionales']}</p>
-                    </div>
-                </div>
-
-            </div>
-       
         </div>
+
+        <div class="contenido-editable">
+            <div class="campo llamada-calidad">
+                <div class="texto">
+                    <p>Llamada calidad:</p>
+                </div>
+                <div class="entrada">
+                    <p id="llamadaCalidadComboBoxCampoEditar">${dato['llamada_calidad']}</p>
+                </div>
+            </div>
+
+            <div class="campo calidad-enviada">
+                <div class="texto">
+                    <p>Calidad enviada:</p>
+                </div>
+                <div class="entrada">
+                    <p id="calidadEnviadaComboBoxCampoEditar">${dato['calidad_enviada']}</p>
+                </div>
+            </div>
+
+            <div class="campo legalizacion">
+                <div class="texto">
+                    <p>Legalización:</p>
+                </div>
+                <div class="entrada">
+                    <p id="legalizacion">${dato['legalizacion']}</p>
+                </div>
+            </div>
+
+            <div class="campo verificacion-calidad">
+                <div class="texto">
+                    <p>Verificación calidad:</p>
+                </div>
+                <div class="entrada">
+                    <p id="verificacionComboBoxCampoEditar">${dato['verificacion_calidad']}</p>
+                </div>
+            </div>
+
+            <div class="campo audios-cargados">
+                <div class="texto">
+                    <p>Audios cargados:</p>
+                </div>
+                <div class="entrada">
+                    <p id="audiosCargadosComboBoxCampoEditar">${dato['audios_cargados']}</p>
+                </div>
+            </div>
+
+            <div class="campo estado">
+                <div class="texto">
+                    <p>Estado:</p>
+                </div>
+                <div class="entrada">
+                    <select name="" id="estadoComboBoxCampoEditar">
+                        <option value="${dato['estado']}">${dato['estado']}</option>
+                        <option value="recuperada">Recuperada</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="campo descripcion">
+                <div class="texto">
+                    <p>Observaciones calidad:</p>
+                </div>
+                <div class="entrada">
+                    <p id="observacionesCalidadCampoEditar">${dato['observaciones_calidad']}</p>
+                </div>
+            </div>
+
+            <div class="campo descripcion">
+                <div class="texto">
+                    <p>Observaciones adicionales:</p>
+                </div>
+                <div class="entrada">
+                    <p id="observacionesAdicionalesCampoEditar">${dato['observaciones_adicionales']}</p>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
         
         `
         return modalCabecera, modalCuerpo
@@ -330,7 +335,7 @@ const Vista = {
         tablaDatos.innerHTML = '';
 
         // Definir las columnas que deseas mostrar
-        const columnasAMostrar = ['fecha_ingreso_venta', 'estado', 'dni', 'nombre', 'observaciones_venta', 'verificacion_calidad', 'observaciones_calidad', 'observaciones_adicionales'];
+        const columnasAMostrar = ['fecha_ingreso_venta', 'estado', 'numero_contrato', 'dni', 'nombre', 'observaciones_venta', 'verificacion_calidad', 'observaciones_calidad', 'observaciones_adicionales'];
 
         // Crear encabezado
         const encabezadoRow = document.createElement('tr');
@@ -427,7 +432,7 @@ const Vista = {
                             </div>
 
                             <div class="texto">
-                                <button><a href= "../home.html">Inicio</a></button>
+                                <button><a href= "./home.html">Inicio</a></button>
                             </div>
                         </div>
 
@@ -437,7 +442,7 @@ const Vista = {
                             </div>
                     
                             <div class="texto">
-                                <button><a href= "../pages/perfil.html">Mi perfil</a></button>
+                                <button><a href= "./pages/perfil.html">Mi perfil</a></button>
                             </div>
                         </div>
 
@@ -447,7 +452,7 @@ const Vista = {
                             </div>
                     
                             <div class="texto">
-                                <button><a href= "../pages/team_leader/inicio_team_leader.html">Mi equipo</a></button>
+                                <button><a href= "./pages/team_leader/inicio_team_leader.html">Mi equipo</a></button>
                             </div>
                         </div>
 
@@ -458,7 +463,7 @@ const Vista = {
                         </div>
             
                         <div class="texto">
-                            <button><a href= "../pages/formulario_ventas.html">Añadir Venta</a></button>
+                            <button><a href= "./pages/formulario_ventas.html">Añadir Venta</a></button>
                         </div>
                     </div>
                         </div>
@@ -691,25 +696,8 @@ const Vista = {
         };
 
     },
-
-    mostrarMensajeError(mensaje) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Algo salió mal',
-            text: mensaje,
-        })
-    },
-
-    mostrarAlertaSatisfactorio(mensaje) {
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: mensaje,
-            showConfirmButton: false,
-            timer: 1500
-        })
-    },
 }
+
 export default Vista;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -730,35 +718,12 @@ abrirMenuOpciones.onclick = function () {
     }
 };
 
+// Botón dentro del modal al seleccionar un registro que edita la info de una venta
 const botonEditar = document.getElementById('botonEditar');
-
 botonEditar.onclick = function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
+    swalAlert.confirmarAccion({
+        texto: '¿Estás seguro de actualizar la venta?',
+        funcionAlAceptar: Controlador.editarventa,
+        mensajeAlCancelar: "No se ha editado nada"
     })
-
-    swalWithBootstrapButtons.fire({
-        title: '¿Estás seguro?',
-        text: 'Deseas actualizar esta información de la venta en la BD',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Controlador.editarventa()
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire(
-                'Cancelado',
-                'No se ha ingresado nada',
-                'error'
-            );
-        }
-    });
-
 }

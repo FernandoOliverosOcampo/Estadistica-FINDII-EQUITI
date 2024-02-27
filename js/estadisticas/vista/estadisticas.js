@@ -25,8 +25,6 @@ const Vista = {
     },
 
     datosEstadisticos(res) {
-
-        console.log(res)
         
         const cant_ventas_totales_realizadas = res.data.cant_ventas_realizadas
         const cant_ventas_totales_diciembre = res.data.cant_ventas_diciembre
@@ -394,7 +392,7 @@ const Vista = {
                 <p><i class="fa-solid fa-check"></i></p>
             </div>
             <div class="titulo_promedio">
-                <p>Ventas Activas</p>
+                <p>Ventas activas</p>
             </div>
             <div class="numero_promedio">
                 <p>${cantVentasActivas}</i></p>
@@ -463,14 +461,119 @@ const Vista = {
 
         `;
 
-    }
+    },
+
+    obtenerDatosSegunSeleccion(resAgente, seleccion) {
+        switch (seleccion) {
+            case 'activa':
+                return resAgente.data.ventas_activas;
+            case 'devuelta':
+                return resAgente.data.ventas_devuelta;
+            case 'cancelada':
+                return resAgente.data.ventas_cancelada;
+            case 'firmada':
+                return resAgente.data.ventas_firmado;
+            case 'pendiente':
+                return resAgente.data.ventas_pendiente;
+            case 'recuperada':
+                return resAgente.data.ventas_recuperada;
+            case 'temporal':
+                return resAgente.data.ventas_temporal;
+            case 'verificada':
+                return resAgente.data.ventas_verificado;
+            case 'bajas':
+                return resAgente.data.ventas_baja;
+            case 'desistimiento':
+                return resAgente.data.ventas_desistimiento;
+            default:
+                return [];
+                
+
+                
+        }
+    },
+
+    crearFilaDeDatos(dato) {
+        const columnasAMostrar = ['fecha_ingreso_venta', 'dni', 'nombre', 'observaciones_venta', 'verificacion_calidad', 'observaciones_calidad', 'observaciones_adicionales', 'estado'];
+        const fila = document.createElement('tr');
+        columnasAMostrar.forEach(columna => {
+            const celda = document.createElement('td');
+            celda.textContent = dato[columna];
+            this.aplicarEstilos(celda, columna, dato[columna]);
+            fila.appendChild(celda);
+        });
+        return fila;
+    },
+
+    aplicarEstilos(celda, columna, valor) {
+        
+        const estilos = {
+            'verificacion_calidad': {
+                'cumple calidad': 'letras-estado-verde',
+                'no cumple calidad': 'letras-estado-rojo',
+                'pendiente': 'letras-estado-amarillo'
+            },
+
+            'estado': {
+                'activa': 'letras-estado-verde',
+                'firmado': 'letras-estado-verde',
+                'recuperada': 'letras-estado-azul',
+                'temporal': 'letras-estado-azul',
+                'verificada': 'letras-estado-azul',
+                'devuelta': 'letras-estado-rojo',
+                'cancelada': 'letras-estado-rojo',
+                'desistimiento': 'letras-estado-rojo',
+                'baja': 'letras-estado-rojo',
+                'pendiente': 'letras-estado-amarillo',
+
+            }
+        };
+        if (estilos[columna] && estilos[columna][valor]) {
+            celda.classList.add(estilos[columna][valor]);
+        }
+    },
+
+    mostrarTodasLasVentas(resAgente) {
+        const combobox = document.getElementById('estadoVenta');
+        combobox.addEventListener('change', ()=>{
+            const seleccion = combobox.value;
+
+            const datos = this.obtenerDatosSegunSeleccion(resAgente, seleccion)          
+
+            const tablaDatos = document.getElementById('tablaDatos');  
+            tablaDatos.innerHTML = ''; 
+            
+           // Definir las columnas que deseas mostrar
+            const columnasAMostrar = ['fecha_ingreso_venta', 'dni', 'nombre', 'observaciones_venta', 'verificacion_calidad' , 'observaciones_calidad', 'observaciones_adicionales', 'estado'];
+            
+            // Crear encabezado
+            const encabezadoRow = document.createElement('tr');
+              for (const columna of columnasAMostrar) {
+                  
+                  const th = document.createElement('th');
+                  th.textContent = columna;
+                  encabezadoRow.appendChild(th);
+              }
+             
+             tablaDatos.appendChild(encabezadoRow)
+             datos.forEach(dato => {
+                const fila = this.crearFilaDeDatos(dato)
+                tablaDatos.appendChild(fila)
+
+             })
+          
+        })
+       
+    },
 
 }
 export default Vista;
+
 document.addEventListener('DOMContentLoaded', function () {
     Controlador.ventasRealizadasAgente();
     Controlador.datosAgenteGraficas();
     Controlador.mostrarEstadisticas();
+    Controlador.mostrarEstadoVentasTabla()
     
     Vista.opcionesMenu();
     General.horaActual();

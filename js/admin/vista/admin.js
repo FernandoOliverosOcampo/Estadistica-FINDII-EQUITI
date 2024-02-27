@@ -1,6 +1,7 @@
 import Controlador from "../controlador/controlador_admin.js"
-import General from "../../general/general.js"
 import Modelo from "../modelo/modelo_admin.js"
+import General from "../../general/general.js"
+import swalAlert from "../../otros/alertas.js"
 
 const Vista = {
 
@@ -25,7 +26,16 @@ const Vista = {
         datos.append(contenidoDatos)
     },
 
-   
+    datosEstadisticos(cant_ventas_dia_actual, response_semana_actual, response_mes_actual) {
+        const cant_ventas_semana_actual = response_semana_actual.data['cant_ventas_semana_actual']
+        const cant_ventas_mes_actual = response_mes_actual.data['cant_ventas_mes_actual']
+
+        this.llenarCuadroVentasTotales(cant_ventas_dia_actual, "Ventas dia actual")
+        this.llenarCuadroVentasTotales(cant_ventas_semana_actual, "Ventas semana actual")
+        this.llenarCuadroVentasTotales(cant_ventas_mes_actual, "Ventas mes actual")
+
+    },
+
     opcionesMenu() {
         if (localStorage.getItem("access_token")) {
             const contenidoPerfil = document.getElementById("contenidoPerfil");
@@ -134,12 +144,12 @@ const Vista = {
         });
     },
 
-    crearGraficoLineas(myChart, ventasMiguel, ventasRay, ventasDavina, ventasLaureano) {
+    crearGraficoLineas(myChart, ventasMiguel, ventasRay, ventasDavina, ventasLaureano, ventasNoAsignado, ventasAndres) {
 
         new Chart(myChart, {
             type: 'line',
             data: {
-                labels: ['Octubre', 'Noviembre', 'Diciembre', 'Enero'],
+                labels: ['Enero', 'Febrero', 'Febrero'],
                 datasets: [
                     {
                         label: 'Ventas Miguel',
@@ -161,6 +171,16 @@ const Vista = {
                         data: ventasLaureano,
                         borderWidth: 1
                     },
+                    {
+                        label: 'Ventas Capacitacion',
+                        data: ventasNoAsignado,
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Ventas Andres',
+                        data: ventasAndres,
+                        borderWidth: 1
+                    },
                 ],
                 options: {
                     responsive: true,
@@ -178,16 +198,34 @@ const Vista = {
         });
     },
 
-    mostrarGraficas(ventas_miguel, ventas_ray, ventas_davina, ventas_laureano) {
+    mostrarGraficas(res) {
+
+        const ventas_andres = res.data['cant_ventas_xteam_leader']['andres']
+        const ventas_davina = res.data['cant_ventas_xteam_leader']['davina']
+        const ventas_laureano = res.data['cant_ventas_xteam_leader']['laureano']
+        const ventas_miguel = res.data['cant_ventas_xteam_leader']['miguel']
+        const ventas_no_asignado = res.data['cant_ventas_xteam_leader']['no asignado']
+        const ventas_ray = res.data['cant_ventas_xteam_leader']['ray']
+
+        const cant_ventas_febrero = {
+            ventas_andres: ventas_andres,
+            ventas_davina: ventas_davina,
+            ventas_laureano: ventas_laureano,
+            ventas_miguel: ventas_miguel,
+            ventas_no_asignado: ventas_no_asignado,
+            ventas_ray: ventas_ray,
+        }
 
         const myChart = document.getElementById('myChart')
 
-        const ventasMiguel = [ventas_miguel.data['cant_ventas_octubre'], ventas_miguel.data['cant_ventas_noviembre'], ventas_miguel.data['cant_ventas_diciembre'], ventas_miguel.data['cant_ventas_enero']]
-        const ventasRay = [ventas_ray.data['cant_ventas_octubre'], ventas_ray.data['cant_ventas_noviembre'], ventas_ray.data['cant_ventas_diciembre'], ventas_ray.data['cant_ventas_enero']]
-        const ventasDavina = [ventas_davina.data['cant_ventas_octubre'], ventas_davina.data['cant_ventas_noviembre'], ventas_davina.data['cant_ventas_diciembre'], ventas_davina.data['cant_ventas_enero']]
-        const ventasLaureano = [ventas_laureano.data['cant_ventas_octubre'], ventas_laureano.data['cant_ventas_noviembre'], ventas_laureano.data['cant_ventas_diciembre'], ventas_laureano.data['cant_ventas_enero']]
+        const ventasAndres = [0, ventas_andres, 20]
+        const ventasDavina = [0, ventas_davina, 19]
+        const ventasLaureano = [0, ventas_laureano, 25]
+        const ventasMiguel = [0, ventas_miguel, 30]
+        const ventasNoAsignado = [0, ventas_no_asignado, 30]
+        const ventasRay = [0, ventas_ray, 15]
 
-        this.crearGraficoLineas(myChart, ventasMiguel, ventasRay, ventasDavina, ventasLaureano)
+        this.crearGraficoLineas(myChart, ventasMiguel, ventasRay, ventasDavina, ventasLaureano, ventasNoAsignado, ventasAndres)
 
     },
 
@@ -237,7 +275,7 @@ const Vista = {
     },
 
     modalContenido(modalCuerpo, modalCabecera, dato) {
-       
+
         const calidad = dato['llamada_calidad']
         const envioCalidad = dato['calidad_enviada']
         const verificacionCalidad = dato['verificacion_calidad']
@@ -245,12 +283,12 @@ const Vista = {
         const legalizacion = dato['legalizacion']
         const estado = dato['estado']
 
-        if (calidad == calidad || envioCalidad == "pendiente" || verificacionCalidad == "pendiente" || audio == "pendiente" || legalizacion == "pendiente"  || estado == estado){
-                modalCabecera.innerHTML =
+        if (calidad == calidad || envioCalidad == "pendiente" || verificacionCalidad == "pendiente" || audio == "pendiente" || legalizacion == "pendiente" || estado == estado) {
+            modalCabecera.innerHTML =
                 `
                     <h1>Información</h1>
                 `
-                    modalCuerpo.innerHTML =
+            modalCuerpo.innerHTML =
                 `
                     <div class="informacion-agente-venta">
                         <h3>Informacion agente</h3>
@@ -415,7 +453,6 @@ const Vista = {
                                 <select name="" id="llamadaCalidadComboBoxCampoEditar">
                                     <option value="${dato['llamada_calidad']}">${dato['llamada_calidad']}</option>
                                     <option value="corregida">Corregida</option>
-                                
                                     <option value="realizada">Realizada</option>
                                 </select>
                             </div>
@@ -516,14 +553,14 @@ const Vista = {
                  </div>
         
                 `
-        return modalCabecera, modalCuerpo
-        } else{
+            return modalCabecera, modalCuerpo
+        } else {
             modalCabecera.innerHTML =
-            `
+                `
                 <h1>Información</h1>
             `
-                modalCuerpo.innerHTML =
-            `
+            modalCuerpo.innerHTML =
+                `
                 <div class="informacion-agente-venta">
                     <h3>Informacion agente</h3>
                             
@@ -788,8 +825,8 @@ const Vista = {
              </div>
     
             `
-            
-    return modalCabecera, modalCuerpo
+
+            return modalCabecera, modalCuerpo
 
         }
     },
@@ -802,19 +839,19 @@ const Vista = {
         tablaDatos.innerHTML = '';
 
         // Definir las columnas que deseas mostrar
-        const columnasAMostrar = ['fecha_ingreso_venta', 'nombre_agente', 'lider_equipo', 'compania', 'dni', 'nombre', 'correo', 'cups_luz', 'cups_gas', 'iban', 'numero_contrato', 'potencia', 'peaje_gas', 'observaciones_venta', 'llamada_calidad', 'calidad_enviada', 'verificacion_calidad' , 'audios_cargados', 'observaciones_calidad', 'observaciones_adicionales', 'legalizacion'];
-        
+        const columnasAMostrar = ['fecha_ingreso_venta', 'nombre_agente', 'lider_equipo', 'compania', 'dni', 'nombre', 'correo', 'cups_luz', 'cups_gas', 'iban', 'numero_contrato', 'potencia', 'peaje_gas', 'observaciones_venta', 'llamada_calidad', 'calidad_enviada', 'verificacion_calidad', 'audios_cargados', 'observaciones_calidad', 'observaciones_adicionales', 'legalizacion'];
+
         // Crear encabezado
         const encabezadoRow = document.createElement('tr');
         for (const columna of columnasAMostrar) {
-            
+
             const th = document.createElement('th');
             th.textContent = columna;
             encabezadoRow.appendChild(th);
         }
         const thEstado = document.createElement('th');
-            thEstado.textContent = 'estado';
-            encabezadoRow.appendChild(thEstado);
+        thEstado.textContent = 'estado';
+        encabezadoRow.appendChild(thEstado);
         tablaDatos.appendChild(encabezadoRow);
 
         // Crear filas de datos
@@ -834,7 +871,7 @@ const Vista = {
                 // Agregar la clase "estado-verde" a la celda específica
                 if (columna === 'verificacion_calidad' && dato[columna] === 'no cumple calidad') {
                     celda.classList.add('letras-estado-rojo');
-                }                    
+                }
 
                 if (columna === 'verificacion_calidad' && dato[columna] === 'pendiente') {
                     celda.classList.add('letras-estado-amarillo');
@@ -843,16 +880,16 @@ const Vista = {
 
                 fila.appendChild(celda);
             }
-            
+
             const estado = dato['estado']
             const idVenta = dato['id']
 
             const estadoCell = document.createElement('td');
-           
+
             const estadoSelect = document.createElement('select');
             estadoSelect.setAttribute('id', 'actualizarEstado')
             const estadosPosibles = [estado, 'firmado', 'verificado', 'temporal', 'activa', 'devuelta', 'cancelado', 'baja', 'desistimiento'];
-            
+
 
             estadosPosibles.forEach(estado => {
                 const option = document.createElement('option');
@@ -867,10 +904,10 @@ const Vista = {
                     // Actualizar el estado en la base de datos
                     const estadoo = dato.id = event.target.value; // Actualizar el estado en el objeto de datos
                     await Modelo.editarEstadoDesdeTabla(idVenta, estadoo);
-                    Vista.mostrarAlertaSatisfactorio("Estado actualizado correctamente");
+                    swalAlert.mostrarAlertaSatisfactorio("Estado actualizado correctamente");
                 } catch (error) {
                     console.error(error);
-                    Vista.mostrarMensajeError("Error al actualizar el estado");
+                    swalAlert.mostrarMensajeError('Error al actualizar el estado')
                 }
             });
 
@@ -879,7 +916,7 @@ const Vista = {
                 estadoSelect.classList.add('estado-verde');
             }
 
-            if (estado === 'recuperada') {
+            if (estado === 'recuperada' || estado === 'temporal' || estado === 'verificado') {
                 estadoSelect.classList.add('estado-azul');
             }
 
@@ -889,10 +926,6 @@ const Vista = {
 
             if (estado === 'devuelta' || estado === 'baja' || estado === 'cancelado') {
                 estadoSelect.classList.add('estado-rojo');
-            }
-
-            if (estado === 'verificado'){
-                estadoSelect.classList.add('estado-azul');
             }
 
             // Agregar el select a la celda del estado
@@ -931,7 +964,7 @@ const Vista = {
         });
     },
 
-    eliminarVenta(){
+    eliminarVenta() {
         const id = document.getElementById('idVenta').textContent;
         return id
     },
@@ -989,24 +1022,6 @@ const Vista = {
 
     },
 
-    mostrarMensajeError(mensaje) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Algo salió mal',
-            text: mensaje,
-        })
-    },
-
-    mostrarAlertaSatisfactorio(mensaje) {
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: mensaje,
-            showConfirmButton: false,
-            timer: 1500
-        })
-    },
-
     recargarPagina(tiempo) {
         setTimeout(function () {
             window.location.reload()
@@ -1014,19 +1029,180 @@ const Vista = {
     },
 
     redirigirCalidad() {
-        location.href = ("../pages/admin/calidad.html");
+        location.href = ("./pages/admin/calidad.html");
     },
 
     redirigirAIndex() {
         location.href = ("../home.html");
     },
-    
-    tomarFecha(){
 
-        const fecha  = document.getElementById('buscarPorFecha').value;
-        return {fecha}
+    topAgentesMes(res) {
+
+        const dataAgentes = res.data['cant_ventas_xagente'];
+
+        const agentesPertenecientesContenedor = document.getElementById('topAgentesMesContenedor');
+        const listaAgentesPertenecientes = document.getElementById('listaTopAgentesMes');
+
+        // Limpiar la lista antes de agregar nuevos elementos
+        listaAgentesPertenecientes.innerHTML = '';
+
+        // Convertir el objeto en un array de objetos
+        const agentesArray = Object.keys(dataAgentes).map(nombreAgente => ({
+            nombre: nombreAgente,
+            ventas: dataAgentes[nombreAgente]
+        }));
+
+        // Ordenar los agentes por cantidad de ventas de mayor a menor
+        agentesArray.sort((a, b) => b.ventas - a.ventas);
+
+        // Tomar solo los primeros 6 agentes
+        const primerosSeisAgentes = agentesArray.slice(0, 6);
+
+        // Crear elementos para cada uno de los primeros 6 agentes
+        primerosSeisAgentes.forEach(agente => {
+            const listItem = document.createElement('div');
+            listItem.innerHTML =
+                `
+                <p><b>Nombre:</b> ${agente.nombre}</p>
+                
+                <p><b>Cantidad ventas:</b> ${agente.ventas}</p>
+            `;
+            listaAgentesPertenecientes.appendChild(listItem);
+        });
+
+        // Agregar la lista completa al contenedor
+        agentesPertenecientesContenedor.appendChild(listaAgentesPertenecientes);
     },
-  
+
+    topLideresMes(res) {
+
+        const dataAgentes = res.data['cant_ventas_xteam_leader'];
+
+        const agentesPertenecientesContenedor = document.getElementById('topLideresMesContenedor');
+        const listaAgentesPertenecientes = document.getElementById('listaTopLideresMes');
+
+        // Limpiar la lista antes de agregar nuevos elementos
+        listaAgentesPertenecientes.innerHTML = '';
+
+        // Convertir el objeto en un array de objetos
+        const agentesArray = Object.keys(dataAgentes).map(nombreAgente => ({
+            nombre: nombreAgente,
+            ventas: dataAgentes[nombreAgente]
+        }));
+
+        // Ordenar los agentes por cantidad de ventas de mayor a menor
+        agentesArray.sort((a, b) => b.ventas - a.ventas);
+
+        // Tomar solo los primeros 6 agentes
+        const primerosSeisAgentes = agentesArray.slice(0, 6);
+
+        // Crear elementos para cada uno de los primeros 6 agentes
+        primerosSeisAgentes.forEach(agente => {
+            const listItem = document.createElement('div');
+            listItem.innerHTML =
+                `
+                <p><b>Nombre:</b> ${agente.nombre}</p> 
+                <p><b>Cantidad ventas:</b> ${agente.ventas}</p>
+            `;
+            listaAgentesPertenecientes.appendChild(listItem);
+        });
+
+        // Agregar la lista completa al contenedor
+        agentesPertenecientesContenedor.appendChild(listaAgentesPertenecientes);
+    },
+
+    topAgentesSemana(res) {
+
+        const dataAgentes = res.data['agentes_semana_actual'];
+
+        const agentesPertenecientesContenedor = document.getElementById('topAgentesSemanaContenedor');
+        const listaAgentesPertenecientes = document.getElementById('listaTopAgentesSemana');
+
+        // Limpiar la lista antes de agregar nuevos elementos
+        listaAgentesPertenecientes.innerHTML = '';
+
+        // Convertir el objeto en un array de objetos
+        const agentesArray = Object.keys(dataAgentes).map(nombreAgente => ({
+            nombre: nombreAgente,
+            ventas: dataAgentes[nombreAgente]
+        }));
+
+        // Ordenar los agentes por cantidad de ventas de mayor a menor
+        agentesArray.sort((a, b) => b.ventas - a.ventas);
+
+        // Tomar solo los primeros 6 agentes
+        const primerosSeisAgentes = agentesArray.slice(0, 6);
+
+        // Crear elementos para cada uno de los primeros 6 agentes
+        primerosSeisAgentes.forEach(agente => {
+            const listItem = document.createElement('div');
+            listItem.innerHTML =
+                `
+                <p><b>Nombre:</b> ${agente.nombre}</p>
+                <p><b>Cantidad ventas:</b> ${agente.ventas}</p>
+            `;
+            listaAgentesPertenecientes.appendChild(listItem);
+        });
+
+        // Agregar la lista completa al contenedor
+        agentesPertenecientesContenedor.appendChild(listaAgentesPertenecientes);
+    },
+
+    filtrarTabla() {
+        const columnaBuscarComboBox = document.getElementById('columnaBuscar');
+        const textoBuscar = document.getElementById('textoBuscar').value;
+
+        columnaBuscarComboBox.addEventListener('change', () => {
+            const estado = columnaBuscarComboBox.value;
+
+            if (estado === "sin filtros") {
+                this.recargarPagina(500)
+                let textoBuscar = document.getElementById('textoBuscar');
+                textoBuscar.value = ""
+            }
+
+        })
+
+        const columnaBuscar = columnaBuscarComboBox.value;
+
+        return { columnaBuscar, textoBuscar }
+
+    },
+
+    tomarFecha() {
+        const fecha = document.getElementById('buscarPorFecha').value;
+        return { fecha }
+    },
+
+    buscarPorIntervalo() {
+        const fechaInicio = document.getElementById('start_date').value;
+        const fechaFinal = document.getElementById('end_date').value;
+
+        return { fechaInicio, fechaFinal }
+    },
+
+    mostrarFiltrosActivos(filtroActivo, filtroValor) {
+        const contenedorFiltrosActivos = document.getElementById('contenedorFiltrosActivos');
+        const filtro = document.createElement('div')
+
+        contenedorFiltrosActivos.innerHTML = '';
+
+        filtro.innerHTML =
+            `
+        <div class="filtro">
+            <p>${filtroActivo}: ${filtroValor} <i id = "quitarFiltro" class="fa-solid fa-xmark quitar-filtro"></i></p>
+        </div>
+        `;
+
+        contenedorFiltrosActivos.append(filtro);
+
+        const quitarFiltro = document.getElementById('quitarFiltro');
+        quitarFiltro.onclick = function () {
+            Vista.recargarPagina(500);
+        }
+
+    }
+
 }
 
 export default Vista;
@@ -1034,112 +1210,77 @@ export default Vista;
 document.addEventListener('DOMContentLoaded', function () {
     const rol = localStorage.getItem("rol");
 
-    if(rol == "calidad"){
+    if (rol === "calidad") {
         Vista.redirigirCalidad()
-        
-    } else if (rol == "team leader" || rol == "agente"){
+
+    } else if (rol === "team leader" || rol === "agente") {
         Vista.redirigirAIndex()
     }
-    
+
     Vista.opcionesMenu();
-    Controlador.ventasPorLiderEquipo();
+    //Controlador.ventasPorLiderEquipo();
     General.horaActual()
     setInterval(General.horaActual, 1000);
     Controlador.mostrarTodasLasVentas()
+    Controlador.estadisticasSemanaMesDiaActual()
+    Controlador.topMensual()
+    Controlador.topSemanal()
 })
 
+
+// Abre el menú de opciones del usuario
 const abrirMenuOpciones = document.getElementById('abrirMenuOpciones');
 const opcionesPerfil = document.getElementById('opcionesPerfil');
-
 abrirMenuOpciones.onclick = function () {
     if (opcionesPerfil.style.display === "none" || opcionesPerfil.style.display === "") {
         opcionesPerfil.style.display = "block";
-
     } else {
         opcionesPerfil.style.display = "none";
     }
-
 };
 
+// Botón dentro del modal al seleccionar un registro que edita la info de una venta
 const botonEditar = document.getElementById('botonEditar');
-
 botonEditar.onclick = function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
+    swalAlert.confirmarAccion({
+        texto: '¿Estás seguro de actualizar la venta?',
+        funcionAlAceptar: Controlador.editarventa,
+        mensajeAlCancelar: "No se ha editado nada"
     })
-
-    swalWithBootstrapButtons.fire({
-        title: '¿Estás seguro?',
-        text: 'Deseas actualizar esta información de la venta en la BD',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Controlador.editarventa()
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire(
-                'Cancelado',
-                'No se ha ingresado nada',
-                'error'
-            );
-        }
-    });
-
 }
 
+// Botón dentro del modal al seleccionar un registro que elimina la info de una venta
 const botonEliminar = document.getElementById('botonEliminar');
-
-
 botonEliminar.onclick = function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
+    swalAlert.confirmarAccion({
+        texto: 'Se eliminará el registro de forma permanente',
+        funcionAlAceptar: Controlador.eliminarVenta,
+        mensajeAlCancelar: 'No se ha eliminado nada'
     })
-
-    swalWithBootstrapButtons.fire({
-        title: '¿Estás seguro?',
-        text: 'Se eliminará el registro de forma permanente',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Controlador.eliminarVenta()
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire(
-                'Cancelado',
-                'No se ha ingresado nada',
-                'error'
-            );
-        }
-    });
-
 }
 
+// Boton que permite descargar las ventas de la BD
 const descargarVentas = document.getElementById('descargarVentas');
-
 descargarVentas.onclick = async function () {
     Controlador.descargarVentas()
 };
 
+// Boton que permite filtrar los registros para una fecha en especifico
 const btnBuscarFecha = document.getElementById('btnBuscarFecha');
-
 btnBuscarFecha.onclick = function () {
     Controlador.datosPorFecha()
 }
 
+// Boton que permite filtrar los registros para un intervalo de fechas
+const btnBuscarIntervalo = document.getElementById('btnIntervalo');
+btnBuscarIntervalo.onclick = function () {
+    Controlador.datosPorIntervalo()
+}
 
+// Boton que permite filtrar los registros según una columna y texto a buscar
+const btnFiltrarTabla = document.getElementById('btnFiltrarTabla');
+btnFiltrarTabla.onclick = function () {
+    Controlador.filtrarTabla();
+}
 
 

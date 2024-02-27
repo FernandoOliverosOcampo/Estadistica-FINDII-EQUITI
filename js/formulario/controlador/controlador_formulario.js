@@ -1,5 +1,7 @@
 import Modelo from "../modelo/modelo_formulario.js";
 import Vista from "../vista/formulario.js"
+import swalAlert from "../../otros/alertas.js";
+
 const Controlador = {
 
     obtenerFechaActual() {
@@ -52,14 +54,13 @@ const Controlador = {
 
             await Modelo.insertarVenta(fechaActual, compania, this.capitalizarTexto(nombre), this.convertirAMayusculas(dni), telefono, correo, direccion, fechaNacimiento, cupsLuz, cupsGas, this.capitalizarTexto(iban), datos, numeroContrato, potencia, peajeGas, observacionesVenta, cedula, liderEquipo, liderResponsable, nombreAgente, valorMantenimiento, valorTipoMantenimiento,)
             let mensaje = "Los datos fueron insertados correctamente"
-            Vista.mostrarAlertaSatisfactorio(mensaje)
+            swalAlert.mostrarAlertaSatisfactorio(mensaje)
             Vista.vaciarCampos();
 
 
         } catch (error) {
             console.log(error)
-            let mensaje = "Error al insertar los datos"
-            Vista.mostrarMensajeError(mensaje)
+            swalAlert.mostrarMensajeError("Error al insertar los datos")
         }
     },
 

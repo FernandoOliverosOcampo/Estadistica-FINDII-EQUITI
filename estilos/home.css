@@ -19,7 +19,7 @@ body{
     padding: 0 2vw;
     background-color: var(--blanco);
     border-radius: 0.5vw;
-    width: 85vw;
+    width: 80vw;
     height: 90vh;
     overflow: auto;
 }
@@ -32,7 +32,7 @@ body{
     display: grid;
     grid-template-areas:
     "agente"
-    "editar";
+    "editar"
 }
 .editar-formulario .contenido .modal-cuerpo .informacion-agente-venta{
     grid-area: agente;
@@ -45,57 +45,46 @@ body{
     padding: 2vw 0;
     justify-content: space-around;
 }
+
 .editar-formulario .contenido .modal-cuerpo .informacion-editar{
     grid-area: editar;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas: 
+    "info-venta info-editable";
+    grid-template-columns: 2fr 1fr;
 }
 
-.modal-cuerpo .informacion-editar .contenido-venta .campo .texto p{
+.informacion-editar .contenido-venta{
+    grid-area: info-venta;
+    display: grid;
+    row-gap: 20px;
+}
+
+.informacion-editar .campo .texto{
     font-weight: bold;
 }
 
-.editar-formulario .contenido .modal-cuerpo .contenido-venta{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 5vh;
-    column-gap: 2vw;
-    padding: 2vw 0;
-    justify-content: space-evenly;
-}
-
-.editar-formulario .contenido .modal-cuerpo .descripcion textarea {
-    width: 50vw;
+.informacion-editar .contenido-editable{
+    grid-area: info-editable;
     height: 20vh;
-}
-
-input[type=text],
-input[type=date],
-input[type=time],
-input[type=email],
-input[type=password],
-input[type=phone],
-input[type=number],
-select {
-    width: 15vw;
-    font-size: 1vw;
-}
-
-textarea{
-    width: 40vw;
-    height: 30vh;
-}
-
-.modal-footer{
-    display: flex;
+    display: grid;
+    flex-wrap: wrap;
+    column-gap: 50px;
     justify-content: center;
-    align-items: center;
-    padding: 2vw 0;
+    row-gap: 20px;
 }
 
-.modal-footer .boton{
+.entrada textarea{
+    height: 80px;
+    width: 30vw;
+    resize: none;
+}
+
+.editar-formulario .contenido .modal-footer{
+    text-align: end;
+}
+
+.editar-formulario .contenido .modal-footer .boton{
     background-color: var(--primario);
     color: var(--blanco);
     border-radius: 0.5vw;
@@ -104,26 +93,6 @@ textarea{
     font-size: 1vw;
     padding: 1vw 2vw;
     border: none;
-}
-
-.btn-danger{
-    background-color: red;
-    padding: 1vw;
-    color: var(--blanco);
-    border-radius: 0.5vw;
-    font-size: 1.1vw;
-    margin: 20px;
-    width: 10vw;
-}
-
-.btn-success{
-    background-color: blue;
-    padding: 1vw;
-    color: var(--blanco);
-    border-radius: 0.5vw;
-    margin: 20px;
-    font-size: 1.1vw;
-    width: 10vw; 
 }
 
 .pagina .contenedor {
@@ -135,53 +104,6 @@ textarea{
     grid-template-columns: 2fr 1fr;
     justify-content: center;
     justify-items: center;
-}
-
-.contenedor .graficas{
-    grid-area: graficas;
-}
-
-.cont-grafica {
-    padding: 1vw 2vw;
-    border-radius: 0.5vw;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1vh;
-}
-
-.graficas .contenido-graficas {
-    display: grid;
-    grid-template-areas:
-        "ventas-mes ventas-realizar";
-    justify-content: space-between;
-}
-
-.graficas .ventas-mes {
-    grid-area: ventas-mes;
-}
-
-.titulo-grafica {
-    padding: 0.5vw;
-    border-bottom: 1px solid rgb(233, 231, 231);
-}
-
-.titulo-grafica p {
-    font-size: 3vh;
-    font-weight: 600;
-    color: #00000088;
-}
-
-.grafica-ventas-mes #myChart {
-    width: 40vw;
-}
-
-.graficas .ventas-realizar {
-    grid-area: ventas-realizar;
-}
-
-.ventas-realizar #myDona {
-    height: 20vh;
 }
 
 .contenedor .datos-estadisticos{
@@ -244,59 +166,6 @@ textarea{
 }
 
 /* TABLA */
-
-/* INFORMACION DATOS (MODAL)*/
-
-.pagina .contenedor .contenido-tabla .editar-formulario .contenido {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2vw;
-    margin: 2% auto;
-    padding: 0 2vw;
-    background-color: var(--blanco);
-    border-radius: 0.5vw;
-    width: 85vw;
-    height: 90vh;
-    overflow: auto;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cabecera{
-    display: flex;
-    border-bottom: 1px solid var(--fondo);
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo{
-    row-gap: 3vh;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .nombre{
-    grid-area: nombre;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .tipo{
-    grid-area: tipo;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .cantidad{
-    grid-area: cantidad;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion{
-    grid-area: descripcion;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .ubicacion{
-    grid-area: ubicacion;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion .entrada textarea{
-    width: 48vw;
-    height: 15vh;
-}
-
-.contenido-tabla .editar-formulario .contenido .modal-footer{
-    text-align: end;
-}
 
 .pagina .contenedor .contenido-tabla .tabla {
     height: 45vh;

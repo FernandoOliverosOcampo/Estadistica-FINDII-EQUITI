@@ -7,7 +7,7 @@ const Modelo = {
         //se almacena la respuesta en "res" para obtener el resultado de la petición y retornarla para mostrar en la vista
         const res = axios({
             method: "GET",
-            url: "http://127.0.0.1:5700/mostrar-datos-personales/" + cedula,
+            url: "https://equitisoporte.pythonanywhere.com/mostrar-datos-personales/" + cedula,
             headers: config.headers,
         });
         return res
@@ -23,12 +23,11 @@ const Modelo = {
             campana: datos.campaña,
             lider_responsable: datos.liderResponsable,
             lider_equipo: datos.liderEquipo,
-            
         }
 
         const res = axios({
             method: "PUT",
-            url: "http://127.0.0.1:5700/actualizar-informacion-agente/",
+            url: "https://equitisoporte.pythonanywhere.com/actualizar-informacion-agente/",
             data: data_agentes,
             headers: config.headers,
           });

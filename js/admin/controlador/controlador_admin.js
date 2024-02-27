@@ -1,105 +1,142 @@
 import Modelo from "../modelo/modelo_admin.js";
 import Vista from "../vista/admin.js";
+import ModeloGeneral from "../../general/modelo/modelo_general.js"
+import General from "../../general/general.js"
+import swalAlert from "../../otros/alertas.js";
 
 const Controlador = {
 
-  async ventasPorLiderEquipo() {
-    const ventas_miguel = await Modelo.ventasPorLiderEquipo("miguel");
-    const ventas_ray = await Modelo.ventasPorLiderEquipo("ray");
-    const ventas_davina = await Modelo.ventasPorLiderEquipo("davina");
-    const ventas_laureano = await Modelo.ventasPorLiderEquipo("laureano");
+    async estadisticasSemanaMesDiaActual() {
+        const response_dia_actual = await Modelo.ventasDiaActual();
+        const response_semana_actual = await Modelo.ventaAgenteSemanaActual();
+        const response_mes_actual = await Modelo.ventasMesActual();
 
-    Vista.mostrarGraficas(
-      ventas_miguel,
-      ventas_ray,
-      ventas_davina,
-      ventas_laureano
-    );
+        if (response_dia_actual.data['venta_dia_status'] == "error") {
+            var cant_ventas_dia_actual = 0
+        } else {
+            var cant_ventas_dia_actual = response_dia_actual.data['cant_ventas_dia_actual']
+        }
 
-  },
+        Vista.datosEstadisticos(cant_ventas_dia_actual, response_semana_actual, response_mes_actual);
+    },
 
-  async eliminarVenta() {
-    try {
-      const id = Vista.eliminarVenta();
-      const res = await Modelo.eliminarVenta(id.trim())
+    async ventasPorLiderEquipo() {
+        const ventas_miguel = await Modelo.ventasPorLiderEquipo("miguel");
+        const ventas_ray = await Modelo.ventasPorLiderEquipo("ray");
+        const ventas_davina = await Modelo.ventasPorLiderEquipo("davina");
+        const ventas_laureano = await Modelo.ventasPorLiderEquipo("laureano");
 
-      if (res.status == 200) {
-        Vista.mostrarAlertaSatisfactorio("Se eliminó el registro de la venta correctamente");
-        Vista.recargarPagina(500)
-      } else {
-        Vista.mostrarMensajeError("Error al eliminar la venta")
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  },
+        Vista.mostrarGraficas(
+            ventas_miguel,
+            ventas_ray,
+            ventas_davina,
+            ventas_laureano
+        );
+    },
 
-  async editarventa() {
-    try {
-      const valores = Vista.editarVenta();
-      const res = await Modelo.actualizarDatosVenta(valores);
-      if (res.status == 200) {
-        Vista.mostrarAlertaSatisfactorio("Se actualizo el registro de la venta correctamente");
-      } else {
-        Vista.mostrarMensajeError("Error al actualizar la venta")
-      }
+    async eliminarVenta() {
+        try {
+            const id = Vista.eliminarVenta();
+            const res = await Modelo.eliminarVenta(id.trim());
 
-    } catch (error) {
-      console.log(error)
-      let mensaje = "Hubo un error al actualizar la venta";
-      Vista.mostrarMensajeError(mensaje)
-    }
-  },
+            if (res.status == 200) {
+                swalAlert.mostrarAlertaSatisfactorio("Se eliminó el registro de la venta correctamente");
+                Vista.recargarPagina(500);
+            } else {
+                swalAlert.mostrarMensajeError("Error al eliminar la venta");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
 
-  async mostrarTodasLasVentas() {
-    const res = await Modelo.traerTodasLasVentas();
-    Vista.mostrarTodasLasVentas(res);
-  },
+    async editarventa() {
+        try {
+            const valores = Vista.editarVenta();
+            const res = await Modelo.actualizarDatosVenta(valores);
+            if (res.status == 200) {
+                swalAlert.mostrarAlertaSatisfactorio(
+                    "Se actualizo el registro de la venta correctamente"
+                );
+            } else {
+                swalAlert.mostrarMensajeError("Error al actualizar la venta");
+            }
+        } catch (error) {
+            console.log(error);
+            let mensaje = "Hubo un error al actualizar la venta";
+            swalAlert.mostrarMensajeError(mensaje);
+        }
+    },
 
-  async descargarVentas() {
-    try {
-      const res = await Modelo.descargarCSV();
-      console.log(res)
-      const blob = new Blob([res.data], { type: 'text/csv' });
+    async mostrarTodasLasVentas() {
+        const res = await Modelo.traerTodasLasVentas();
+        Vista.mostrarTodasLasVentas(res);
+    },
 
-      // Crear un enlace temporal y simular un clic para descargar el archivo
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = 'ventas_realizadas.csv';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    async descargarVentas() {
+        try {
+            const res = await Modelo.descargarCSV();
+            const blob = new Blob([res.data], { type: "text/csv" });
 
-      console.log('Archivo CSV descargado correctamente');
-    } catch (error) {
-      console.error('Error al descargar el archivo CSV:', error);
-    }
-  },
+            // Crear un enlace temporal y simular un clic para descargar el archivo
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "ventas_realizadas.csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
 
-  formatearFechaParaEnvio(fecha) {
-    // Formatea la fecha en el formato deseado (dd/mm/yyyy)
-    if (fecha.length == 0) {
-        return fecha
+        } catch (error) {
+            console.error("Error al descargar el archivo CSV:", error);
+        }
+    },
 
-    } else {
-        var partes = fecha.split('-');
-        var fechaFormateada = partes[2].replace('0', '') + '/' + partes[1] + '/' + partes[0];
+    async topMensual() {
+        const res = await Modelo.ventasMesActual()
+        Vista.topAgentesMes(res)
+        Vista.topLideresMes(res)
+        //Vista.mostrarGraficas(res)
+    },
 
-        return fechaFormateada
-    }
-  },
+    async topSemanal() {
+        const res = await Modelo.ventaAgenteSemanaActual()
+        Vista.topAgentesSemana(res)
+    },
+    
+    async filtrarTabla(){
+        const { columnaBuscar, textoBuscar } = Vista.filtrarTabla();
+        const res = await ModeloGeneral.filtrarTabla(columnaBuscar, textoBuscar);
+        Vista.mostrarTodasLasVentas(res);
+        Vista.mostrarFiltrosActivos(columnaBuscar, textoBuscar);
+    },
 
-  async datosPorFecha() {
+    async datosPorFecha() {
+        const { fecha } = Vista.tomarFecha();
+        const fechaFormateada = General.formatearFechaParaEnvio(fecha);
 
-    const {fecha} = Vista.tomarFecha();
-    const fechaFormateada = this.formatearFechaParaEnvio(fecha)
+        const fechaVacia = fechaFormateada.length;
+        if (fechaVacia === 0) {
+            Vista.mostrarTodasLasVentas();
+        }
+        const res = await ModeloGeneral.mostrarVentasPorFecha(fechaFormateada);
+        Vista.mostrarTodasLasVentas(res);
+        Vista.mostrarFiltrosActivos('fecha', fechaFormateada)
 
-    // console.log(fechaFormateada)
+    },
 
-    const res = await Modelo.mostrarVentasPorFecha(fechaFormateada)
-    console.log(res)
-    Vista.mostrarTodasLasVentas(res)
-},
+    async datosPorIntervalo() {
+
+        const { fechaInicio, fechaFinal } = Vista.buscarPorIntervalo()
+
+        const fechaFormateadaInicio = General.formatearFechaParaEnvio(fechaInicio);
+        const fechaFormateadaFinal = General.formatearFechaParaEnvio(fechaFinal)
+
+        const res = await ModeloGeneral.mostrarPorIntervalo(fechaFormateadaInicio, fechaFormateadaFinal);
+
+        Vista.mostrarTodasLasVentas(res);
+        const intervaloFecha = `${fechaFormateadaInicio} - ${fechaFormateadaFinal} `
+        Vista.mostrarFiltrosActivos('fechas', intervaloFecha)
+    },
 
 };
 

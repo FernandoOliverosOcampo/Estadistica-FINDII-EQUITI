@@ -1,3 +1,4 @@
+import swalAlert from "../../otros/alertas.js"
 import Modelo from "../modelo/home_modelo.js"
 import Vista from "../vista/home.js"
 const Controlador = {
@@ -5,11 +6,8 @@ const Controlador = {
   async ventasRealizadasAgente() {
     const res = await Modelo.traerVentasRealizadasAgente(localStorage.getItem('cedula'))
 
-    console.log(localStorage.getItem('cedula'))
-
     Vista.mostrarTablaDatos(res)
     Vista.datosEstadisticos(res)
-    console.log(res)
   },
 
   async datosAgenteGraficas() {
@@ -21,13 +19,16 @@ const Controlador = {
     try {
       const valores = Vista.editarVenta();
       const res = await Modelo.actualizarDatosVenta(valores);
-      let mensaje = "Se actualizo el registro de la venta correctamente";
-      Vista.mostrarAlertaSatisfactorio(mensaje);
 
+      if (res.status == 200) {
+        swalAlert.mostrarAlertaSatisfactorio("Se actualizo el registro de la venta correctamente");
+      } else {
+        swalAlert.mostrarMensajeError("Hubo un error al actualizar la venta")
+      }
+      
     } catch (error) {
       console.log(error)
-      let mensaje = "Hubo un error al actualizar la venta";
-      Vista.mostrarMensajeError(mensaje)
+      swalAlert.mostrarMensajeError("Hubo un error al actualizar la venta")
     }
   },
 

@@ -2,6 +2,30 @@
 @import url(./tabla.css);
 @import url(./menu.css);
 
+.tarjetas{
+    display: flex;
+    column-gap: 50px;
+}
+
+.tarjeta{
+    display: flex;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.tarjeta .cabecera .titulo p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tarjeta .cuerpo .descripcion .lista{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
 .hero {
     color: #191919;
     background-color: #ffffff;
@@ -17,30 +41,62 @@
     row-gap: 3vh;
 }
 
+.hero .pagina-principal .grilla {
+    display: grid;
+    grid-template-areas: 
+    "datos-estadisticos grafica-ventas-diarias"
+    "tabla-grid tabla-grid"
+    "posiciones posiciones"
+    "graficas graficas";
+    grid-template-columns: 1fr 0.5fr;
+    row-gap: 75px;
+}
+
+.contenido-datos-estadisticos{
+    grid-area: datos-estadisticos;
+}
+
+.grafica-ventas-diarias{
+    grid-area: grafica-ventas-diarias;
+}
+
+.tabla-grid{
+    grid-area: tabla-grid;
+    row-gap: 50px;
+}
+
+.posiciones{
+    grid-area: posiciones;
+}
+
+.graficas{
+    grid-area: graficas;
+}
+
 .datos-usuario .nombre p {
     font-size: 7vh;
     font-weight: 700;
 }
 
-.datos-estadisticos .contenido-datos-estadisticos {
+.contenido-datos-estadisticos {
     display: flex;
     column-gap: 2vw;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .contenido-datos-estadisticos .estadistica {
     display: grid;
     grid-template-areas:
         "valor icono"
-        "titulo icono";
+        "titulo titulo";
     background-color: #ffffff;
     padding: 0.5vw 1.5vw;
-    column-gap: 2vw;
+    /* column-gap: 2vw; */
+    /* row-gap: 2vw; */
     border-radius: 0.5vw;
     justify-content: space-between;
     box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.08);
-    height: 10vh;
-    width: 15vw;
+    width: 12vw;
 }
 
 .estadistica .titulo {
@@ -50,7 +106,7 @@
 .estadistica .titulo p {
     color: #00000088;
     font-weight: 600;
-    font-size: 1.9vh;
+    font-size: 12px;
 }
 
 .estadistica .valor {
@@ -58,20 +114,20 @@
 }
 
 .estadistica .valor p {
-    font-size: 4vh;
+    font-size: 30px;
     font-weight: 700;
 }
 
 .estadistica .icono {
     display: flex;
-    align-items: center;
+    align-items: start;
     grid-area: icono;
     color: #030303;
 }
 
-.estadistica .icono i {
-    font-size: 5vh;
-}
+.estadistica .icono i{
+    font-size: 40px;
+}   
 
 .graficas {
     margin-top: 5vh;
@@ -121,6 +177,19 @@
 }
 
 /* TABLA */
+
+.contenido-tabla .tabla {
+    overflow: auto;
+    height: 50vh;
+    background-color: #ffffff;
+    width: 90vw;
+}
+
+/* BOTON EXPORTAR */
+
+.boton-descarga{    
+    text-align: end;
+}
 
 /* INFORMACION DATOS (MODAL)*/
 
@@ -201,6 +270,7 @@
     column-gap: 2vw;
     padding: 2vw 0;
 }
+
 .modal-footer .boton{
     background-color: var(--primario);
     color: var(--blanco);
@@ -211,6 +281,7 @@
     padding: 1vw 2vw;
     border: none;
 }
+
 .btn-danger{
     background-color: red;
     padding: 1vw;
@@ -220,6 +291,7 @@
     margin: 20px;
     width: 10vw;
 }
+
 .btn-success{
     background-color: blue;
     padding: 1vw;
@@ -245,7 +317,85 @@
     width: 12vw;
 }
 
-/* FIN TABLA */
+.filtros-tabla{
+    display: flex;
+    padding: 25px;
+    background-color: #f2f2f2;
+    border-radius: 0.5vw;
+    justify-content: space-around
+}
+
+.filtros-tabla .buscar-por-estado, .buscar-por-intervalo, .buscar-fecha{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5vw;
+}
+
+.filtros-tabla 
+select{
+    width: 12.5vw;
+    padding: 0.5vw 1vw;
+    box-sizing: border-box;
+}
+
+.buscar-fecha input {
+    width: 11vw;
+    padding: 0.5vw 1vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.buscar-por-estado input{
+    width: 11vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.buscar-por-estado select{
+    width: 11vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+.filtros-tabla .buscar-por-intervalo .filtros-intervalo{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5vw;
+}
+
+.buscar-por-intervalo .boton-buscar button{
+    margin: 0 0.5dvw;
+}
+
+.buscar-por-intervalo input{
+    width: 11vw;
+    padding: 0.5vw 1vw;
+    border: none;
+    border-radius: 0.5vw;
+}
+
+
+.filtros-activos{
+    display: grid;
+    justify-items: center;
+    justify-content: end;
+}
+
+.filtros-activos .filtro{
+    display: inline-block;
+    background-color: #f2f2f2;
+    padding: 5px 20px;
+    border-radius: 0.5vw;
+}
+
+.filtros-activos .filtro p{
+    color: black;
+}
+
+.filtros-activos .filtro .quitar-filtro{
+    cursor: pointer;
+}
+
 
 @media only screen and (max-width: 700px) {
     .contenido-datos-estadisticos .estadistica {

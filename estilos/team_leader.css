@@ -296,9 +296,19 @@ body{
 }
 
 
-
-
-
+.contenido-abajo-agentes .campos{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 10px;
+}
+.contenido-abajo-agentes .campos .campo{
+    width: 20dvw;
+}
+.contenido-abajo-agentes .campos .campo .titulo{
+    width: 30dvw;
+    font-weight: bold;
+}
 
 
 
